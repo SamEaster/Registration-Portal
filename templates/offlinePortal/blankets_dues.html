@@ -1,0 +1,109 @@
+{% extends 'offlinePortal/home.html' %}
+{% block title %} Search {% endblock %}
+{% block styles %}
+<style>
+table,th,td{
+    border:1px solid black;
+    padding:1rem;
+    max-width:700px;
+}
+a{
+    color:blue;
+    text-decoration:underline;
+}
+body{
+    font-size: large;
+}
+</style>
+{% endblock styles %}
+{% block header %}
+Blanket/Dues
+{% endblock %}
+{% block content %}
+<div>
+    <h1 class="text-center w-full text-3xl font-bold my-10">Blanket List</h1>
+    <div class="flex justify-center w-full margin-auto p-5 text-center">
+
+    <table>
+        <tr>
+
+            <th>Alcher ID</th>
+            <th>Team Name</th>
+            <th>Leader</th>
+            <th>Phone</th>
+            <th>No of Blankets</th>
+        </tr>
+        {% for team in teams %}
+        {% if team.blankets %}
+        <tr>
+            <td>  {{ team.leader.alcherid }}   </td>
+            <td>  {{ team.leader  }}   </td>
+            <td>  {{ team.leader}}   </td>
+            <td>  {{ team.leader.phone }}   </td>
+            <td>  {{ team.blankets }}   </td>
+            <td> <a onclick="urlChange(this)" data-id={{team.id}} style="cursor: pointer;">Edit</a>  </td> <!--Create the link for edit here-->
+        </tr>
+        {% endif %}
+        {% endfor %}
+
+
+    </table>
+
+    </div>
+
+    <div>
+
+    <h1 class="text-center w-full text-3xl font-bold my-10">Dues List </h1>
+    <h3 style="text-align: center;">Pending Dues</h3>
+    <div class="flex justify-center w-full margin-auto p-5 text-center">
+
+    <table>
+        <tr>
+
+            <th>Alcher ID</th>
+            <th>Team Name</th>
+            <th>Leader</th>
+            <th>Phone</th>
+            <th>Dues</th>
+        </tr>
+        {% for team in teams %}
+        {% if team.dues %}
+        <tr>
+            <td>  {{ team.leader.alcherid }}   </td>
+            <td>  {{ team.leader  }}   </td>
+            <td>  {{ team.leader}}   </td>
+            <td>  {{ team.leader.phone }}   </td>
+            <td>  {{ team.dues }}   </td>
+            <td> <a onclick="urlChange(this)" data-id={{team.id}}>Edit</a>  </td> <!--Create the link for edit here-->
+        </tr>
+        {% endif %}
+        {% endfor %}
+
+
+    </table>
+    </div>
+
+
+
+</div>
+
+
+</div>
+
+<script type="text/javascript">
+	var search='';
+	var initialLoc='';
+	function urlChange(e)
+	{
+		console.log(window.location.href);
+
+		window.location.href = "{% url 'edit-blankets-duess' %}" +`?team=${e.dataset.id}`;
+
+		console.log(window.location.href);
+
+
+	}
+	</script>
+
+
+{% endblock %}

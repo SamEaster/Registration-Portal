@@ -1,0 +1,74 @@
+{% extends './base.html' %}
+{% block title %} Users {% endblock %}
+{% block styles %}
+
+{%  endblock styles %}
+{% block content %}
+<div>
+    <h1 class="text-center w-full text-3xl font-bold my-10">Blankets </h1>
+    <div class="flex justify-center w-full margin-auto p-5 text-center">
+    
+    <table>
+        <tr>
+            
+            <th>Alcher ID</th>
+            <th>Team Name</th>
+            <th>Leader</th>
+            <th>Phone</th>
+            <th>No of Blankets</th>
+        </tr>
+        {% for team in teams %}
+        <tr>
+            <td>  {{ team.id }}   </td>
+            <td>  {{ team.leader  }}   </td>
+            <td>  {{ team.leader}}   </td>
+            <td>  {{ team.leader.phone }}   </td>
+            <td>  {{ team.blankets }}   </td>
+            <td> <a href="/">Edit</a>  </td> <!--Create the link for edit here-->
+        </tr>
+        {% endfor %}
+           
+           
+    </table>
+
+    </div>
+    
+    <div>
+
+    <h1 class="text-center w-full text-3xl font-bold my-10">Dues List </h1>
+    <h3 style="text-align: center;">Pending Dues</h3>
+    <div class="flex justify-center w-full margin-auto p-5 text-center">
+    
+    <table>
+        <tr>
+            
+            <th>Alcher ID</th>
+            <th>Team Name</th>
+            <th>Leader</th>
+            <th>Phone</th>
+            <th>Dues</th>
+        </tr>
+        {% for team in teams %}
+        <tr>
+            <td>  {{ team.id }}   </td>
+            <td>  {{ team.leader  }}   </td>
+            <td>  {{ team.leader}}   </td>
+            <td>  {{ team.leader.phone }}   </td>
+            <td>  {{ team.dues }}   </td>
+            <td> <a href="/">Edit</a>  </td> <!--Create the link for edit here-->
+        </tr>
+        {% endfor %}
+           
+           
+    </table>
+    </div>
+
+
+
+</div>
+
+
+</div>
+
+
+{% endblock %}

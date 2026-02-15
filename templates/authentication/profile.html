@@ -1,0 +1,79 @@
+{% extends "baseProfile.html" %}
+{% load static %}
+        <script>
+            document.addEventListener('DOMContentLoaded',function (){
+                console.log("Profile")
+            })
+        </script>
+        {% block title %}
+        <title>My Profile</title>
+        {% endblock title %}
+        <!-- <div class="navbar-container">
+            <div class="nav-link nav-active" ><a href="{% url 'profile' %}">My Profile</a></div>
+            <div class="nav-link"><a href="{% url 'RegisteredEvents' %}">My registrations</a></div>
+            <div class="nav-link"><a href="{% url 'TeamMembers' %}">Team Members</a></div>
+        </div>             -->
+        {% block content %}
+            <div class="circle">
+                <div class="img-container">
+                    <img src="{{request.user.img.url}}">
+                </div>
+                <div class="circlediv">
+                    <div class="username">{{ request.user.username }}</div>
+                    <div class="ID">{{ request.user.email }}</div>
+                </div>
+            </div>
+            <div class="edit">
+                <a href="{%url 'profileedit'%}"><button type="button" >Edit</button></a>
+            </div>
+            <div class="allDetails">
+                <div class="details fullname">
+                    Full name
+                    <div>{{ request.user.fullname }}</div>
+                </div>
+                
+                <div class="details phone1">
+                    Phone no
+                    <div>{{ request.user.phone_number }}</div>
+                </div>
+                
+                <div class="details gender">
+                    Gender
+                    <div>{{ request.user.gender }}</div>
+                </div>
+                
+                <div class="details phone2">
+                    Alternate Phone no
+                    <div>{{ request.user.alternate_phone }}</div>
+                </div>
+                
+                {% comment %} <div class="details teamname two">
+                    Team Name
+                    <div>{{ request.user.teamname}}</div>
+                </div> {% endcomment %}
+                
+                <div class="details college">
+                    College
+                    <div>{{ request.user.collegename }}</div>
+                </div>
+
+                <div class="details city two">
+                    City
+                    <div>{{ request.user.city }}</div>
+                </div>
+
+                <div class="details state">
+                    State
+                    <div>{{request.user.state}}</div>
+                </div>
+            </div>
+            <div class="details email">
+                <p>
+                    Email id
+                </p>
+                <div>
+                    <img src="../../static/imgs/alcher_profile_design_email_logo.png" alt="">
+                    <div>{{ request.user.email }}</div>
+                </div>
+            </div>
+        {% endblock content %}

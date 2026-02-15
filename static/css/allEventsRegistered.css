@@ -1,0 +1,491 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto:wght@400;500;700&display=swap");
+/*
+html5doctor.com Reset Stylesheet
+v1.6.1
+Last Updated: 2010-09-17
+Author: Richard Clark - http://richclarkdesign.com
+Twitter: @rich_clark
+*/
+* {
+  background: transparent;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  line-height: 1;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Inter',sans-serif;
+  padding: 2vw 4vw 2vw;
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  margin:0;
+}
+
+header .welcome{
+  width: 284px;
+  height: 65px;
+  top: 30px;
+  left: 108px;
+  gap: 0px;
+  opacity: 0px;
+  padding:1rem;
+}
+
+header .welcome h1{
+  margin-top:0;
+}
+nav ul {
+  list-style: none;
+}
+
+.main {
+  display: flex;
+  background: #FCFBFE;
+  /* flex-direction: row; */
+  justify-content: center;
+  /* align-items: center; */
+  border-radius: 15px 15px 15px 15px;
+}
+
+.right-box {
+  /* margin: 7vh; */
+  padding: 3vh;
+  min-height: 80vh;
+  width: 100%;
+  background-color: #FCFBFE;
+  font-family: "Satoshi", sans-serif;
+  border-radius: 0 0 15px 15px;
+}
+
+.box-nav {
+  height: 5vh;
+  display: flex;
+  justify-content: space-between;
+  padding: 1.2vw;
+  padding-right: 2vw;
+  margin: 2vw 0 0 2vw;
+  align-items: center;
+  font-family: "Yeseva One", sans-serif;
+}
+
+.box-nav h1 {
+  font-family: "Yeseva One", sans-serif;
+  color: #1F232C;
+  font-size: 4vw;
+  font-weight: 600;
+}
+
+.box-nav a {
+  text-decoration: none;
+  cursor: pointer;
+}
+.add-reg {
+  width: 12vw;
+  height: 3.5vw;
+  display: flex;
+  font-size: 2vw;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  justify-content: center;
+  align-items: center;
+  color: #DE235B;
+  background-color: #DE235B1A;
+  text-align: center;
+  padding: 1vw;
+  border: 3px solid #DE235B;
+  border-radius: 15px;
+}
+
+.add-reg p {
+  margin-right: 0.8vw;
+}
+
+.search-container {
+  display: flex;
+  justify-content: flex-end;
+  height: fit-content;
+  overflow: hidden;
+  padding: 1.2vw 2vw;
+}
+.search {
+  border-bottom: 2px solid black;
+  width: 35%;
+}
+.search input {
+  border: none;
+  outline: none;
+  background: none;
+  width: 90%;
+  font-size: 2vh;
+  padding: 0 6px 6px 0;
+}
+.search button {
+  float: right;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+.search button img {
+  width: 20px;
+}
+
+.team-no {
+  font-size: 2vw;
+  color: rgba(74, 80, 62, 1);
+  font-family: "Roboto", sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 0.4vw;
+  color: #0a2628;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 0.2vw grey;
+  border-radius: 0.5vw;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #0a2628;
+  border-radius: 0.6vw;
+}
+
+.search-members input[type="search"] :focus {
+  outline: none;
+}
+
+.competitions-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  overflow: hidden;
+  row-gap: 2vh;
+  column-gap: 2vh;
+  padding-bottom: 2vw;
+  padding: 1.2vw;
+  margin: 1.2vw;
+}
+
+.details h3,
+h5 {
+  font-family: "Roboto", sans-serif;
+}
+.rectangle-group {
+  width: 100%;
+  border-radius: 25px;
+  position: relative;
+  display: flex;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  height: calc(200px + 5vw);
+  transition: all 0.5s;
+  transform: scale(0.97);
+}
+
+.rectangle-group::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+    to left,
+    rgba(0, 0, 0, 0) 50%,
+    rgba(0, 0, 0, 0.4) 70%
+  );
+}
+
+.rectangle-group img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.competition-info {
+  background: #fedcdb;
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  justify-content: space-between;
+  align-items: start;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+  padding: 1.5rem;
+  height: calc(100%-3rem);
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  font-family: "Satoshi", sans-serif;
+  width: 40%;
+  /* Adjust the width as needed */
+  opacity: 1;
+  /* overflow: hidden; */
+}
+
+.competition-info::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -10px; /* Aligns scallops outside the container */
+  width: 20px; /* Width of the scallops */
+  height: 100%; /* Full height of the container */
+  background: radial-gradient(circle, #fedcdb 8px, transparent 8px);
+  background-size: 20px 20px; /* Diameter of each scallop */
+  background-repeat: repeat-y; /* Repeats the circles vertically */
+}
+.competition-name {
+  display: flex;
+  padding: 1.3rem;
+  flex-direction: column;
+  text-align: start;
+  justify-content: space-between;
+  align-items: start;
+  color: white;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  font-family: "Satoshi", sans-serif;
+  font-size: medium;
+  width: 100%;
+  /* Adjust the width as needed */
+  overflow-x: visible;
+}
+.details {
+  font-family: "Yeseva One";
+  width: 50%;
+}
+
+.details h3 {
+  font-weight: 750;
+  font-size: 2.5vw;
+  margin-bottom: auto;
+}
+.competition-info h3 {
+  font-size: 2rem;
+}
+.competition-info h3 span {
+  font-size: 0.7rem;
+}
+
+.details h5 {
+  font-size: 1.5vw;
+  margin-bottom: auto;
+}
+
+.rectangle-group:hover::after {
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.4) 50%,
+    rgba(0, 0, 0, 0) 50%
+  );
+}
+
+.competition-info h3 {
+  font-family: "Yeseva One", sans-serif;
+  color: #de235b;
+  font-weight: 750;
+  font-size: calc(0.7rem + 1.3vw);
+}
+
+.competition-info h4 {
+  opacity: 0;
+  position: absolute;
+}
+
+.prize_worth {
+  opacity: 0;
+  font-family: "Satoshi", sans-serif;
+  transform: rotate(-20deg);
+  font-size: calc(0.5rem + 1.2vw);
+  font-weight: 900;
+  top: 45%;
+  left: 40%;
+  width: 10vw;
+  max-width: 150px;
+  max-height: 150px;
+  height: 10vw;
+  background-size: contain;
+  display: flex;
+  align-items: center;
+  padding: 1.5vw;
+  /* padding-left: 3vw; */
+  justify-content: center;
+  flex-direction: column;
+  position: absolute;
+  background-image: url("../imgs/Star.png");
+  overflow: visible;
+  opacity: 1;
+}
+
+.prize_worth span {
+  text-wrap: nowrap;
+  font-size: calc(0.1rem + 0.7vw);
+}
+
+.prize_worth div {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.competition-info p {
+  font-size: 1vw;
+  font-family: "Satoshi", sans-serif;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: auto;
+}
+
+.competition-info a {
+  text-decoration: none;
+  color: black;
+}
+
+.register-button {
+  color: black;
+  border-style: solid;
+  border-color: red;
+  border-width: 2px;
+  border-radius: 10px;
+  padding: 0.5vw 1.5vw;
+  cursor: pointer;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.5vw;
+  font-weight: 500;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.register-button a {
+  text-decoration: none;
+  color: #de235b;
+}
+.registerbutton {
+  display: flex;
+  width: 100%;
+  justify-content: end;
+}
+
+.registerbutton2 {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 1.3rem;
+}
+.competition-name .register-button {
+  background: rgba(254, 220, 219, 0.8);
+  border-style: solid;
+  width: fit-content;
+  padding: 0.5vw 1.5vw;
+  cursor: pointer;
+  font-size: 1.5vw;
+  font-weight: 500;
+  transition: background-color 0.3s ease-in-out;
+}
+.registerbutton2 .register-button {
+  background-color: #fedcdb;
+}
+
+.competition-name .register-button a {
+  text-decoration: none;
+  color: #de235b;
+}
+
+@media (max-width: 768px) {
+  .box-nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5vh;
+  }
+  .competitions-list {
+    grid-template-columns: repeat(1, 1fr);
+    margin-top: 13vw;
+  }
+  .rectangle-group {
+    width: 100%;
+    height: 25vw;
+    margin: 0;
+  }
+
+  .my-reg {
+    font-size: 3vh;
+  }
+  .competition-info h3 {
+    font-size: 2.3vw;
+  }
+  .details h1 {
+    font-size: 5vw;
+  }
+  .competition-info p {
+    font-size: 2vw;
+  }
+  .register-button {
+    padding: 0vw 1vw;
+    font-size: 1vw;
+  }
+  .box-nav h1 {
+    font-size: 5vw;
+    margin-right: 1vw;
+  }
+  .add-reg {
+    padding: 1.5vw;
+    font-size: 3vw;
+    width: 17vw;
+  }
+  .register-button {
+    padding: 1vw;
+    font-size: 2vw;
+  }
+  .team-no {
+    font-size: 2.1vw;
+  }
+}
+@media (max-width: 500px) {
+  .row1,
+  .row2,
+  .row3,
+  .row4,
+  .row5,
+  .row6 {
+    flex-direction: column;
+    margin-bottom: 0;
+  }
+  .right-box {
+    margin-left: 0;
+    width: 85vw;
+  }
+  .rectangle-group {
+    width: 100%;
+    height: 150px;
+    margin-bottom: 3vw;
+  }
+  .competition-info h3 {
+    font-size: 3vw;
+  }
+
+  .register-button {
+    font-size: 3vw;
+  }
+  .competition-info p {
+    font-size: 2.2vw;
+  }
+  .team-no {
+    font-size: 3vw;
+  }
+}

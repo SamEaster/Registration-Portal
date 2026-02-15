@@ -1,0 +1,28 @@
+{% extends 'data/base.html' %}
+{% block title %} Users {% endblock %}
+{% block styles %}
+
+{%  endblock styles %}
+{% block content %}
+<div>
+
+    <div class="flex flex-col justify-center w-full margin-auto p-5 text-center my-20 text-3xl font-bold">
+        {% for competition in competitions %}
+        <div>
+            <a href="{% url 'submissions' comp_id=competition.id %}" target='__blank'>{{competition.event_name}}</a>
+        </div>
+      
+        {% endfor %}
+        
+
+    </div>
+    
+   
+
+</div>
+
+
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends './basictailwind.html'%}
+{% load static %}
+{%block title%}Contact Us | Alcheringa {%endblock%}
+{% block body %}
+
+<body>
+    <div class="flex"  style="background-color: #F3F6F8;">
+        {% include "./navbar.html" %}
+        <div class="w-full flex justify-center">
+           
+                <!-- component -->
+                <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-4 py-12">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6 justify-center">
+                        <div class="w-full bg-white rounded-lg p-12 flex flex-col justify-center items-center">
+                            <div class="w-full rounded-md mb-5">
+                                <img src="{% static 'imgs/pr/siddhant.jpg' %}" class="w-full rounded-md">
+                            </div>
+                            
+                            
+                            <div class="text-center">
+                                <p class="text-xl text-gray-700 font-bold mb-2">Siddhant Singh</p>
+                                <p class="text-base text-gray-400 font-normal">Public Relations<br>Head</p><br>
+                                <p class="text-base text-gray-400 font-normal">siddhant.s@alcheringa.in</p>
+                                <p class="text-base text-gray-400 font-normal">9310859978</p>
+                            </div>
+                        </div>
+                        <div class="w-full bg-white rounded-lg p-12 flex flex-col justify-center items-center">
+                            <div class="w-full rounded-md mb-5">
+                                <img src="{% static 'imgs/pr/akshara.jpg' %}" class="w-full rounded-md">
+                            </div>
+                            
+                            <div class="text-center">
+                                <p class="text-xl text-gray-700 font-bold mb-2">Danda Akshara</p>
+                                <p class="text-base text-gray-400 font-normal">Public Relations<br>Head</p><br>
+                                <p class="text-base text-gray-400 font-normal">akshara@alcheringa.in</p>
+                                <p class="text-base text-gray-400 font-normal">9908991939</p>
+                            </div>
+                        </div>
+                        
+                        
+                        
+                    </div>
+                </section>
+          
+        </div>
+    </div>
+    </div>
+
+</body>
+{%endblock%}
+{% block script %}
+
+{% endblock %}

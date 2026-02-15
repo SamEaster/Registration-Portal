@@ -1,0 +1,269 @@
+{% extends 'offlinePortal/home.html' %}
+    {% block title %} Search {% endblock %}
+    {% block header %}
+    Blanket/Dues Edit
+    {% endblock %}
+    {% block styles %}
+<style>
+    .center-flex{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .heading{
+        display:flex;
+        align-items:center;
+        font-size: 1.3vw;
+        font-weight: bold;
+        height:8vh;
+    }
+    .w-100{
+        width: 100vw;
+    }
+    * {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    }
+
+    body {
+        margin: 0;
+    }
+
+    .left-nav-outer {
+        width: 250px;
+        width: 20vw;
+        height: 100vh;
+        border-radius: 0 8px 8px 0;
+    }
+
+    .left-nav {
+        position: sticky;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        border-radius: 0 8px 8px 0;
+    }
+
+    .top-intro {
+        height: 4vw;
+        background-color: #060f1f;
+        color: rgb(222, 222, 222);
+        font-size: 17px;
+        font-size: 1.3vw;
+        font-weight: 500;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-left: 15px;
+        padding-left: 1.5vw;
+    }
+
+    .bottom-links {
+        padding: 2vw 0 2vw 0;
+        height: 100%;
+        background-color: #172338;
+        color: rgb(222, 222, 222);
+        font-size: 15px;
+        font-size: 1.18vw;
+    }
+
+    .bottom-link {
+        text-decoration: none;
+        color: rgb(222, 222, 222);
+        /* padding: 4px 6px 4px 6px; */
+        padding: 0.4vw 0.5vw 0.9vw 0.5vw;
+        margin: 0.12vw 1vw 0.12vw 1vw;
+        border-radius: 6px;
+        display: flex;
+    }
+
+    .bottom-link-2 {
+        text-decoration: none;
+        color: rgb(222, 222, 222);
+        padding: 4px 6px 4px 6px;
+        margin: 2px 12px 2px 10px;
+        padding: 0.4vw 0.5vw 0.4vw 0.5vw;
+        margin: 0.12vw 1vw 0.12vw 1vw;
+        border-radius: 6px;
+        display: flex;
+        cursor: default;
+        color: rgb(150, 150, 150);
+    }
+
+    .bottom-link:hover {
+        background-color: #091427 !important;
+        cursor: pointer;
+    }
+
+    .header-main {
+        margin-bottom: 20px;
+        background-color: white;
+        height: 4.2vw;
+        box-shadow: 0 1px 8px rgb(0 0 0 / 0.2);
+    }
+
+    .search__options {
+        /* display: none; */
+    }
+
+    .search:hover,
+    .search:hover .search__options {
+        background-color: #293243;
+    }
+
+    .search:hover a {
+        background-color: #38465e;
+    }
+
+    .search:hover .search__options {
+        display: block;
+        transition: 0.25s ease-in-out;
+    }
+
+    .alcher-logo {
+        width: 1.5vw;
+    }
+    .main-content{
+        width:80vw;
+        padding:0% 5% 0% 5%;
+    }
+    .dark{
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        height: 2.9vw;
+        padding: 0 1.2vw 0 1.2vw;
+        border: 1px solid rgb(195, 195, 195);
+        cursor: pointer;
+        border-radius: 0.4vw;
+        font-size: 1.1vw;
+        background-color:#060f1f;
+        color:white;
+    }
+    .light{
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        height: 2.9vw;
+        padding: 0 1.2vw 0 1.2vw;
+        border: 1px solid rgb(195, 195, 195);
+        cursor: pointer;
+        border-radius: 0.4vw;
+        font-size: 1.1vw;
+        background-color:#38465e;
+        color:white;
+    }
+    #input_box {
+        height: 2.9vw;
+        width: 15vw;
+        border: 1px solid #1d345c;
+        font-size: 1.1vw;
+        padding-left: 1vw;
+        border-radius: 0.4vw;
+    }
+    .Btn{
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        height: 2.9vw;
+        padding: 0 1.2vw 0 1.2vw;
+        border: 1px solid rgb(195, 195, 195);
+        background: #1d345c;
+        color: white;
+        cursor: pointer;
+        border-radius: 0.4vw;
+        font-size: 1.1vw;
+    }
+    #comp_select {
+        height: 2.9vw;
+        width: 16.5vw;
+        border: 1px solid #1d345c;
+        font-size: 1.1vw;
+        padding-left: 1vw;
+        border-radius: 0.4vw;
+    }
+
+</style>
+{% endblock %}
+{% block content %}
+    <div class="d-flex">
+        <div class="main-content">
+            <div class="heading"><div>Event Registrations</div></div>
+                <div class=" mt-4">
+                    <div style="font-size: 1vw;margin-top: 0.5vw; color: red;">
+                        {% for message in messages %}
+                        * {{message}}
+                        {% endfor %}
+                        </div>  
+                    <form action="{% url 'event-search' %}" method="POST" id="alcher_search">
+                        {% csrf_token %}
+                        <div class="input-group mb-3">
+                            <input type="text" placeholder="Alcher-ID" name="alcherid" id="input_box" >
+                            <div class="input-group-append">
+                            <button class="Btn dark" type="submit">Search</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            <div class="d-flex w-100">
+                <div class="d-flex"><div class="font-weight-bold">TeamName:&nbsp;</div><div>{{team.name}}</div></div> 
+                <div></div>
+            </div>
+            <div>
+                <div class="d-flex  w-100">
+                    <div class="d-flex "><div class="font-weight-bold">Members:</div><div></div></div> 
+                    <div></div>
+                </div>
+                <form method="POST" action="{% url 'event-register'%}">
+                    {% csrf_token %}
+                    {% if id %}
+                        <input type="hidden" name="team" value={{id}} />
+                    {%endif%}
+                    <div class="mt-4" style=" display:grid; grid-template-columns: repeat( 10, minmax(150px, 1fr) ); justify-self:space-around; gap:8px;">
+                        {% for member in members%}
+                        <label for="" class="light" onclick="checkbox(this)"><input type="text" name="member" class="d-none" value={{member.memberid}}><span>{{member.name}}</span></label>
+                        {%endfor%}
+                    </div>
+                <div class="d-flex w-100 mt-4">
+                    <div>
+                        <select name="competition" id="comp_select" onchange="showLink()">
+                            <option selected>Choose Competition</option>
+                            {%for competition in competitions%}
+                            <option value={{competition.id}}>{{competition.event_name}}({{competition.min_members}}-{{competition.max_members}})</option>
+                            {% endfor %}
+                            {%for competition in competitions%}
+                            {% if competition.showPeformanceLink %}
+                            <input name={{competition.id}} type="hidden" value={{competition.showPeformanceLink}} >
+                            {% endif %}
+                            {%endfor%}
+                        </select>
+                    </div>
+                </div>
+                    <div class="d-flex w-100 mt-4">
+                    <div class="input-group mb-3" id="link">
+                    </div>
+                </div>
+                    <div><button type="submit" class="Btn dark">Register</button></div>
+                </form>
+                </div>
+                </div>
+            </div>
+
+</body>
+<script>
+    const checkbox=(element)=>{
+        element.children[0].checked=!(element.children[0].checked);
+        if(element.children[0].checked){
+            element.classList.value="dark";
+        }else{
+            element.classList.value="light";
+        }
+
+    }
+    function showLink(){
+        var comp_selected=document.getElementById('comp_select').value
+        var showPerfomace=document.getElementsByName(comp_selected)[0].value
+        document.getElementById('link').innerHTML='<input type="text" placeholder="Link" name="link" id="input_box">'
+    }
+</script>
+{% endblock %}

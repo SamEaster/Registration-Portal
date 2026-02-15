@@ -1,0 +1,164 @@
+{% extends 'offlinePortal/home.html' %}
+{% block title %} Search {% endblock %}
+{% block styles %}
+    <style>
+        .header_ div {
+            border-bottom: 1px solid rgb(26, 52, 97); 
+            padding: 0.8vw 1.6vw 0.8vw 1.6vw;
+            width: 25vw;
+        }
+        .container-div{
+            border: 1px solid rgb(149, 118, 118);
+            border-radius: 0.5vw;
+            width: fit-content;
+            text-align: left;
+            font-size: 1.15vw;
+        }
+
+        h1 {
+            color:rgb(26, 52, 97); 
+            font-size: 1.5vw; 
+            font-weight: 500;
+        }
+
+        h3, strong {
+            font-weight: 500;
+        }
+
+    
+
+        h3 a,.container-div a{
+            color: rgb(26, 52, 97);
+            text-decoration: underline;
+        }
+        #input_box {
+            height: 2.5vw;
+            width: 15vw;
+            border: 1px solid #1d345c;
+            font-size: 1.1vw;
+            padding-left: 1vw;
+            border-radius: 0.4vw;
+        }
+        #searchBtn {
+            height: 2.9vw;
+            padding: 0 1.2vw 0 1.2vw;
+            border: 1px solid rgb(195, 195, 195);
+            background: #1d345c;
+            color: white;
+            cursor: pointer;
+            border-radius: 0.4vw;
+            font-size: 1.1vw;
+        }
+    </style>
+{% endblock styles %}
+{% block header %}
+Universal Search
+{% endblock %}
+{% block content %}
+    
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="alcherID" id="input_box" placeholder="Alcher / Member ID">
+            <button id="searchBtn" type="submit">Search</button>
+        </form>
+        <div style="font-size: 1vw;margin-top: 0.5vw; color: red;">
+            {% for message in messages %}
+            * {{message}}
+            {% endfor %}
+        </div>
+    {% if leader %}
+    <div>
+        <div class="flex  w-full margin-auto p-5 text-center" style="margin-top: 3vw;">
+            <div style="margin-bottom: 1vw; font-size: 1.15vw;"><strong>AlcherID : {{ leader.alcherid }} </strong></div>
+            <div style="display:flex">
+                <div class="container-div">
+                    <div class="header_">
+                        <div><strong>Leader Name</strong> - {{ leader.fullname }} </div>
+                        <div><strong>Email</strong> -  {{ leader.email}}</div>
+                        <!-- <div><strong>Team Name</strong> - {{ leader.username }}</div> -->
+                        <div><strong>Phone</strong> - {{ leader.phone }}</div>
+                        <div><strong>College Name</strong> - {{ leader.collegename }}</div>
+                        <div><strong>City </strong>- {{ leader.city }}</div>
+                        <div><strong>Team Members</strong> - <a href="{% url 'team_members' leader_id=leader.id %}" target="__blank">
+                            Team Members
+                            </a></div>
+                    </div>
+                </div>
+                <div class="container-div" style="margin-left: 2vw;">
+                    <div class="header_">
+                        <div><strong>Alternate Phone</strong> - {{ leader.alternate_phone }}</div>
+                        <div><strong>Email Verified </strong>- {% if leader.is_active %}
+                            Yes
+                            {% else %}
+                            No
+                            {% endif %}</div>
+                        <div style="border-bottom: 0px solid white;"><strong>Competitions Registered</strong> - <br><p>{% for event in leader.events_registered.all %}
+                            {{event.event_name}},
+                            {% endfor %}</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        {% elif member %}
+        <div class="flex w-full p-5 text-center" style="margin-top: 3vw;">
+            <div style="margin-bottom: 1vw; font-size: 1.15vw;"><strong>Leader - {{ team.leader.fullname  }} (<a target="_blank" style="cursor: pointer;text-decoration: underline;" onclick=linktoteam()>{{team.leader.alcherid}}</a>)</strong></div>
+            
+
+            <div style="display: flex;">
+                <div class="container-div">
+                    <div class="header_">   
+                        <div><strong>MemberID - </strong>  {{ member.memberid  }} </div>
+                        <div><strong>Member Name</strong> - {{ member.name}} </div>
+                        <div><strong>Email</strong> - {{ member.email}} </div>
+                        <!-- <div><strong>Team Name</strong> - {{ team.leader.username }}</div> -->
+                        <div><strong>Phone</strong> - {{ member.phone  }}</div>
+                        <div><strong>College Name</strong> - {{ team.leader.collegename }} </div>
+                        <div><strong>City</strong> - {{ team.leader.city  }} </div>
+                        <div><strong>Team</strong> - 
+                            <a href="{% url 'team_members' leader_id=team.leader.id %}" target="__blank">
+                            Team Members</a>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="container-div" style="margin-left: 2vw;">
+                    <div class="header_">   
+                        <div><strong>Alternate Phone </strong>- {{ team.leader.alternate_phone  }}</div>
+                        <div><strong>Email Verified</strong> -  {% if member.is_active %}
+                            Yes
+                            {% else %}
+                            No
+                            {% endif %}</div>
+                        <div style="border-bottom: 0px solid white;"><strong>Competitions Registered</strong> - <p>{% for event in team.leader.events_registered.all %}
+                            {{event.event_name}},
+                            {% endfor %}</p></div>
+                    </div>
+                </div>
+
+            </div>
+
+            
+        </div>
+    </div>
+    {% endif %}
+    <script defer>
+        function linktoteam(){
+            const inputbox = document.getElementById('input_box');
+            // console.log(inputbox);
+            inputbox.value = '{{team.leader.alcherid}}';
+            const searchBtn = document.getElementById('searchBtn');
+            searchBtn.click();
+            inputbox.value='';
+            console.log('done')
+        }
+        console.log("{{active_page}}"+"hello");
+    if ('{{active_page}}')
+        {var active = "{{active_page}}";
+    }
+    document.getElementById("{{active_page}}").style.backgroundColor = "#060f1f";
+    </script>
+    </div>
+{% endblock %}

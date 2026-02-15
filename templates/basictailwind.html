@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <!-- Title -->
+    <title>{% block title %} {% endblock %}</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'icons/Group 26.png'  %}">
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins&family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/css?f[]=satoshi@400,700&display=swap" rel="stylesheet">
+
+
+    <!-- FONT AWESOME CDN -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+    <!-- TAILWIND CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Global styles -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+        body{
+            font-family: 'Poppins', sans-serif;
+        }
+        .orcolor {
+            background-color: #EE6337;
+        }
+        .border-orange{
+            --tw-border-opacity: 1!important;
+            border-color: #FF4433!important;
+        }
+        input:focus{
+            outline: none;
+        }
+                ::-webkit-scrollbar {
+            width: 4px;
+            padding-right: 2px;
+        }
+
+
+        
+    </style>
+
+
+    <!-- JQUERY -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- External stylesheet -->
+    {% block ext_style %} {% endblock %}
+    
+</head>
+
+<body class="bg-gray-100">
+    
+    {% block body %} {% endblock %}
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+
+{% include 'loading.html' %}
+{% include 'messages.html' %}
+{% include 'guidelines_popup.html' %}
+<div class="extra sm:hidden w-full h-2"></div>
+<script>
+    var active="{{active_page}}";
+    document.getElementById("{{active_page}}").style.color="#EE6337";
+    document.getElementById("{{active_page}}").classList.add("border-0","bg-gray-100");
+    document.getElementById("{{active_page}}").children[0].src=`{% static 'icons/nav/active/'|add:active_page|add:".png" %}`;
+    document.getElementById("{{active_page}}_mbl").src=`{% static 'icons/nav/active/'|add:active_page|add:".png" %}`;
+    document.getElementById("{{active_page}}_mbl").classList.add();
+   
+  </script>
+
+</html>

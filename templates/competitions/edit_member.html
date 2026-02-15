@@ -1,0 +1,124 @@
+{% extends "baseProfile.html" %} {% load static %} {% block title %}
+<title>Add Team Member</title>
+<link rel="stylesheet" href="{% static 'css/add_member.css' %}" />
+{% endblock title %} {% block content %} 
+<style>
+    .name input::placeholder{
+        color:black;
+    }
+    .phone input::placeholder{
+        color:black;
+    }
+    .phone-comp{
+        display: flex;
+    }
+    #id_phone_number_0{
+        border:none;
+        width:5vw;
+        background-color: white;
+    }
+    #id_phone_number_1{
+        width:20vw;
+    }
+    .email input::placeholder{
+        color:black;
+    }
+    .gender input::placeholder{
+        color:black;
+    }
+    @media(max-width:768px)
+    {
+        .name input::placeholder{
+        font-size:2vw;
+    }
+    .phone input::placeholder{
+        font-size:2vw;
+    }
+    .phone-comp{
+        display: flex;
+    }
+    #id_phone_number_0{
+        width:5vw;
+        background-color: white;
+    }
+    #id_phone_number_1{
+        width:20vw;
+    }
+    .email input::placeholder{
+        font-size:2vw;
+    }
+    .gender input::placeholder{
+        font-size:2vw;
+    }
+
+    }
+</style>
+<div class="body">
+      <div class="team-container" style="position: relative;">
+          <div class="header-text">
+              <h3>Team Members</h3>
+              <h4>Edit Members</h4>
+          </div>
+          <div class="member-img">
+              <img src="{% static 'imgs/image 4.png' %}" alt="">
+          </div>
+          <div class="form-container">
+              <form action="" id="add_form" method="POST" >
+                  {% csrf_token %}
+                  <div class="name">
+                      Full Name*
+                      {{form.name}}
+                  </div>
+  
+                  <div class="email">
+                      Email ID*
+                      {{form.email}}
+                  </div>
+  
+                  <div class="phone">Phone Number*
+                     <div class="phone-comp"> {{form.phone_number}}</div>
+                  </div>
+  
+                  <div class="gender" >Gender
+                      {{form.gender}}
+        
+                      </select>
+                  </div>
+                  <br>
+      
+                  <div class="buttons-container">
+                      <button  type="submit">
+                        Edit
+                      </button>
+                      
+                  </div>
+                  </div>
+              </form>
+          </div>
+  
+      </div>
+      
+  </div>
+<script>
+    const form = document.querySelector('#add_form');
+    let previous_page = document.referrer;
+    //form.setAttribute("action", `${previous_page}`);
+    function Redirect(){
+        window.history.back();
+    }
+    document.addEventListener("DOMContentLoaded", function () {
+        var messages = document.querySelectorAll(".errorlist");
+        if (messages.length > 0) {
+          var alertContainer = document.getElementById("alert-container");
+          function displayErrorMessage() {
+            alertContainer.style.display = "block";
+            for (var i = 0; i < messages.length; i++) {
+              alertContainer.innerHTML += messages[i].innerText;
+              alertContainer.innerHTML += "<br>";
+              
+            }
+          }
+        }
+      });
+</script>
+{% endblock content %}

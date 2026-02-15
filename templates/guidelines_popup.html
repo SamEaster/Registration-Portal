@@ -1,0 +1,78 @@
+<style>
+  .open-button {
+    color: white;
+    border: none;
+    cursor: pointer;
+    position: fixed;
+    bottom: 23px;
+    right: 28px;
+  }
+
+  .cancel {
+    color: white;
+    border: none;
+    cursor: pointer;
+    position: fixed;
+    bottom: 23px;
+    right: 28px;
+    display: none;
+  }
+  
+  .popup {
+    display: none;
+    position: fixed;
+    background-color: #FFFFFF;
+    bottom:70px;
+    right: 28px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px 0.1px #e6e6e6;
+    width: 35vw;
+  }
+
+  h6 {
+      font-weight: 500;
+  }
+  
+  
+</style>
+
+<button class="open-button sm:block hidden" id = "open" onclick="openPopup()">
+  <div style="background: #EE6337;border-radius: 18px;width: 36px;height: 36px;">
+      <div style="font-size: 18px;transform: translate(0.8px,5px);">?</div>
+  </div>
+</button>
+<button type="button" class="btn cancel" id="close" onclick="closePopup()">
+  <div style="background: #EE6337;border-radius: 18px;width: 36px;height: 36px;">
+      <div style="font-size: 22px;transform: translate(0px,3px);">×</div>
+  </div>
+</button>
+
+<div class="popup sm:hidden" id="guidelinesBody">
+  
+  <h6 style="margin: 10px;">Guidelines</h6>
+  <hr style="height: 1px;color: #ebe7e7;">
+  <ol style="margin: 22px 14px 18px 28px;font-size: 14px;">
+      <li>1. Complete your profile by filling all the details in the Profile" tab.</li>
+      <li>2. Add members to your team in the "Members" tab, if required. </li>
+      <li>3. Now, click on to Competitions" tab to register for the events. </li>
+      <li>4. Select your particular event and hit 'Register button. </li>
+      <li>5. Select the individuals participating in that event.</li>
+      <li>6. In events, it will prompt you to provide the link of your  performance. In that case, upload the video file on your Google drive and paste the sharing link.</li>
+  </ol>
+
+</div>
+
+<script>
+function openPopup() {
+document.getElementById("guidelinesBody").style.display = "block";
+document.getElementById("close").style.display = "block";
+document.getElementById("open").style.display = "none";
+}
+
+function closePopup() {
+document.getElementById("guidelinesBody").style.display = "none";
+document.getElementById("close").style.display = "none";
+document.getElementById("open").style.display = "block";
+}
+</script>

@@ -1,0 +1,176 @@
+{% extends "baseProfile.html" %} {% load static %} {% block title %}
+<title>Team Members</title>
+<link rel="stylesheet" href="{% static 'css/teamMembers.css' %}" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins&family=Roboto&display=swap"
+  rel="stylesheet"
+/>
+<link
+  href="https://api.fontshare.com/css?f[]=satoshi@400,700&display=swap"
+  rel="stylesheet"
+/>
+{% endblock title %} {% block content %}
+<div class="teamMembers">
+<div class="form-container">
+  <form action="" id="add_form" method="POST" >
+<form class="form-section" id="memberForm" action="{% url 'TeamMembers' slug=slug %}" method="POST">
+{% csrf_token %}
+<div id="formset-container">
+  {{ formset.management_form }}
+  
+  {% for form in formset %}
+      <div class="team-member-form">
+        <h4 class="member-title">New Member</h4>
+          <div class="form-group name">
+              <label for="">Full Name*</label> {{ form.name }}
+          </div>
+          <div class="form-group email">
+              <label for="">Email ID*</label> {{ form.email }}
+          </div>
+          <div class="form-group phone">
+              <label for="">Phone Number*</label> <div class="phone-comp"> {{ form.phone_number }}</div>
+          </div>
+          <div class="form-group gender">
+              <label for="">Gender</label> {{ form.gender }}
+          </div>
+          <br>
+      </div>
+  {% endfor %}
+</div>
+<div class="add-member">
+<button type="button" id="add-more-members" class="add-button">Add Member</button>
+</div>
+<div class="buttons">
+  <button type="button" class="remove-btn">Remove</button>
+    <button type="submit" class="add-btn">Add</button>
+  
+</div>
+</div>
+</form>
+
+  <div class="right">
+    <div class="search-container">
+      <div class="search">
+        <input
+          type="text"
+          placeholder="Search members"
+          id="searchInput"
+          onkeyup="performSearch()"
+        />
+        <button type="submit">
+          <img src="{% static 'imgs/Vector (1).png' %}" />
+        </button>
+      </div>
+    </div>
+    <div class="members">
+      <!-- <a class="member add" href="{% url 'add_member' %}">
+        <img src="{% static 'imgs/add-member-outline.png' %}" />
+        Add Members
+      </a> -->
+      {% for member in members %}
+      <div class="member">
+        <img src="{% static 'imgs/image 3.png' %}" />
+        <div style="width:80%">
+          <div style="display: flex; justify-content: space-between">
+            <span style="font-weight: bold">{{member.name}}</span>
+            <div>
+              <button
+                style="
+                  border: none;
+                  background-color: #FEDCDB;
+                  margin-left: 2vw;
+                  font-size: 2vw;
+                "
+              >
+                <a
+                  href="{% url 'edit_member' member_id=member.id %}"
+                  style="text-decoration: none"
+                  ><img style="width: 4vw; height: 4vw; max-width: 20px;max-height: 20px;" src="{% static 'icons/edit.png' %}"></img></a
+                >
+              </button>
+              {% comment %} <button
+                style="border: none; background-color: #c4c9a0; font-size: 2vw"
+              >
+                <a
+                  href="{% url 'delete_member' member_id=member.id %}"
+                  style="text-decoration: none"
+                  >🗑️</a
+                >
+              </button> {% endcomment %}
+            </div>
+          </div>
+          {{member.email}}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+<script>
+  const searchInput = document.getElementById("searchInput");
+  const membersContainer = document.getElementsByClassName(".members");
+  const memberBox = document.querySelectorAll(".member");
+  function performSearch() {
+    const searchValue = searchInput.value.toLowerCase();
+    for (let i = 0; i < memberBox.length; i++) {
+      let member = memberBox[i].getElementsByTagName("span")[0];
+      if (member) {
+        let memberName = member.innerText;
+        if (memberName.toLowerCase().indexOf(searchValue) > -1) {
+          memberBox[i].style.display = "";
+        } else {
+          memberBox[i].style.display = "none";
+        }
+      }
+    }
+  }
+  document.addEventListener('DOMContentLoaded', function () {
+    const addMoreButton = document.querySelector('.add-member');
+    let formContainer = document.getElementById('formset-container');
+    let totalForms = document.querySelector('#id_form-TOTAL_FORMS');
+    const removeButton = document.querySelector('.remove-btn')
+    
+    addMoreButton.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        let newForm = formContainer.querySelector('.team-member-form').cloneNode(true);
+        let formCount = parseInt(totalForms.value);
+
+        // Update the form count
+        totalForms.value = formCount + 1;
+
+        // Update the form indexes
+        let newFormHTML = newForm.innerHTML.replace(/form-(\d)-/g, `form-${formCount}-`);
+        newForm.innerHTML = newFormHTML;
+
+        // Update the member title with the new member number
+        let memberTitle = newForm.querySelector('.member-title');
+        memberTitle.textContent = `New Member ${formCount + 1}`;
+
+        formContainer.appendChild(newForm);
+    });
+    
+    removeButton.addEventListener('click', function (e) {
+      e.preventDefault(); // Prevent default button action
+
+      // Check if there are multiple forms present
+      let forms = formContainer.querySelectorAll('.team-member-form');
+      if (forms.length > 1) {
+        // Remove the last form in the container
+        formContainer.removeChild(forms[forms.length - 1]);
+
+        // Update the form count
+        let formCount = parseInt(totalForms.value);
+        totalForms.value = formCount - 1;
+      } else {
+          alert('At least one form is required.');
+      }
+    });
+
+    add_redirect_button = document.querySelector('.add-btn')
+    
+});
+</script>
+{% endblock content %}

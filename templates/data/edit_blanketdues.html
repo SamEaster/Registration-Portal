@@ -1,0 +1,54 @@
+{% extends './base.html' %}
+{% block title %} Users {% endblock %}
+{% block styles %}
+
+{%  endblock styles %}
+
+{% block content %}
+
+<!-- First we need to take input -->
+<!-- Then we need to display the results based on that input -->
+<div style="text-align:center">
+	<h2>Blanket/Dues Edit</h2>
+	
+	<input id='inputSearch' type="text" name="search" style="border-width: 2px;border-color: black;" >
+	<button type="button" onclick="urlChange()">Search</button>
+
+	{% if teams %}
+		{% for team in teams %}
+		<p>Team id: <span>{{team.id}}</span></p>
+		<p>Team Leader: <span>{{team.leader}}</span></p>
+		<form method="POST">{% csrf_token %}
+			<input type="text" name="blanketUpdate" value="{{team.blankets}}">
+			<input type="text" name="duesUpdate" value='{{team.dues}}'>
+			<button type="submit">Submit</button>
+		</form>
+			
+<!-- 		<p>Team Blankets: <span>{{team.blankets}}</span></p>
+		
+		<p>Dues: <span>{{team.dues}}</span></p> -->
+		{% endfor %}
+	{% endif %}
+</div>
+
+<script type="text/javascript">
+	var search='';
+	var initialLoc='';
+	function urlChange()
+	{
+		search=document.getElementById('inputSearch').value;
+		console.log(window.location.href);
+		
+		window.location.href = window.location.href.split('?')[0]+`?team=${search}`;
+
+		console.log(window.location.href);
+		
+		
+	}
+	</script>
+
+
+
+
+
+{% endblock %}

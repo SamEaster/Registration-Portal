@@ -1,0 +1,373 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register | Alcheringa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="icon" type="image/x-icon" href="{% static 'icons/Group 26.png'  %}">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins&family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/css?f[]=satoshi@400,700&display=swap" rel="stylesheet">
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        height: auto;
+      }
+      .main {
+        display: flex;
+        height: auto;
+      }
+      .alcher{
+        width: 12vw;
+      }
+      .left {
+        background-color: #10242c;
+        width: 50vw;
+        padding: 3vw;
+      }
+      .right {
+        background: url("{% static 'imgs/IMG_0504.png' %}");
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 50vw;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding-bottom: 5vw;
+        padding-left: 5vw;
+        padding-right: 2vw;
+      }
+      .header {
+        color: #b5bc89;
+        font-family: 'Satoshi', sans-serif;
+      }
+      .text {
+        color: white;
+        font-size: 1.3vw;
+        font-family: 'Roboto',  sans-serif;
+      }
+      .sub-heading {
+        color: white;
+        font-size: 1.5vw;
+        font-family: 'Satoshi', sans-serif;
+      }
+      .top {
+        display: flex;
+        justify-content: flex-end;
+      }
+      .right h3 {
+        margin: 0.5vw;
+      }
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        color: white;
+        font-family: 'Roboto', sans-serif;
+      }
+
+      .form-group label {
+        margin-bottom: 0.2vw;
+      }
+      .fontfam {
+        color: white;
+      }
+      .form-group input {
+        background-color: #10242c;
+        border: 0.1vw solid white;
+        padding: 1vw;
+        margin-bottom: 1vw;
+        color: #b5bc89;
+      }
+      .form-group input:hover {
+        border: 0.1vw solid #b5bc89;
+      }
+      .form-group input::placeholder {
+        color: #b5bc89;
+      }
+      .form-group input:valid {
+        border: 0.1vw solid #b5bc89;
+      }
+      .righttxt {
+        color: #b5bc89;
+        font-size: 2.5vw;
+        font-family: 'Satoshi',sans-serif;
+      }
+      .reg {
+        color: white;
+        padding: 0.2vw;
+        font-size: 2.5vw;
+        font-family: 'Satoshi', sans-serif; 
+      }
+      .errorlist {
+        display: none;
+      }
+      .phone_number {
+        display: flex;
+      }
+      .phone_number input {
+        width: 100%;
+      }
+
+      .phone_number select {
+        background-color: #10242c;
+        border: 0.1vw solid white;
+        font-size: 1vw;
+        padding: 0.5vw;
+        color: #b5bc89;
+      }
+      .phone_number input:hover {
+        border: 0.1vw solid #b5bc89;
+      }
+      .phone_number input:valid {
+        border: 0.1vw solid #b5bc89;
+      }
+      .phone_number select:hover {
+        border: 0.1vw solid #b5bc89;
+      }
+      .phone_number select:valid {
+        border: 0.1vw solid #b5bc89;
+      }
+      .phone_number select option {
+        background-color: #10242c;
+        border: 0.1vw solid #b5bc89;
+      }
+      #id_phone_number_0 {
+        width: 5vw;
+        height: 4vw;
+      }
+      #id_phone_number_0 option {
+        color: #b5bc89;
+        padding: 0.5vw;
+      }
+      #id_phone_number_1 {
+        height: 4vw;
+        width: 40vw;
+        box-sizing: border-box;
+      }
+      #btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0.5vw 2vw;
+      }
+      #btn p {
+        margin-left: 0.75vw;
+        font-size: calc(0.5rem + 1vw);
+      }
+      #loginredirect {
+        font-family: 'Roboto', sans-serif;
+      }
+      #msg {
+        font-size: calc(7px + 0.5vw);
+        font-family: 'Roboto' , sans-serif;
+      }
+      #alert-container {
+        background-color: #b5bc89;
+        color: white;
+        padding: 1vw;
+        font-size: 1.5vw;
+        display: none;
+        z-index: 1000;
+        font-family: 'Roboto', sans-serif;
+      }
+      .field-mandatory {
+        font-family: 'Poppins', sans-serif; 
+        font-size: 1vw; 
+      }
+      @media (max-width: 768px) {
+        .alcher{
+          width: 30vw;
+        }
+        .main {
+          height: auto;
+        }
+        .left {
+          width: 100%;
+          padding: 2.5vw;
+        }
+        .right {
+          width: 0;
+          padding: 0;
+        }
+        .text {
+          font-size: 2.7vw;
+        }
+        .sub-heading {
+          font-size: 7vw;
+        }
+        .form-group label {
+          margin-bottom: 1vw;
+        }
+        .form-group input {
+          font-size: 3.5vw;
+          padding: 3vw;
+          width: 80vw;
+          margin-bottom: 3vw;
+        }
+        #id_phone_number_0 {
+          width: 20vw;
+          height: 8vw;
+          font-size: 4vw;
+        }
+        #id_phone_number_1 {
+          font-size: 3.5vw;
+          padding: 3vw;
+          height: 8vw;
+          width: 66vw;
+        }
+        {% comment %} #btn {
+          height: 5vw;
+          width: 20vw;
+          padding: 1vw;
+          font-size: 3vw;
+        }
+        #btn p {
+          margin-left: 1.5vw;
+          font-size: 5vw;
+        } {% endcomment %}
+        #alert-container {
+          top: 4vw;
+          right: 4vw;
+          padding: 2vw;
+          border-radius: 1vw;
+          font-size: 3vw;
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="alert-container"></div>
+    <div class="main">
+      <div class="left">
+        <a href="{% url 'home' %}"><img class="alcher" src="{% static 'imgs/home/logo.png' %}" /></a>
+        <h1 class="header">Registration Portal</h1>
+        <p class="sub-heading">Sign Up</p>
+        <div class="form-container">
+          <form method="post" action="{% url 'register' %}">
+            {% csrf_token %}
+            <ul class="fontfam">
+              {% if form.non_field_errors %}
+              <li>{{ form.non_field_errors }}</li>
+              {% endif %} {% for field in form %} {% if field.errors %}
+              <ul class="errorlist">
+                {% for error in field.errors %} {{ error }} {% endfor %}
+              </ul>
+              {% endif %} {% endfor %}
+            </ul>
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="name">Full Name <sup style="color: #ff4433;">*</sup></label>
+              {{form.fullname}}
+            </div>
+
+            <div class="form-group">
+              <label for="name">User Name <sup style="color: #ff4433;">*</sup></label>
+              {{form.username}}
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Phone Number <sup style="color: #ff4433;">*</sup></label>
+              <div class="phone_number">{{form.phone_number}}</div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email ID <sup style="color: #ff4433;">*</sup></label>
+              {{form.email}}
+            </div>
+
+            <div class="form-group">
+              <label for="collegename">College Name <sup style="color: #ff4433;">*</sup></label>
+              {{form.collegename}}
+            </div>
+
+            <div class="form-group">
+              <label for="city">City <sup style="color: #ff4433;">*</sup></label>
+              {{form.city}}
+            </div>
+            
+            <div class="form-group">
+              <label for="state">State <sup style="color: #ff4433;">*</sup></label>
+              {{form.state}}
+            </div>
+
+            <div class="form-group">
+              <label for="message">Set Password <sup style="color: #ff4433;">*</sup></label>
+              {{form.password1}}
+            </div>
+           
+            <div class="form-group">
+              <label for="message">Confirm Password <sup style="color: #ff4433;">*</sup></label>
+              {{form.password2}}
+            </div>         
+            <div class="form-group">
+              <label for="referral">Referral Code </label>
+              {{form.referred_by}}
+            </div>
+
+            <p class="mb-2 field-mandatory" id="msg" style="color: white">
+              Field marked * are mandatory
+            </p>
+
+            <div class="flex center_ele">
+              <button
+                type="submit"
+                id="btn"
+                class="btn_register my-4 btn_sub cursor-pointer hover:bg-red-700 text-white rounded shadow-sm fw-5 font text-base"
+                style="
+                  background-color: #10242c;
+                  border: 0.1vw solid #b5bc89;
+                  color: #b5bc89;
+                  cursor: pointer;
+                  @media (max-width: 768px) {
+                    font-size: 4vw;
+                  }
+                "
+              >
+                Sign Up
+              </button>
+            </div>
+          </form>
+          <div class="flex center_ele font mb-2 fw-5">
+            <p style="color: white" id="loginredirect">
+              Already have an account?
+              <a
+                class="fw-5"
+                style="color: #ff4433; text-decoration: none"
+                href="{%url 'login'%}"
+              >
+                Login</a
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="right">
+        <div class="top">
+          <div class="righttxt"><h3>Ready to Dive in? <span class="reg">Register</span></h3></div>
+          
+        </div>
+        <div class="top">
+          <div class="righttxt"><h3>and Dive into <span class="reg">Alcheringa</span></h3></div>
+          <div ><h3></h3></div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+      var messages = document.querySelectorAll(".errorlist");
+      if (messages.length > 0) {
+        var alertContainer = document.getElementById("alert-container");
+          alertContainer.style.display = "block";
+          for (var i = 0; i < messages.length; i++) {
+            alertContainer.innerHTML += messages[i].innerText;
+            alertContainer.innerHTML += "<br>";
+            
+          }
+        }
+  </script>
+</html>

@@ -1,0 +1,149 @@
+<script>
+  function dpupload() {
+    $("#id_img").click();
+  }
+  document.getElementById("id_img").addEventListener("change", (event) => {
+    document.getElementById("dp-set").src = URL.createObjectURL(
+      event.target.files[0]
+    );
+  });
+  interests = [];
+  function select(id) {
+    document.getElementById(id).classList.toggle("invisible");
+    document.getElementById("card" + id).classList.toggle("border-orange");
+    document.getElementById("card" + id).classList.toggle("selected");
+  }
+
+  document
+    .getElementById("confirm-select")
+    .addEventListener("click", function confirmselect() {
+      interests = [];
+      var elements = document.getElementsByClassName("selected");
+      for (var i = 0, len = elements.length; i < len; i++) {
+        interests.push({
+          id: elements[i].id.slice(4),
+          name: elements[i]
+            .getElementsByTagName("div")[1]
+            .getElementsByTagName("div")[0].innerHTML,
+        });
+      }
+      console.log(interests);
+      if(interests.length>0)
+      addchip(interests);
+    });
+
+  //add chip
+  function addchip(interests) {
+    $("#chip-interest").empty();
+    $.each(interests, function (i) {
+      var templateString = `<span
+                id="chip${interests[i].id}" class="mx-2 my-2 rounded-full text-white orcolor font-semibold text-sm flex align-center cursor-pointer active:bg-gray-300 transition duration-300 ease w-max">
+                <span class="flex items-center px-3 py-2">
+                ${interests[i].name}
+                </span>
+                <button type="button" class="bg-transparent hover focus:outline-none" onclick="deletechip('${interests[i].id}')">
+                <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times"
+                    class="svg-inline--fa fa-times w-3 mr-4" role="img" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 352 512">
+                    <path fill="currentColor"
+                    d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z">
+                    </path>
+                </svg>
+                </button>
+            </span>`;
+      $("#chip-interest").append(templateString);
+      if (i == interests.length - 1) {
+        var templateString2 = `<span @click="showModal = true;modalstart();"
+        class="rounded-full text-gray-500 bg-gray-200 font-semibold text-sm flex align-center cursor-pointer active:bg-gray-300 transition duration-300 ease w-max my-auto">
+                    <div class="rounded-full w-10 h-10 max-w-none text-center flex align-center justify-center " ><i class="fa fa-plus my-auto" style="font-size:1.2rem; color:black;" aria-hidden="true"></i></div>
+                </span>`;
+        $("#chip-interest").append(templateString2);
+      }
+    });
+    checkitems(interests)
+  }
+
+  //delete chip
+  function deletechip(id) {
+    for (var i = 0; i < interests.length; i++) {
+      if (interests[i].id === id) {
+        interests.splice(i, 1);
+      }
+    }
+    addchip(interests);
+    if (interests.length == 0) {
+      var templateString2 = `<span @click="showModal = true;modalstart();"
+                class="rounded-full text-gray-500 bg-gray-200 font-semibold text-sm flex align-center cursor-pointer active:bg-gray-300 transition duration-300 ease w-max my-auto">
+                <div class="rounded-full w-10 h-10 max-w-none text-center flex align-center justify-center " ><i class="fa fa-plus my-auto" style="font-size:1.2rem; color:black;" aria-hidden="true"></i></div>
+                </span>`;
+      $("#chip-interest").append(templateString2);
+    }
+  }
+  function modalstart() {
+    for (
+      var i = 0;
+      i < document.getElementsByClassName("team_members_card").length;
+      i++
+    ) {
+      document
+        .getElementsByClassName("team_members_card")
+        [i].getElementsByTagName("div")[0]
+        .classList.add("invisible");
+      // document
+      //   .getElementsByClassName("team_members_card")
+      //   [i].classList.remove("bg-blue-50");
+      document
+        .getElementsByClassName("team_members_card")
+        [i].classList.remove("border-orange");
+      document
+        .getElementsByClassName("team_members_card")
+        [i].classList.remove("selected");
+    }
+    for (var i = 0; i < interests.length; i++) {
+      document.getElementById(interests[i].id).classList.remove("invisible");
+      // document
+      //   .getElementById("card" + interests[i].id)
+      //   .classList.add("bg-blue-50");
+      document
+        .getElementById("card" + interests[i].id)
+        .classList.add("border-orange");
+      document
+        .getElementById("card" + interests[i].id)
+        .classList.add("selected");
+    }
+  }
+  function checkitems(interests){
+      for (var i = 0;i < {{totalmodules}};i++) {
+          document.getElementById(`id_interest_${i}`).checked = false;
+          for(var j=0;j< interests.length;j++){
+              console.log('not match')
+              if(document.getElementById(`id_interest_${i}`).value==interests[j].id){
+                document.getElementById(`id_interest_${i}`).checked = true;
+                console.log('match')
+              }
+
+          }
+        }
+  }
+  window.onload = function() {
+    var labels = document.getElementsByTagName('label');
+    for (var i = 0; i < labels.length; i++) {
+        if (labels[i].htmlFor != '') {
+            var elem = document.getElementById(labels[i].htmlFor);
+            if (elem)
+                elem.label = labels[i];         
+        }
+    }
+    for (var i = 0;i < {{totalmodules}};i++) {
+        if(document.getElementById(`id_interest_${i}`).checked == true){
+            var html = document.getElementById(`id_interest_${i}`).label.innerHTML;
+            var div = document.createElement("div");
+            div.innerHTML = html;
+            interests.push({'id':document.getElementById(`id_interest_${i}`).value,'name':div.innerText})                
+        }
+    }
+    if(interests.length>0)
+    addchip(interests)
+    console.log(interests)
+    };
+</script>

@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | Alcheringa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="icon" type="image/x-icon" href="{% static 'imgs/Group 26.png' %}" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins&family=Roboto&display=swap" rel="stylesheet" />
+    <link href="https://api.fontshare.com/css?f[]=satoshi@400,700&display=swap" rel="stylesheet" />
+    <!-- local Style sheets -->
+    <link rel="stylesheet" href="{% static 'css/login.css' %}" />
+  </head>
+  <body>
+    <div id="alert-container"></div>
+    <div class="main">
+      <div class="left">
+        <div class="alcher">
+          <a href="{% url 'home' %}"><img src="{% static 'imgs/home/logo.png' %}" alt="Alcher Logo" /></a>
+        </div>
+        <h1 class="header">Registration Portal</h1>
+        <p class="sub-heading">Login</p>
+        <div class="form-container">
+          <form method="post">
+            {% csrf_token %}
+            <div class="form_container">
+              <div class="form-group">
+                <label for="email">Email ID<sup style="color: #ff4433">*</sup></label>
+                <input type="email" name="email" id="email" placeholder="Enter Email ID" required />
+              </div>
+
+              <div class="form-group">
+                <label for="message">Password<sup style="color: #ff4433">*</sup></label>
+                <input type="password" name="password" id="password" placeholder="Enter Password" required />
+              </div>
+              <div class="forgotpassword">
+                <a class="fontfam" href="{% url 'password_reset' %}">Forgot password?</a>
+              </div>
+            </div>
+            <div id="btndiv" class="flex center_ele">
+              <button type="submit" id="btn" class="btn_register my-4 btn_sub cursor-pointer hover:bg-red-700 text-white rounded shadow-sm fw-5 font text-base">
+                Login &nbsp;<svg width="22px" height="22px" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g id="SVGRepo_bgCarrier" stroke-width="1.5"></g>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <rect width="48" height="48" fill="white" fill-opacity="0.01"></rect>
+                    <path d="M19 11H37V29" stroke="#B5BC89" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M11.5441 36.4559L36.9999 11" stroke="#B5BC89" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </g>
+                </svg>
+              </button>
+            </div>
+          </form>
+
+          <div class="flex center_ele font mb-2 fw-5">
+            <p id="msg" style="color: white; font-family: 'Roboto', sans-serif">
+              Don't have an account?
+              <a class="fw-5" style="color: #ff4433; text-decoration: none" href="{% url 'register' %}">Sign Up</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="right">
+        <div class="top">
+          <div class="righttxt">
+            <h3>Ready to Dive in? <span>Register</span></h3>
+          </div>
+          <div class="righttxt">
+            <h3><span>and Dive into</span>Alcheringa</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+      var messages = document.querySelectorAll('.errorlist li')
+      if (messages.length > 0) {
+        var alertContainer = document.getElementById('alert-container')
+        alertContainer.innerHTML = messages[0].innerText
+        alertContainer.style.display = 'block'
+        setTimeout(function () {
+          alertContainer.style.display = 'none'
+        }, 15000)
+      }
+  </script>
+</html>

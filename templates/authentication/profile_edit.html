@@ -1,0 +1,118 @@
+{% extends "baseProfile.html" %}
+{% load static %}
+        {% block title %}
+        <title>My Profile</title>
+        <link rel="stylesheet" href="{% static 'css/profile_edit.css' %}"> 
+        {% endblock title %}
+    {% block content %}
+        <div class="circle">
+            <div class="img-container">
+                <img id="dp-set"  alt="profile pic"  src="{{request.user.img.url}}">
+            </div>
+            
+
+            <div class="circlediv">
+                <div class="username">{{ request.user.username }}</div>
+                <div class="ID">{{ request.user.email }}</div>
+            </div>
+            <button class="img_edit" onclick="dpupload()">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                fill="white">
+                <path
+                    d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                </svg>
+            </button>
+        </div>
+        
+        <div class="allDetails">
+            <form method="POST" enctype="multipart/form-data" class="">{% csrf_token %}
+            <div style="display:none;">
+                {{ form.img }}
+            </div>
+
+            <div class="details fullname">
+                Full name*
+                <div> {{ form.fullname }}</div>
+            </div>
+
+            <div class="details phone1">
+                Phone no*
+                <div style="display: flex;">{{ form.phone_number }}</div>
+            </div>
+
+            <div class="details gender">
+                Gender*
+                <div>{{ form.gender }}</div>
+            </div>
+
+            <div class="details phone2">
+                Alternate Phone no
+                <div style="display: flex;">{{ form.alternate_phone }}</div>
+            </div>
+
+            <!-- <div class="details teamname two">
+                TEAM NAME
+                <div>{{form.teamname}}</div>
+            </div> -->
+            
+            <div class="details college">
+                College*
+                <div>{{ form.collegename }}</div>
+            </div>
+            
+            <div class="details city two">
+                City*
+                <div>{{ form.city }}</div>
+            </div>
+            
+            <div class="details state">
+                State*
+                <div>{{form.state}}</div>
+            </div>
+            <!-- <div style="height:0px; overflow:hidden">
+                {{form.interest}}</div> -->
+            
+            <!-- <div class="details ">
+                INTEREST
+                <div class="rects" id="chip-interest">
+                    <div class="rectangle">Module name</div>
+                    <div class="rectangle">Module name</div>
+                    <div class="rectangle">Module name</div>
+                    <div class="rectangle">Module name</div>
+                </div>
+            </div> -->
+        </div> 
+        <button class="cancel" type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M0.75827 11.2426L6.0009 5.99999L0.75827 11.2426ZM11.2435 0.757355L6.0009 5.99999L11.2435 0.757355ZM6.0009 5.99999L0.75827 0.757355L6.0009 5.99999ZM6.0009 5.99999L11.2435 11.2426L6.0009 5.99999Z" fill="#F9E5EE"/>
+                <path d="M6.0009 5.99999L11.2435 11.2426M0.75827 11.2426L6.0009 5.99999L0.75827 11.2426ZM11.2435 0.757355L6.0009 5.99999L11.2435 0.757355ZM6.0009 5.99999L0.75827 0.757355L6.0009 5.99999Z" stroke="#DE235B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Cancel
+        </button>
+        <input class="save" type="submit" value="Confirm">
+        <div class="details email">
+            <p>
+                Email id*
+            </p>
+            <div>
+                <img src="../../static/imgs/alcher_profile_design_email_logo.png" alt="">
+                <div>{{ form.email }}</div>
+            </div>
+        </div>  
+        </form>
+    {% endblock content %}
+    {% block script %}
+    <script>
+        console.log('hello')
+        document.addEventListener("DOMContentLoaded", () => {
+            const cancelButton = document.querySelector('.cancel');
+            console.log("Cancel button:", cancelButton); // Debug log
+            if (cancelButton) {
+                cancelButton.addEventListener("click", () => {
+                console.log("Cancel button clicked!"); // Debug log
+                window.location.href = "{% url 'profile' %}";
+                });
+            }
+        });
+    </script>
+    {% endblock script %}

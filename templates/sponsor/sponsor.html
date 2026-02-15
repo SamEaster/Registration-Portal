@@ -1,0 +1,208 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Technocon Workshops</title>
+    <style>
+        html { font-size: calc(0.25em + 0.75vw); }
+        .row1{
+            display: flex; 
+            gap: 0.694vw;
+        }
+        .container a{
+            text-decoration: none;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 83.333vw;
+            margin: 0 auto;
+            padding: 0.694vw;
+            
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2 em;
+            margin-bottom: 1.388vw;
+            color: #333;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 0.694vw;
+            margin-bottom: 0.694vw;
+        }
+
+        .card {
+            background-color: #ffe6e6;
+            border-radius: 0.694vw;
+            padding: 0.694vw;
+            box-shadow: 0 0.138vw 0.347vw rgba(0, 0, 0, 0.1);
+            padding-left: 1.388vw;
+            
+        }
+        .grid .card{
+            background-color: #fda3a3;
+        }
+        .grid2 .card{
+            background-color: #fecfdd;
+        }
+        .card h3 {
+            font-size: 1.25 em;
+            /* font-family:; */
+            margin-bottom: 10%;
+            color: #333;
+        }
+
+        .card p {
+            font-size: 1rem;
+            color: #555;
+        }
+        .tall {
+            grid-row: span 2;
+        }
+        .large {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+        .grid2{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 0.694vw;
+        }
+        .card.wide h3 {
+            font-size: 1.1rem;
+        }
+        .card.row{
+            width: auto;
+            flex-grow: 1;
+        }
+        .header{
+            display: flex;
+            justify-content: space-between;
+            align-content: center;
+        }
+        .contact{
+            display: flex;
+            align-items: center;
+        }
+        h1 { font-size: 2em; }
+        @media only screen and (max-width: 600px) {
+            img{
+                height: 5vh;
+            }
+            .container{
+                max-width: 93vw;
+            }
+            .card{
+                border-radius: 1.5vw;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>World technocon workshops</h1>
+            <img src="{% static 'imgs/image.png' %}" height="15%" alt="">
+        </div>
+        <div class="row1" style="margin-bottom: 0.694vw;">
+            <a href="https://technocon.org/workshops/alcheringa-2025-iit-guwahati/workshop-on-data-science-for-everyone.php" class="card row">
+            <h3>Data Science</h3>
+            <p>31st Jan 2025</p>
+            </a>
+            <a href="https://technocon.org/workshops/alcheringa-2025-iit-guwahati/workshop-on-chatgpt.php" class="card row">
+            <h3>ChatGPT Mastery for Everyone</h3>
+            <p>31st Jan 2025</p>
+            </a>
+            <a href="https://technocon.org/workshops/alcheringa-2025-iit-guwahati/workshop-on-iot-with-arduino.php" class="card row">
+            <h3>Robotics and IoT</h3>
+            <p>31st Jan 2025</p>
+            </a>
+            <a href="https://technocon.org/workshops/alcheringa-2025-iit-guwahati/workshop-on-user-experience-ux-design-principles.php" class="card row">
+            <h3>User Experience (UX) Design</h3>
+            <p>31st Jan 2025</p>
+            </a>
+        </div>
+        <div class="grid">
+            <a href="https://technocon.org/workshops/alcheringa-2025-iit-guwahati/workshop-on-digital-marketing.php" class="card wide">
+            <h3>Digital Marketing Mastery with Instagram and Google Ads/SEO</h3>
+            <p>1st Feb 2025</p>
+            </a>
+            <div>
+            <div class="row1" style="margin-bottom: 0.694vw;">
+                <a href="https://technocon.org/workshops/alcheringa-2025-iit-guwahati/workshop-on-ai-and-machine-learning.php" class="card row">
+                <h3>Artificial Intelligence & Machine Learning</h3>
+                <p>1st Feb 2025</p>
+                </a>
+                <a href="https://technocon.org/workshops/alcheringa-2025-iit-guwahati/workshop-on-ethical-hacking.php" class="card row">
+                <h3>Ethical Hacking & Cyber Security</h3>
+                <p>1st Feb 2025</p>
+                </a>
+            </div>
+            <div class="row1">
+                <a href="https://technocon.org/workshops/alcheringa-2025-iit-guwahati/workshop-on-generative-ai.php" class="card row">
+                <h3>Generative AI</h3>
+                <p>1st Feb 2025</p>
+                </a>
+                <a href="https://technocon.org/workshops/alcheringa-2025-iit-guwahati/workshop-on-entrepreneurship.php" class="card row">
+                <h3 style="margin-bottom: 20px;">Entrepreneurship Essentials: From Idea to Launch</h3>
+                <p>1st Feb 2025</p>
+                </a>
+            </div>
+            </div>
+        </div>
+        <div class="grid2">
+            <a href="https://technocon.org/workshops/alcheringa-2025-iit-guwahati/workshop-on-quantum-computing-basics.php" class="card">
+            <h3>Quantum Computing Basics</h3>
+            <p>2nd Feb 2025</p>
+            </a>
+            <a href="https://technocon.org/workshops/alcheringa-2025-iit-guwahati/workshop-on-game-development-fundamentals.php" class="card">
+            <h3>Game Development with Unity</h3>
+            <p>2nd Feb 2025</p>
+            </a>
+            <a href="https://technocon.org/workshops/alcheringa-2025-iit-guwahati/workshop-on-ai-for-healthcare-professionals.php" class="card tall">
+            <h3>ChatGPT & AI Tools for Healthcare Professionals</h3>
+            <p>2nd Feb 2025</p>
+            </a>
+            <a href="https://technocon.org/workshops/alcheringa-2025-iit-guwahati/workshop-on-innovating-fashion-design.php" class="card">
+            <h3>Fashion Design & Entrepreneurship</h3>
+            <p>2nd Feb 2025</p>
+            </a>
+            <a href="https://technocon.org/workshops/alcheringa-2025-iit-guwahati/workshop-on-drone-technology.php" class="card">
+            <h3>Quadcopter Drone & UAV</h3>
+            <p>2nd Feb 2025</p>
+            </a>
+        </div>
+        <div style="display: flex; justify-content: center; margin-bottom: 1.388vw; padding-top: 1.388vw;">
+            <a href="https://account.technocon.org/event/registration/alcheringa-2025-iit-guwahati" style="text-decoration: none;">
+            <button style="background-color: #f87171; color: white; font-size: 1.25rem; padding: 1.388vw 2.777vw; border: none; border-radius: 0.347vw; cursor: pointer; transition: background-color 0.3s;">
+                Register for Workshops
+            </button>
+            </a>
+        </div>
+
+        <!-- Contact Section -->
+        <div style="background-color: #fff5f5; border-radius: 0.694vw; padding: 1.388vw; box-shadow: 0 0.138vw 0.347vw rgba(0, 0, 0, 0.1);">
+            <div style="display: flex; align-items: center; gap: 0.694vw;">
+            <h3 style="font-size: 1.25rem; font-weight: 600; color: #333;">For Any Workshop Queries contact:</h3>
+            <div style="display: flex; align-items: center; gap: 0.694vw;">
+                <span style="color: #f87171; font-size: 1.5rem;">📞</span>
+                <p style="font-size: 1.125rem; color: #555;">9315208676</p>
+            </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

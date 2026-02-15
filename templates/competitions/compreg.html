@@ -1,0 +1,175 @@
+{% extends '../basictailwind.html'%}
+{%load static%}
+{%block title%}Register for {{comp.event_name}} {%endblock%}
+{% block body %}
+<style>
+    /* input,
+    textarea {
+        border: none;
+        border-bottom: 1px solid rgb(214, 206, 206);
+        margin: 16px 0px;
+        width: 100%;
+    } */
+
+    input,
+    textarea:focus {
+        outline: none;
+    }
+    .rules-modal ::-webkit-scrollbar-track {
+        background-color: rgb(255, 255, 255);
+    }
+
+    .rules-modal ::-webkit-scrollbar-thumb {
+        background-color: #e07e60;
+        border-radius: 3px;
+    }
+    .rules-modal ::-webkit-scrollbar {
+        width: 10px;
+        padding-right: 2px;
+    }
+
+    .rules-modal ::-webkit-scrollbar-track {
+        background-color: rgb(255, 255, 255);
+    }
+
+    .rules-modal ::-webkit-scrollbar-thumb {
+        background-color: #e07e60;
+        border-radius: 3px;
+    }
+
+</style>
+
+<body x-data="{ showModal: false, showRulesModal : false}" :class="{'overflow-y-hidden': showModal}" style="background-color: #F3F6F8;;">
+    <div class="flex" style="background-color: #F3F6F8; height:100vh;">
+        {% include "../navbar.html" %}
+        <div class="flex">
+            <div class="flex-grow">
+                <div class="bg-white flex flex-grow" style="background-color: #F3F6F8;">
+                    <div class="mx-4 flex-grow">
+                        <br>
+                        <!-- Content here -->
+                        <div class="flex m-1">
+                            <div class=" bg-white max-w-4xl rounded-lg w-screen shadow-md">
+                                <div>
+                                    <div class="py-3 pl-6  text-xl border-b-2 font-normal">Register</div>
+                                        <div class="container px-5">
+                                            <form id="add-member-form">
+
+                                                <div class="flex flex-col sm:flex-row my-2 gap-3">
+                                                    <img class=" h-36 rounded-md" src="{{comp.image.url}}" alt="img" />
+                                                    <div>
+                                                        <div class="text-2xl font-medium"> {{comp.event_name}} </div>
+                                                        <span class="text-base font-normal text-gray-600"> {{comp.module}}
+                                                        </span>
+                                                        <span>
+                                                            <a onclick="showrules(this)" data-rules= '{{comp.event_rules}}' @click="showRulesModal = true" class="cursor-pointer"><span
+                                                                    class="text-xs text-orange-600 font-medium">
+                                                                    . View Rules
+                                                                </span>
+                                                            </a >
+                                                        </span>
+                                                        <div class="py-2">
+                                                            {% if comp.min_members == 1 and comp.max_members == 1 %}
+                                                            <i class="fa fa-user" aria-hidden="true"></i> Single
+                                                            {%else%}
+                                                            <i class="fa fa-users" aria-hidden="true"></i> Group
+                                                            {{comp.min_members}}-{{comp.max_members}} members
+                                                            {%endif%}
+                                                        </div>
+                                                        <div class="text-base font-normal text-gray-600">Total Prizes Worth
+                                                        </div>
+                                                        <div class="text-xl font-medium">₹{{comp.prize_worth}}</div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="py-3 mx-auto border border-white bg-white">
+                                                    
+
+                                                    <div class="font-normal pt-4 text-gray-600 text-base">Add members *</div>
+
+                                                    <!-- Chips -->
+                                                    <div class="flex flex-wrap" id="chip-team"></div>
+                                                    <div class="py-3 px-6 mt-2 border-dashed border-2 font-normal text-orange-600 w-full text-center cursor-pointer"
+                                                        @click="showModal = true;modalstart();" id="add_members_old">
+                                                        Add member(s)</div>
+                                                    {% if comp.showPeformanceLink %}
+                                                        <div class="font-normal pt-4 text-gray-600 text-base">Submit your Performance(s) *</div>
+                                                        <input type="text" name="link" placeholder="Enter link.." class="mt-1 w-full border-b-2" id="link">
+                                                        <div class="font-normal pt-4 text-gray-600 text-base">Description</div>
+                                                        <textarea name="description" class="mt-1 w-full border-b-2" rows="1"
+                                                            placeholder="Write a suitable caption explaining your performance.."
+                                                            id="description"></textarea>
+                                                    {% endif %}
+                                                    <button type="submit"
+                                                        class="my-3 hover:bg-red-700 text-white inline-block py-2 px-4 rounded shadow-sm font-semibold text-base" style="background-color: #EE6337;">Submit</button>
+
+                                                </div>
+                                            </form>
+
+
+                                        </div>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div
+      class="fixed inset-0 w-full h-full z-20 bg-black bg-opacity-50 duration-300 overflow-y-auto rules-modal"
+      x-show="showRulesModal"
+      x-transition:enter="transition duration-300"
+      x-transition:enter-start="opacity-0"
+      x-transition:enter-end="opacity-100"
+      x-transition:leave="transition duration-300"
+      x-transition:leave-start="opacity-100"
+      x-transition:leave-end="opacity-0"
+    >
+      <div class="fixed inset-0 sm:w-3/4 md:w-1/2 lg:w-3/4 mx-2 sm:mx-auto h-4/5 overflow-y-auto my-10 opacity-100" >
+        <div
+          class="relative p-5 bg-white shadow-lg rounded-md text-gray-900 z-20"
+          @click.away="showRulesModal = false"
+          x-show="showRulesModal"
+          x-transition:enter="transition transform duration-300"
+          x-transition:enter-start="scale-0"
+          x-transition:enter-end="scale-100"
+          x-transition:leave="transition transform duration-300"
+          x-transition:leave-start="scale-100"
+          x-transition:leave-end="scale-0"
+        >
+          <header class="flex items-center justify-between p-2">
+            <h2 class="font-semibold">Rules</h2>
+            <button class="focus:outline-none p-2" @click="showRulesModal = false">
+              <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                <path
+                  d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"
+                ></path>
+              </svg>
+            </button>
+          </header>
+          <main class="p-2">
+            <p id = "rules_body">
+              
+            </p>
+          </main>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal for adding members -->
+    {%include 'competitions/add_member_modal.html'%}
+
+    <script>
+            function showrules(ele) {
+                const rules = ele.getAttribute("data-rules")
+                document.getElementById("rules_body").innerText = rules;
+            }
+    </script>
+</body>
+{%include 'competitions/compreg_scripts.html'%}
+{%endblock%}

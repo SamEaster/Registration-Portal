@@ -1,0 +1,365 @@
+{% load static %}
+{%load socialaccount %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register | Alcheringa</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'icons/Group 26.png'  %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins&family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/css?f[]=satoshi@400,700&display=swap" rel="stylesheet">
+    <style>
+      body {
+        display:flex;
+        flex-direction: column;
+        justify-content:center;
+        align-items:center;
+        margin: 0;
+        padding: 0;
+        font-family: 'Roboto', sans-serif;
+        background: url("{% static 'imgs/Registration_background.jpg' %}") center center;
+      }
+      #msg {
+        font-size: calc(7px + 0.5vw);
+        font-family: 'Roboto' , sans-serif;
+      }
+      {% comment %} #alert-container {
+        width:100%;
+        background-color: #DE235B;
+        color: white;
+        padding: 1vw;
+        font-size: 1.5vw;
+        display: none;
+        z-index: 1000;
+        font-family: 'Roboto', sans-serif;
+      } {% endcomment %}
+      .toast {
+        visibility: hidden;
+        min-width: 250px;
+        background-color: #DE235B; /* Keep the red color you used */
+        color: white;
+        text-align: center;
+        border-radius: 5px;
+        padding: 1vw;
+        position: fixed;
+        z-index: 1000;
+        bottom: 30px; /* Bottom placement for toast */
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 1.5vw;
+        font-family: 'Roboto', sans-serif;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+    }
+    
+    .toast.show {
+        visibility: visible;
+        opacity: 1;
+    }
+    
+      .main {
+        margin-top:10vh;
+        display: flex;
+        width:60%;
+        border-radius:20px;
+        height: 80vh;
+        background-color: white;
+        overflow: hidden;
+      }
+      /* Left side with image and text */
+      .left {
+        background: url("{% static 'imgs/Sign_in_photo.png' %}") no-repeat center center;
+        
+        background-size: cover;
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        color: white;
+        text-align: center;
+        padding: 1.5 rem;
+      }
+      .left div{
+        margin-bottom:2rem;
+
+      }
+      .left h1 {
+        font-size: 2.5rem;
+        font-family: "Yeseva One", serif;
+        width:70%;
+        margin-left:1.5rem;
+        text-align: start;
+      }
+      .left p {
+        font-size: 1rem;
+        font-family: 'Roboto', sans-serif;
+        width:90%;
+        text-align:start;
+        margin-left:1.5rem;
+
+      }
+      /* Right side with form */
+      .right {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 1rem 1rem;
+      }
+      .right h2 {
+        font-size: 2rem;
+        color: #333;
+        font-family: "Yeseva One", serif;
+        margin:0%
+      }
+      .right p {
+        font-size: 1rem;
+        color: #888;
+        margin:0.5rem;
+      }
+      form{
+        width:70%;
+      }
+      .form-group {
+        margin-bottom: 0.5rem;
+        padding-right: 0.5rem;
+      }
+      .form-group label {
+        display: block;
+        font-size: 0.9rem;
+        color: #555;
+        margin-bottom: 0.2rem;
+      }
+      .form-group input {
+        width: 100%;
+        padding: 0.8rem;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+      }
+      .form-group input:focus {
+        border-color: #007bff;
+        outline: none;
+      }
+      .form-group .phone_number select{
+        width:30%;
+        border-radius:10px;
+      }
+      .btn {
+        width: 50%;
+        padding: 0.8rem;
+        background-color: #DE235B;
+        color: white;
+        font-size: 1rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        
+        margin-left:56%;
+      }
+      .btn:hover {
+        opacity:0.5;
+      }
+      .login-link {
+        text-align: center;
+        margin-top: 1rem;
+        color: #007bff;
+        font-size: 0.9rem;
+      }
+      .login-link a {
+        color: #007bff;
+        text-decoration: none;
+      }
+      .login-link a:hover {
+        text-decoration: underline;
+      }
+      .or-separator {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 1.5rem 0; /* Adds spacing above and below */
+        font-size: 1rem;
+        color: #888;
+        font-family: 'Roboto', sans-serif;
+      }
+      
+      .or-separator span {
+        background: white; /* Matches the form's background color */
+        padding: 0 1rem;
+        position: relative;
+        z-index: 1;
+      }
+      
+      .or-separator:before,
+      .or-separator:after {
+        content: "";
+        flex-grow: 1;
+        height: 1px;
+        background: #ccc;
+        margin: 0 1rem;
+      }
+      
+
+      .Alcher-logo{
+
+        padding:1rem;
+        margin:1rem;
+        display:none;
+      }
+      .Googlebtn{
+        width:95%;
+        padding:1rem;
+        border:solid 3px #1F232C;
+        border-radius:20px;
+        display:flex;
+        color:black;
+        text-decoration:none;
+        align-items:center;
+        justify-content:center;
+        gap:0.5rem;
+        font-family:"Poppins", sans-serif;
+
+      }
+      /* Responsive styles for mobile */
+        @media (max-width: 768px) {
+          .Alcher-logo{
+            display:block;
+          }
+            .main {
+                width:90%;
+                flex-direction: column;
+                height: auto;
+            }
+
+            .left {
+                display: none; /* Hide the left section on mobile */
+            }
+
+            .right {
+                width: 100%;
+                padding: 2rem;
+                box-sizing: border-box;
+            }
+
+            .btn {
+              
+                margin-top: 1rem;
+                margin-left:25%;
+                float:none;
+
+                
+
+                
+            }
+            form{
+              width:100%;
+              margin-right:7%;
+            }
+            
+
+            .form-group label{
+              text-align: left;
+            }
+
+            .login-link {
+                text-align: center;
+            }
+
+            .logo {
+                margin-top: 2rem;
+                text-align: center;
+            }
+
+            .logo img {
+                width: 80px;
+            }
+        }
+    </style>
+  </head>
+  <body>
+    <div id="alert-container" class="toast"></div>
+
+    <div class="main">
+      <!-- Left Section with Background Image and Text -->
+      <div class="left">
+        <div>
+          <h1>Welcome Back! Let’s Get You In</h1>
+          <p style="display:flex">Sign in to continue with us.<img src="{% static 'imgs/arrow-right-circle.svg' %}"></p>
+        </div>
+      </div>
+      
+           <!-- Right Section with Registration Form -->
+       <div class="right">
+          <h2>Sign In</h2>
+          <p>Don't have an account? <a href="{% url 'register' %}" style="color: #DE235B; text-decoration: none;">Sign Up</a></p>
+        
+         <form method="post">
+          <ul class="fontfam">
+            {% if messages %}
+              <ul class="errorlist">
+                {% for message in messages %}
+                  <li>{{ message }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </ul>
+          {% csrf_token %}
+          <div class="form_container">
+            <div class="form-group">
+              <label for="email">Email ID<sup style="color: #ff4433">*</sup></label>
+              <input type="email" name="email" id="email" placeholder="Enter Email ID" required />
+            </div>
+
+            <div class="form-group">
+              <label for="message">Password<sup style="color: #ff4433">*</sup></label>
+              <input type="password" name="password" id="password" placeholder="Enter Password" required />
+            </div>
+            
+          </div>
+          
+            <button type="submit" class="btn">Login In</button>
+            <div class="or-separator">
+              <span>Or</span>
+            </div>
+             
+              <a class="Googlebtn" href="{% provider_login_url 'google' %}"><img src="{% static 'imgs/googlelogo.png' %}"><span>Login with Google</span></a>
+            
+            
+            </div>
+
+         
+        
+        </div>
+        
+      </form>
+      
+
+      </div>
+      
+    </div>
+    <div class="Alcher-logo">
+      <a href="{% url 'home' %}"><img src="{% static 'imgs/AlcherLogo.png' %}"></a>
+    </div>
+  </body>
+  <script>
+    var messages = document.querySelectorAll(".errorlist");
+
+    if (messages.length > 0) {
+        var alertContainer = document.getElementById("alert-container");
+        var combinedMessages = "";
+        for (var i = 0; i < messages.length; i++) {
+            combinedMessages += messages[i].innerText + "<br>";
+        }
+        alertContainer.innerHTML = combinedMessages;
+        alertContainer.classList.add("show");
+        setTimeout(function () {
+            alertContainer.classList.remove("show");
+        }, 5000);
+    }
+    
+</script>
+</html>

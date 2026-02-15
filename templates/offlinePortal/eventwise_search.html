@@ -1,0 +1,155 @@
+{% extends 'offlinePortal/home.html' %}
+{% block title %} Search {% endblock %}
+{% block styles %}
+<style>
+    table,
+    th,
+    td {
+        border: 0.5px solid rgb(100, 100, 100);
+        border-collapse: collapse;
+        padding: 0.5vw;
+        max-width: fit-content;
+        font-size: 1.15vw;
+    }
+
+    table {
+        border-radius: 1vw;
+    }
+
+    th {
+        font-weight: 500;
+        background-color: rgb(227, 227, 227);
+    }
+
+    table a {
+        color: blue;
+        text-decoration: underline;
+    }
+    #comp_select {
+        height: 2.7vw;
+        width: 16.5vw;
+        border: 1px solid #1d345c;
+        font-size: 1.1vw;
+        padding-left: 1vw;
+        border-radius: 0.4vw;
+    }
+    #searchBtn {
+        height: 2.9vw;
+        padding: 0 1.2vw 0 1.2vw;
+        border: 1px solid rgb(195, 195, 195);
+        background: #1d345c;
+        color: white;
+        cursor: pointer;
+        border-radius: 0.4vw;
+        font-size: 1.1vw;
+    }
+    h3, strong {
+            font-weight: 500;
+        }
+    
+    h1 {
+        color:rgb(26, 52, 97); 
+        font-size: 1.5vw; 
+        font-weight: 500;
+    }
+</style>
+{% endblock %}
+{% block header %}
+Event Wise Search
+{% endblock %}
+{% block content %}
+<div>
+    <form method="post">
+        {% csrf_token %}
+        <select name="competition" id="comp_select">
+            <option value="select" selected disabled>Select Competition</option>
+            {% for comp in comps %}
+            <option value={{comp.id}}>{{comp}}</option>
+            {% endfor %}
+        </select>
+        <button type="submit" id="searchBtn">Search</button>
+    </form>
+    {% if submissions %}
+    <div>
+        <h3 class="w-full text-3xl my-10" style="margin: 3vw 0 1vw 0; font-size: 1.15vw;">Registrations : {{ competition.event_name }} </h3>
+        <div class=" w-full margin-auto p-5 text-center">
+
+            <table>
+                <tr>
+                    <th>Sl No.</th>
+                    <th>Competition Name</th>
+                    <th>Leader Alcher Id</th>
+                    <th>Leader Name</th>
+                    <th>Participants</th>
+                    <th>Performance Link</th>
+                    <th>Description</th>
+                </tr>
+                {% for submission in submissions %}
+                <tr>
+                    <td> {{ forloop.counter }} </td>
+                    <td> {{ competition.event_name }} </td>
+                    <td> {{ submission.team.leader.alcherid }} </td>
+                    <td> {{ submission.team.leader.fullname }} </td>
+                    <td> {% for member in submission.team.members.all %}
+                        <p> {{member.name}}, {{member.phone}},{{member.email}}</p>
+
+                        {% endfor %}
+                    </td>
+                    <td>
+                        <p class="submission-link">
+                            <a href="{{ submission.link }}" target='__blank'> Click here </a>
+                        </p>
+                    </td>
+                    <td> {{ submission.description}} </td>
+
+                </tr>
+                {% endfor %}
+
+
+            </table>
+
+        </div>
+
+
+    </div>
+    {% elif comp_wo_sub %}
+    <div>
+        <h3 class="text-center w-full text-3xl font-bold my-10" style="margin: 3vw 0 1vw 0; font-size: 1.15vw;">Registrations : {{ competition.event_name }} </h3>
+        <div class="w-full margin-auto p-5 text-center">
+
+            <table>
+                <tr>
+                    <th>Sl No.</th>
+                    <th>Competition Name</th>
+                    <th>Leader Alcher Id</th>
+                    <th>Leader Name</th>
+                    <th>Participants</th>
+                </tr>
+                {% for comp in comp_wo_sub %}
+                <tr>
+                    <td> {{ forloop.counter }} </td>
+                    <td> {{ competition.event_name }} </td>
+                    <td> {{ comp.leader.alcherid }} </td>
+                    <td> {{ comp.leader.fullname }} </td>
+                    <td> {% for member in comp.members.all %}
+                        <p> {{member.name}}, {{member.phone}},{{member.email}}</p>
+
+                        {% endfor %}
+                    </td>
+
+                </tr>
+                {% endfor %}
+
+
+            </table>
+
+        </div>
+
+    </div>
+    {% elif message %}
+    <div style="font-size: 1vw;margin-top: 0.5vw; color: red;">
+        * {{message}} {{competition.event_name}}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

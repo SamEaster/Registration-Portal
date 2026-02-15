@@ -1,0 +1,200 @@
+<script>
+    var emptyCard = document.getElementById("emptyCard");
+    var addMemberCard = document.getElementById("addMemberCard");
+    var addMemberCardSmall = document.getElementById("addMemberCardSmall");
+    var editProfileCard = document.getElementById("editProfileCard");
+    function toggleOpen(id) {
+
+        if (id == "addMemberButton") {
+            
+            emptyCard.style.display = 'none';
+            addMemberCard.style.display = 'block';
+            addMemberCardSmall.style.display = 'block';
+            editProfileCard.style.display = 'none';
+        }
+        if(id == "cancel-edit") {
+            emptyCard.style.display = 'flex';
+            addMemberCard.style.display = 'none';
+            addMemberCardSmall.style.display = 'none';
+            editProfileCard.style.display = 'none';
+        }
+        
+        if (id == "deleteButton") {
+            document.getElementById("modalBackground").style.display = 'block';
+        }
+        if (id == "modalCancel") {
+            document.getElementById("modalBackground").style.display = 'none';
+            console.log(id)
+        }
+        if (id == "cancel-edit-mobile") {
+                    window.location.replace(window.location.href)
+        }
+    }
+    
+    //remove member part
+    var remId = '';
+    function removeMember(id){
+        // console.log(id)
+        remId = id;
+        document.getElementById("modalBackground").style.display = 'block';
+    }
+    document.getElementById('modalCancelConfirmDelete').addEventListener('click',function deletemember(){
+        $.ajax({
+            type: "POST",
+            data: {
+                'id':remId ,
+            },
+            url: `{% url 'remove-member'%}` ,
+
+            headers: {
+                "X-CSRFTOKEN": "{{ csrf_token }}"
+            },
+            success:(data)=>{
+                notifySuccess('SUCCESS','Member removed successfully')
+                window.location.reload();
+            }
+        })
+    })
+    //Team Member edit part
+    function editmember(editimg,editid,name,email,phone,gender){
+        emptyCard.style.display = 'none';
+        addMemberCard.style.display = 'none';
+        editProfileCard.style.display = 'block';
+        document.getElementById('dp-set-edit').src=editimg
+        document.getElementById('editid').value=editid
+        document.getElementById('editname').value=name
+        document.getElementById('editemail').value=email
+        document.getElementById('editphone').value=phone
+        document.getElementById('editgender').value=gender
+    }
+    
+    document.getElementById('editform').addEventListener('submit',function editformsubmit(editid){
+        event.preventDefault()
+        $.ajax({
+            type: "POST",
+            data: new FormData($('#editform')[0]),
+            url: `{% url 'update-member' %}`,
+ processData: false,
+contentType: false,
+            headers: {
+                "X-CSRFTOKEN": "{{ csrf_token }}"
+            },
+            success:(data)=>{
+                if(data=="OK"){
+                    notifySuccess('SUCCESS','Member updated successfully')
+                    window.location.reload()
+                }
+                else
+                notifyError('ERROR',data)
+            }
+        })
+    })
+
+    function phoneditform(id){
+        event.preventDefault()
+        $.ajax({
+            type: "POST",
+            data: {
+                'editid':document.getElementById(`editid__mobile${id}`).value,
+                'editname':document.getElementById(`editname__mobile${id}`).value,
+                'editemail':document.getElementById(`editemail__mobile${id}`).value,
+                'editphone':document.getElementById(`editphone__mobile${id}`).value,
+                'editgender': document.getElementById(`editgender__mobile${id}`).value
+            },
+            url: `{% url 'update-member' %}`,
+
+            headers: {
+                "X-CSRFTOKEN": "{{ csrf_token }}"
+            },
+            success:(data)=>{
+                if(data=='OK'){
+                    notifySuccess('SUCCESS','Member updated successfully')
+                    window.location.reload()
+                }
+                else
+                notifyError('ERROR',data)
+
+            }
+        })
+    }
+    //add form submission
+    document.getElementById('addform').addEventListener('submit',function addformsubmit(){
+        event.preventDefault()
+        $.ajax({
+            type: "POST",
+            data: new FormData($('#addform')[0]),
+            url: `{% url 'add-member' pk %}`,
+
+            headers: {
+                "X-CSRFTOKEN": "{{ csrf_token }}"
+            },
+            processData: false,
+contentType: false,
+            success:(data)=>{
+                if(data=="OK"){
+                    notifySuccess('SUCCESS','Member added successfully')
+                    window.location.reload()
+                }else if(data=="GO"){
+                    window.location.href=`{% url 'registercomp' slug=pk %}`
+                }
+                else
+                notifyError('ERROR',data)
+            }
+        })
+    })
+    //add gorm for mobile
+    document.getElementById('addform__mobile').addEventListener('submit',function addformsubmitmobile(editid){
+      event.preventDefault()
+        $.ajax({
+            type: "POST",
+            data: new FormData($('#addform__mobile')[0]),
+            url: `{% url 'add-member' pk %}`,
+
+            headers: {
+                "X-CSRFTOKEN": "{{ csrf_token }}"
+            },
+            processData: false,
+contentType: false,
+            success:(data)=>{
+                console.log(data)
+                if(data=="OK"){
+                    notifySuccess('SUCCESS','Member added successfully')
+                    window.location.reload()
+                }else if(data=="GO"){
+                    window.location.href=`{% url 'registercomp' slug=pk %}`
+                }else{
+                    notifyError('ERROR',data)
+                }
+                
+            }
+        })
+    })
+    function dpuploadadd() {
+    $("#addimg").click();
+  }
+      function dpuploadaddmobile() {
+    $("#addimgmobile").click();
+  }
+  function dpuploadedit() {
+    $("#editimg").click();
+  }
+  document.getElementById("addimg").addEventListener("change", (event) => {
+    document.getElementById("dp-set-add").src = URL.createObjectURL(
+      event.target.files[0]
+    );
+  });
+    document.getElementById("addimgmobile").addEventListener("change", (event) => {
+    document.getElementById("dp-set-add-mobile").src = URL.createObjectURL(
+      event.target.files[0]
+    );
+  });
+    document.getElementById("editimg").addEventListener("change", (event) => {
+    document.getElementById("dp-set-edit").src = URL.createObjectURL(
+      event.target.files[0]
+    );
+  });
+  document.getElementById('done').addEventListener('click',(e)=>{
+    window.location.href=`{% url 'registercomp' slug=pk %}`
+  })
+
+</script>

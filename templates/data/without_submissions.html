@@ -1,0 +1,44 @@
+{% extends 'data/base.html' %}
+{% block title %} Users {% endblock %}
+{% block styles %}
+
+{%  endblock styles %}
+{% block content %}
+<div>
+    <h1 class="text-center w-full text-3xl font-bold my-10">Registrations : {{ competition.event_name }} </h1>
+    <div class="flex justify-center w-full margin-auto p-5 text-center">
+    
+    <table>
+        <tr>
+            <th>Sl No.</th>
+            <th>Competition Name</th>
+            <th>Leader Alcher Id</th>
+            <th>Leader Name</th>
+            <th>Participants</th>
+
+        </tr>
+        {% for comp in comp_wo_sub %}
+        <tr>
+            <td>  {{ forloop.counter }} </td>
+            <td>  {{ competition.event_name }}   </td>
+            <td>  {{ comp.leader.alcherid }}   </td>
+            <td>  {{ comp.leader.fullname }}   </td>
+            <td>  {% for member in  comp.members.all %}
+                <p> {{member.name}}, {{member.phone}},{{member.email}}</p>
+               
+               {% endfor %}
+               </td>
+           
+        </tr>
+        {% endfor %}
+           
+           
+    </table>
+
+</div>
+
+
+</div>
+
+
+{% endblock %}

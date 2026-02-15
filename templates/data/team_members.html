@@ -1,0 +1,42 @@
+{% extends 'data/base.html' %}
+{% block title %} Users {% endblock %}
+{% block styles %}
+
+{%  endblock styles %}
+{% block content %}
+<div>
+    <h1 class="text-center w-full text-3xl font-bold my-10">Team Members</h1>
+    <h3 class="text-center w-full text-xl font-bold my-10">Leader Name: {{leader.fullname}} | Alcher Id:{{leader.alcherid}}</h3>
+    <div class="flex justify-center w-full margin-auto p-5 text-center">
+    
+    <table>
+        <tr>
+            <th>Sl No.</th>
+            <th>Member ID</th>
+            <th>Email</th>
+            <th>Name</th>
+            <th>Phone</th>
+            
+           
+        </tr>
+        {% for member in team_members %}
+        <tr>
+            <td>  {{ forloop.counter }} </td>
+            <td>  {{ member.memberid }} </td>
+            <td>  {{ member.email }}   </td>
+            <td>  {{ member.name }}   </td>
+            <td>  {{ member.phone }}   </td>
+          
+        </tr>
+        {% endfor %}
+           
+           
+    </table>
+
+</div>
+
+
+</div>
+
+
+{% endblock %}

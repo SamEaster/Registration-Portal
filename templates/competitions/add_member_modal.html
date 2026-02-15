@@ -1,0 +1,69 @@
+{%load static%}
+<div class="fixed inset-0 w-full h-full z-20 bg-black bg-opacity-50 duration-300 overflow-y-auto" id="addmodal" x-show="showModal"
+        x-transition:enter="transition duration-300" x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100" x-transition:leave="transition duration-300"
+        x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
+        <div class="relative sm:w-3/4 md:w-3/4 lg:w-3/5 mx-2 sm:mx-auto my-10 opacity-100" id="add-member-modal">
+            <div class="relative bg-white shadow-lg rounded-md text-gray-900 z-20"id="add-member-modal2" @click.away="showModal = false"
+                x-show="showModal" x-transition:enter="transition transform duration-300" x-transition:enter-start="scale-0"
+                x-transition:enter-end="scale-100" x-transition:leave="transition transform duration-300"
+                x-transition:leave-start="scale-100" x-transition:leave-end="scale-0">
+                <header class="flex items-center justify-between p-2">
+                    <h2 class="font-semibold">Add members from your team (<span id="selectedelements"> </span> out of {{comp.max_members}} selected)</h2>
+                    <button class="focus:outline-none p-2" @click="showModal = false">
+                        <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                            <path
+                                d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z">
+                            </path>
+                        </svg>
+                    </button>
+                </header>
+                <div class="mx-4 my-2 bg-blue-50 rounded-sm flex">
+                    <div class="p-1">
+                        <svg width="20" height="20" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg" class="mt-1">
+                            <path
+                                d="M12.9167 12.1667H12.2583L12.025 11.9417C12.8417 10.9917 13.3333 9.75833 13.3333 8.41667C13.3333 5.425 10.9083 3 7.91667 3C4.925 3 2.5 5.425 2.5 8.41667C2.5 11.4083 4.925 13.8333 7.91667 13.8333C9.25833 13.8333 10.4917 13.3417 11.4417 12.525L11.6667 12.7583V13.4167L15.8333 17.575L17.075 16.3333L12.9167 12.1667ZM7.91667 12.1667C5.84167 12.1667 4.16667 10.4917 4.16667 8.41667C4.16667 6.34167 5.84167 4.66667 7.91667 4.66667C9.99167 4.66667 11.6667 6.34167 11.6667 8.41667C11.6667 10.4917 9.99167 12.1667 7.91667 12.1667Z"
+                                fill="#C2CFE0" />
+                        </svg>
+                    </div>
+                    <div class="flex-grow">
+                        <input type="search" class="py-1 bg-blue-50 font-light text-base" placeholder="search member" />
+                    </div>
+                </div>
+                <div class="p-3 grid grid-cols-1 sm:grid-cols-2">
+                    
+                    <!-- single-card -->
+                    {%for member in team_members%}
+                    {%if member.email == request.user.email%}
+                    <div class="m-1 p-3 flex border-2 rounded-md shadow-md relative cursor-pointer team_members_card" id="card{{member.id}}"onclick="select('{{member.id}}')">
+                        <img style="height : 70px; width : 70px; border-radius: 50%;" src="{{request.user.img.url}}" alt="profile" border="0" />
+                        <div class="absolute right-0 text-right px-2 invisible" style="top:40%; bottom:40%;"id="{{member.id}}"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M17.7869 17.7692L2.22168 2.22173M2.22259 17.778L17.7789 2.22168" stroke="#FF4433" stroke-width="3" stroke-linecap="round"/>
+</svg></div>
+                        <div class="mx-5 my-auto">
+                            <div class="font-medium text-base">{{member.name}}(Leader)</div>
+                            <div class="font-light text-sm">{{member.email}}</div>
+                        </div>
+                    </div>
+                    {%else%}
+                    <div class="m-1 p-3 flex border-2 rounded-md shadow-md relative cursor-pointer team_members_card" id="card{{member.id}}"onclick="select('{{member.id}}')">
+                        <img style="height : 70px; width : 70px; border-radius: 50%;" src="{{member.img.url}}" alt="profile" border="0" />
+                        <div class="absolute right-0 text-right px-2 invisible" style="top:40%; bottom:40%;"id="{{member.id}}"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M17.7869 17.7692L2.22168 2.22173M2.22259 17.778L17.7789 2.22168" stroke="#FF4433" stroke-width="3" stroke-linecap="round"/>
+</svg></div>
+                        <div class="mx-5 my-auto">
+                            <div class="font-medium text-base">{{member.name}}</div>
+                            <div class="font-light text-sm">{{member.email}}</div>
+                        </div>
+                    </div>
+                    {%endif%}
+                    {%endfor%}
+                    
+            
+                </div>
+                <footer  class="p-2 text-center">
+                    <button  style="background-color: #EE6337;" class="hover:bg-red-700 text-white inline-block py-2 px-4 rounded shadow-sm font-semibold text-base"id="confirm-select"  @click="showModal = false">Done</button>
+                </footer>
+            </div>
+        </div>       
+    </div>

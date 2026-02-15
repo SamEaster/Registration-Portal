@@ -1,0 +1,78 @@
+{% extends 'offlinePortal/home.html' %}
+{% block title %} Users {% endblock %}
+{% block header %}
+Leaders
+{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" integrity="sha512-wnea99uKIC3TJF7v4eKk4Y+lMz2Mklv18+r4na2Gn1abDRPPOeef95xTzdwGD9e6zXJBteMIhZ1+68QC5byJZw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+    {% block styles %}
+    {% endblock %}
+    table,th,td{
+        border:1px solid black;
+        padding:1rem;
+        max-width:500px;
+    }
+    a{
+        color:blue;
+        text-decoration:underline;
+    }
+    
+</style>
+
+
+<div style="display:flex ; justify-content:space-evenly">
+    <a href={% url 'allUsers' %} style="text-decoration:Solid ; color:black;"  >All Users</a>
+   <a href={% url 'leaders' %} style="text-decoration:Solid ; color:black;" > All Leaders</a>
+</div>
+
+
+
+<div>
+    <h1 class="text-center w-full text-3xl font-bold my-10">Leaders </h1>
+    <div class="flex justify-center w-full margin-auto p-5 text-center" style="transform:scale(.84);position:relative; right: 10px;">
+    
+    <table >
+        <tr>
+            <th>Sl No.</th>
+            <th>Alcher ID</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>College Name</th>
+            <th>City</th>
+            <th>Phone</th>
+            <th>Team Members</th>
+            <th>Alternate Phone</th>
+            <th>Email Verified</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>  {{ forloop.counter }} </td>
+            <td>  {{ user.alcherid }}   </td>
+            <td>  {{ user.fullname  }}   </td>
+            <td>  {{ user.email}}   </td>
+            <td>  {{ user.collegename }}   </td>
+            <td>  {{ user.city  }}   </td>
+            <td>  {{ user.phone  }}   </td>
+            <td>  <a href="{% url 'team_members' leader_id=user.id %}" target="__blank"> Team Members</a>  </td>
+            <td>  {{ user.alternate_phone  }}   </td>
+            <td>  
+                {% if user.is_active %}
+                Yes
+                {% else %}
+                No
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+           
+           
+    </table>
+
+</div>
+
+
+</div>
+
+
+{% endblock %}

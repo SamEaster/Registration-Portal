@@ -1,0 +1,19 @@
+{% extends 'offlinePortal/home.html' %}
+{% block title %} Users {% endblock %}
+{% block styles %}
+
+{%  endblock styles %}
+{% block content %}
+<form method="get" action="{% url 'saveEdit' %}">
+    {% csrf_token %}
+    <div class="emailid" style="display: flex; ">
+        <label for="edit_id" style="margin-right: 10px;margin-top:10px">Enter alcher Id</label>
+
+        <input type="text" class="edit_id" name="edit_id" />
+        <p></p>
+        <button type="submit" class="btn btn-dark" style="margin-left: 10px;">Submit</button>
+    </div>
+  
+</form>
+
+{% endblock %}

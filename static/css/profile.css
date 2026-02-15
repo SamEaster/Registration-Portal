@@ -1,0 +1,677 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto:wght@400;500;700&display=swap");
+html,body {
+  margin: 0;
+  padding: 0;
+  background-color: #FFFFFF;
+  width:100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+.container-1 {
+  background: url('../imgs/alcher_profile_design_2.png');
+  background-repeat: repeat;
+  background-size: cover;
+  min-height: 100vh;
+  min-width: 100vw;
+  width: 100%;
+  height: 100%;
+  box-sizing:border-box;
+  overflow: auto;
+}
+a{
+  color: inherit;
+  text-decoration: none;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2vw 4vw 2vw;
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  margin:0;
+}
+
+header .welcome{
+  width: 284px;
+  height: 65px;
+  top: 30px;
+  left: 108px;
+  gap: 0px;
+  opacity: 0px;
+  padding:1rem;
+}
+
+header .welcome h1{
+  margin-top:0;
+  font-family: 'Yeseva One',sans-serif;
+  text-wrap: nowrap;
+
+}
+header .welcome p{
+  font-family: 'Inter',sans-serif;
+}
+
+.backbutton{
+  display: inline-block;
+  position: absolute;
+  top: 36px;
+  right: 2%;
+  min-width: 1vw;
+  font-size: 17px;
+  font-weight: 600;
+  width: 117px;
+  height: 48px;
+  padding: 5px;
+  margin: 2vh 3vw 0 0 ;
+  color:#DE235B;
+  background: #DE235B1A;
+  border: 2px solid #DE235B;
+  opacity: 0px;
+  cursor: pointer;
+  font-family: 'Inter',sans-serif;
+}
+
+header a {
+  display: flex;
+  align-items: center;
+}
+
+header .crcl {
+  position: absolute;
+  border-radius: 50%;
+  right: 0;
+  width: 3em;
+  margin: 5vh 5vh 0 0;
+}
+#label1 {
+  position: absolute;
+  visibility: hidden;
+}
+#check {
+  position: absolute;
+  display: none;
+}
+#alert-container {
+  visibility: hidden;
+  min-width: 250px;
+  background-color: #DE235B; /* Keep the red color you used */
+  color: white;
+  text-align: center;
+  border-radius: 5px;
+  padding: 1vw;
+  position: fixed;
+  z-index: 1000;
+  bottom: 30px; /* Bottom placement for toast */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.5vw;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+}
+
+#alert-container,.show {
+  visibility: visible;
+  opacity: 1;
+}
+#alert-container li{
+  list-style-type:none;
+}
+.errorlist {
+  display: none;
+}
+.action {
+  right: 0;
+  top: 0;
+  color: white;
+  gap: 0;
+  overflow: visible;
+}
+.action .profile {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  color: white;
+  background-color: #b5bc89;
+}
+.profile img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+#Contact {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  font-size: 1.1vw;
+  font-family: "Inter", sans-serif;
+}
+.Contact {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 2vw;
+  padding-right: 3vw;
+  border-right: 2px solid black;
+  font-family: "Inter", sans-serif;
+}
+.pd {
+  margin: 1vw;
+}
+.contactus {
+  margin-bottom: 1vw;
+}
+.Follow_head {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2vw;
+  margin-bottom: 1vw;
+}
+.logo {
+  display: flex;
+  justify-content: space-between;
+  gap: 1vw;
+}
+
+.logo .bottom {
+  padding: 0.5vw;
+  z-index: 0;
+  background-color: #0a2628;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.sub-container {
+  position: relative;
+  z-index: 1;
+  min-height: 1vh;
+  height: auto;
+  max-height: fit-content;
+  width: 90%;
+  background-color: #FFFFFF;
+  margin:0 auto 8vw;
+  padding: 0;
+  font-family: sans-serif;
+  position: relative;
+  font-weight: 400;
+  font-size: 20px;
+  border-radius: 15px 15px 15px 15px;
+  box-shadow: 5px 5px 10px grey;
+}
+.edit{
+  display:block;
+}
+.edit button {
+  min-width: 1vw;
+  top: calc((3*1.3vw) + (2*1.3vh));
+  right: 2vw;
+  position: absolute;
+  width: 6vw;
+  height: 3vw;
+  font-size: 1.5vw;
+  font-weight: 500;
+  color: #FFFFFF;
+  border: 2px solid #DE235B;
+  cursor: pointer;
+  background-color: #DE235B;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  margin: 5vh 2vw 0 0;
+}
+.edit button:active {
+  background-color: #DE235B1A;
+  color: #DE235B;
+}
+.edit button:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.navbar-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: #DE235B1A;
+  color:#2E5169;
+  font-size: 18px;
+  border-radius:15px 15px 0 0;
+  cursor: pointer;
+  height: 40px;
+}
+.nav-link{
+  width:100%;
+  height:100%;
+  text-align: center;
+  padding:5px 0 5px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.nav-active{
+  color:#DE235B;
+  border-bottom:2px solid #DE235B;
+}
+.circle {
+  margin: 0 1vw 0;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.circle .img-container{
+  display: block;
+  float: left;
+  height: 8vw;
+  width: 8vw;
+  border-radius: 0;
+  margin: 8px;
+  padding:10px;
+  background-image: url('/static/imgs/profile_background.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.circle .img-container img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.circlediv{
+  display: block;
+  overflow: hidden;
+  height: 15vh;
+  box-sizing: border-box;
+}
+.circlediv .username {
+  display: block;
+  text-align: left;
+  width: fit-content;
+  font-weight: 600;
+  font-size: 2vw;
+  margin: 2vh 0 1vh 2vw;
+  font-family: 'Yeseva One',sans-serif;
+}
+.circlediv .ID {
+  display: block;
+  text-align: left;
+  width: fit-content;
+  font-size: 1.3vw;
+  margin: 2vh 0 1vh 2vw;
+}
+.allDetails {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+  color: #0a2628;
+  box-sizing: border-box;
+  position: relative;
+  font-family: "Satoshi", sans-serif;
+  clear:left;
+  margin:0 1vw 0;
+}
+.details{
+  font-weight: 400;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.details div {
+  margin-top: 2%;
+  padding: 0.5vw;
+  font-size: 1.2vw;
+  background-color: #f0f0f0;
+  color:#969696;
+  border-radius: 8px;
+  height: auto;
+  flex:1;
+}
+.email{
+  font-size: 1.6vw;
+  color:black;
+  font-weight: 600;
+  margin: 15px 1vw 0;
+  padding-bottom:13px;
+  font-family: 'Yeseva One',sans-serif;
+}
+.email img{
+  display:inline;
+  height: auto;
+  padding:4px;
+}
+.email div{
+  display:flex;
+  justify-content: flex-start;
+  background-color: white;
+  margin:0;
+  padding: 0;
+  color:black;
+  font-weight: 500;
+}
+.email div div{
+  display:flex;
+  align-items: center;
+  background-color: white;
+  margin:0;
+  padding: 0;
+  color:black;
+  font-weight: 500;
+  padding: 4px;
+}
+
+.rects {
+  display: flex;
+  flex-wrap: wrap;
+}
+.rects .rectangle {
+  box-sizing: border-box;
+  margin: 1vh 2.5% 1vh 0;
+  width: 200px;
+  height: 6vh;
+  padding: 1vh;
+  font-size: 0.9vw;
+  background-color: #0a262833;
+  border: 2px solid #0a2628;
+  border-radius: 10px;
+  text-align: center;
+}
+.footer {
+  display: flex;
+  height: 10vh;
+  box-sizing: border-box;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #b5bc89;
+  padding: 1rem;
+}
+
+.footer-left {
+  flex-shrink: 0;
+  margin-left: 3vh;
+}
+
+.footer-right {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 3vh;
+}
+
+.footer a {
+  margin-left: 0.5rem;
+}
+
+.footer img {
+  height: 1.5em;
+}
+.footer-left img {
+  height: 1.9em;
+}
+
+@media screen and (max-width: 950px) {
+  .backbutton{
+    font-size: 2vw;
+  }
+  .sidebar {
+    visibility: hidden;
+  }
+  .circle{
+    height: 12.5vw;
+  }
+  .circle img{
+    width:14vw;
+    height:14vw;
+  }
+  .circlediv .username{
+    margin: 2vh 0 1vh 2vw;
+    font-size: 2.5vw;
+  }
+  .circlediv .ID{
+    font-size: 2vw;
+  }
+  .details{
+    font-size: 20px;
+    font-weight: 400;
+  }
+  .details div {
+    margin-top: 2%;
+    padding:0.8vw 1.2vw 0.8vw;
+    font-size: 2.3vw;
+    background-color: #f0f0f0;
+    color:#969696;
+    border-radius: 8px;
+    height: auto;
+  }
+  .email div{
+    background-color: white;
+    color: black;
+  }
+  .email div div{
+    background-color: white;
+    color: black;
+  }
+}
+
+
+@media screen and (max-width: 760px) {
+  header {
+    padding-bottom: 2.5vw;
+    position: relative;
+  }
+
+  header .crcl {
+    position: absolute;
+    right: 0;
+    width: 3em;
+    margin: 5vh 5vh 0 0;
+  }
+  .sub-container {
+    box-sizing: border-box;
+    max-width: 100%;
+    font-size: 20px;
+    margin:auto;
+  }
+  .backbutton{
+    font-size: 16px;
+    width:14vw;
+    min-width: 9vw;
+    height:7vw;
+    min-height: 4vw;
+  }
+  .backbutton img{
+    height:2vw;
+    width:2vw;
+  }
+  .edit button {
+    min-width: 1vw;
+    top: calc((3*2.25vw) + (2*2vh));
+    right: 2vw;
+    font-size: 0.75em;
+    font-weight: 500;
+    position: absolute;
+    width: fit-content;
+    height: fit-content;
+    display: inline-block;
+    padding: 5px;
+    margin: 2vh 3vw 0 0;
+    cursor: pointer;
+  }
+  .circle{
+    height: auto;
+  }
+  .circle img {
+    float: left;
+    height: 14vh;
+    width: 14vh;
+    display: inline;
+  }
+  .circlediv .username{
+    margin: 2vh 0 1vh 2vw;
+    font-size: 3vw;
+  }
+  .circlediv .ID{
+    font-size: 2.5vw;
+  }
+  .details{
+    font-size: 20px;
+    font-weight: 500;
+  }
+  .details div {
+    padding:0.8vw 2.7vw 0.8vw;
+    font-size: 3vw;
+    background-color: #f0f0f0;
+    color:#969696;
+    border-radius: 8px;
+    margin-top: 2%;
+    height: auto;
+  }
+  .allDetails{
+    margin-left:2%;
+
+  }
+  .email{
+    margin-left:2%;
+  }
+  .email div{
+    display:flex;
+    justify-content: flex-start;
+    background-color: white;
+    margin:0;
+    padding: 0;
+    color:black;
+    font-weight: 500;
+  }
+  .email div div{
+    display:flex;
+    align-items: center;
+    background-color: white;
+    margin:0;
+    padding: 0;
+    color:black;
+    font-weight: 500;
+    padding: 4px;
+  }
+  .alcherLogoBottom img {
+    height: 23vw;
+    width: 22vw;
+  }
+  .alcherFooter {
+    font-size: 5vw;
+  }
+  .Contact {
+    font-size: 3vw;
+  }
+  .Follow_head {
+    font-size: 4vw;
+  }
+  .copyright {
+    font-size: 2.5vw;
+  }
+}
+
+@media (max-width: 480px){
+  .navbar-container{
+    font-size: 14px;
+    height: 40px;
+  }
+  .circle img{
+    width: 18vw;
+    height: 18vw;
+  }
+  .backbutton span{
+    display:none;
+  }
+}
+
+@media (max-width: 450px) {
+  .backbutton img{
+    height: 4vw;
+    width:4vw;
+  }
+  .sub-container {
+    box-sizing: border-box;
+    max-width: 100%;
+    font-size: 20px;
+    margin:auto;
+  }
+  .circle img{
+    width: 22vw;
+    height: 22vw;
+  }
+  .circlediv .username{
+    font-size: 4.7vw;
+  }
+  .circlediv .ID{
+    font-size: 4.8;
+  }
+  .allDetails{
+    display: block;
+  }
+  .details div{
+    font-size: 16px;
+    padding:8px;
+  }
+  .details {
+    margin:15px 1vw 8px;
+  }
+}
+
+@media (max-width: 400px) {
+  .backbutton{
+    padding: 0;
+  }
+  .backbutton img{
+    height: 2.5vw;
+    width: 2.5vw;
+  }
+  .circlediv .username {
+    font-size: 4.7vw;
+    margin-bottom: 5px;
+  }
+  .circlediv .ID {
+    font-size: 4.8vw;
+  }
+  .circle img {
+    height: 12vh;
+    width: 12vh;
+    display: inline;
+  }
+}
+
+@media (max-width: 350px) {
+  .details div {
+    font-size: 4.5vw;
+  }
+  .footer-left {
+    margin-left: 1vh;
+  }
+
+  .footer-right {
+    margin-right: 1vh;
+  }
+
+  .footer img {
+    height: 1.2vw;
+  }
+  .footer-left img {
+    height: 1.5vw;
+  }
+  .edit button {
+    top: calc((9*1.3vw) + (8*1.3vh));
+  }
+  .circlediv .username{
+    font-size: 8vw;
+  }
+}

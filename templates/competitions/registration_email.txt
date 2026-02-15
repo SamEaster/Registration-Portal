@@ -1,0 +1,11 @@
+{% autoescape off %}
+Hello {{name}},
+
+We're delighted to inform you that your registration for Alcheringa, IIT Guwahati's annual cultural fest, is confirmed! We're thrilled to welcome you to the event.
+Your registration for the competition {{event}} has been verified, and we're currently in the process of finalizing participant selections. Expect an email from the Alcheringa team soon, confirming your selection for active participation in the upcoming festivities.
+Exciting news is on the way! We can't wait for you to be a part of this incredible cultural celebration.
+
+Warm regards,
+Team PR & Branding, Alcheringa 2025
+
+{% endautoescape %}

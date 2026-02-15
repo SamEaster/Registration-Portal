@@ -1,0 +1,440 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register | Alcheringa</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'icons/Group 26.png'  %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins&family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/css?f[]=satoshi@400,700&display=swap" rel="stylesheet">
+    <style>
+      body {
+        display:flex;
+        flex-direction: column;
+        justify-content:center;
+        align-items:center;
+        margin: 0;
+        padding: 0;
+        font-family: 'Roboto', sans-serif;
+        background: url("{% static 'imgs/Registration_background.jpg' %}") center center;
+      }
+      #msg {
+        font-size: calc(7px + 0.5vw);
+        font-family: 'Roboto' , sans-serif;
+      }
+      #alert-container p {
+        background-color:#DE235B;
+        width:100%;
+        color: white;
+        padding: 1vw;
+        font-size: 1.5vw;
+        display: none;
+        z-index: 1000;
+        font-family: 'Roboto', sans-serif;
+      }
+      .main {
+        margin-top:3.5vh;
+        display: flex;
+        width:60%;
+        border-radius:20px;
+        height: auto;
+        background-color: white;
+        overflow: hidden;
+      }
+      /* Left side with image and text */
+      .left {
+        background: url("{% static 'imgs/Sign_in_photo.png' %}") no-repeat center center;
+        
+        background-size: cover;
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        color: white;
+        text-align: center;
+        padding: 1.5 rem;
+      }
+      .left div{
+        margin-bottom:2rem;
+
+      }
+      .left h1 {
+        font-size: 2.5rem;
+        font-family: "Yeseva One";
+        width:70%;
+        margin-left:1.5rem;
+        text-align: start;
+      }
+      .left p {
+        font-size: 1rem;
+        font-family: 'Roboto', sans-serif;
+        width:90%;
+        text-align:start;
+        margin-left:1.5rem;
+
+      }
+      /* Right side with form */
+      .right {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 1rem 2rem;
+      }
+      .right h2 {
+        font-size: 2rem;
+        color: #333;
+        font-family: "Yeseva One";
+        margin:0%
+      }
+      .right p {
+        font-size: 1rem;
+        color: #888;
+        margin:0.5rem;
+      }
+      form{
+        width:100%;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        margin:0;
+        padding:0;
+      }
+      .form-group {
+        margin-bottom: 0.5rem;
+        padding-right: 0.5rem;
+      }
+      .form-group label {
+        display: block;
+        font-size: 0.9rem;
+        color: #555;
+        margin-bottom: 0.2rem;
+      }
+      .form-group input {
+        width: 90%;
+        padding: 0.8rem;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+      }
+      .form-group input:focus {
+        border-color: #007bff;
+        outline: none;
+      }
+      .form-group .phone_number{
+        display:flex;
+        color:#888;
+
+      }
+      .form-group .phone_number input{
+        width:64%;
+
+      }
+      .form-group .phone_number select{
+        width:25%;
+        margin-right:1%;
+        border-radius:10px;
+        color:#888;
+
+      }
+      .btn {
+        width: 50%;
+        padding: 0.8rem;
+        background-color: #DE235B;
+        color: white;
+        font-size: 1rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-right:1.2rem;
+      }
+      .btn:hover {
+        opacity:0.5;
+      }
+      .login-link {
+        text-align: center;
+        margin-top: 1rem;
+        color: #007bff;
+        font-size: 0.9rem;
+      }
+      .login-link a {
+        color: #007bff;
+        text-decoration: none;
+      }
+      .login-link a:hover {
+        text-decoration: underline;
+      }
+
+      .Alcher-logo{
+
+        padding:1rem;
+        margin:1rem;
+        display:none;
+      }
+      .progress-container {
+        display: flex; /* Ensures children are placed on the same row */
+        align-items: center; /* Aligns items vertically in the center */
+        justify-content: space-between; /* Spreads out items evenly */
+        gap: 10px; /* Optional: Adds space between step1 and progress-bar */
+        width: 90%; /* Ensures the container takes full width */
+        margin-bottom:1rem;
+    }
+    
+    .step1,.step2 {
+        display: flex;
+        flex-direction: column; /* Keeps text and circle stacked */
+        justify-content: center;
+        align-items: center;
+        text-align:center;
+    }
+    
+    #step1-circle,#step2-circle {
+        display: flex;
+        width: 0.75rem;
+        height: 0.75rem; /* Ensures a perfect circle */
+        border:solid 1px white;  
+        border-radius: 50%;
+        background-color: #DE235B;
+        color: #fff; /* Ensures text is visible */
+        font-size: 0.875rem; /* Adjust font size */
+        justify-content: center;
+        align-items: center;
+        padding: 0.625rem;
+    }
+    
+    .progress-bar {
+        flex-grow: 1; /* Makes the progress bar take the remaining space */
+        height: 10px;
+        background-color: #e0e0e0;
+        border-radius: 5px;
+        overflow: hidden;
+        margin: 0 10px; /* Optional: Adds spacing around progress bar */
+        position: relative;
+        margin-bottom:5vh;
+        margin-right:1rem;
+    }
+    
+    .progress-bar-inner {
+        height: 100%;
+        width: 0%;
+        background-color: #DE235B;
+        transition: width 0.4s ease;
+    }
+    .form-step {
+      display: none;
+      opacity: 0;
+      transform: translateX(50%);
+      transition: all 0.3s ease-in-out;
+  }
+  .form-step-active {
+      margin:0%;
+      display: block;
+      opacity: 1;
+      transform: translateX(0);
+  }
+  #id_gender{
+    width:97%;
+    height:5vh;
+    margin-right:1%;
+    border-radius:10px;
+    color:#888;
+  }
+  .toast {
+    visibility: hidden;
+    min-width: 250px;
+    background-color: #DE235B;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1000;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: visibility 0s, opacity 0.5s ease-out;
+    opacity: 0;
+}
+
+.toast.show {
+    visibility: visible;
+    opacity: 1;
+}
+  
+      /* Responsive styles for mobile */
+        @media (max-width: 768px) {
+
+          .Alcher-logo{
+            display:block;
+          }
+            .main {
+              width:90%;
+                flex-direction: column;
+                height: auto;
+            }
+
+            .left {
+                display: none; /* Hide the left section on mobile */
+            }
+
+            .right {
+                width: 100%;
+                padding: 2rem;
+                box-sizing: border-box;
+            }
+
+            .btn {
+                margin-top: 1rem;
+                margin-left:21%;
+                float:none;
+
+                
+
+                
+            }
+            .form-group p{
+              font-size:0.8rem;
+              
+            }
+
+            .form-group label, .right p, .right h2 {
+                text-align: left;
+            }
+            .right p{
+              margin-right:25%;
+              margin-left:0%;
+            }
+
+            .login-link {
+                text-align: center;
+            }
+
+            .logo {
+                margin-top: 2rem;
+                text-align: center;
+            }
+
+            .logo img {
+                width: 80px;
+            }
+            .form-group .phone_number select{
+              width:25%;
+              margin-right:1%;
+              border-radius:10px;
+              color:#888;
+             }
+            #id_gender{
+              width:100%;
+              margin-right:1%;
+              border-radius:10px;
+              color:#888;
+             }
+            }
+
+    </style>
+  </head>
+  <body>
+    <div id="toast" class="toast"></div>
+    <div class="main">
+      <!-- Left Section with Background Image and Text -->
+      <div class="left">
+        <div>
+          <h1>Create Your Account and Dive In!</h1>
+          <p style="display:flex">Sign up to create a new account with us!<img src="{% static 'imgs/arrow-right-circle.svg' %}"></p>
+        </div>
+      </div>
+      
+      <!-- Right Section with Registration Form -->
+      <div class="right">
+        <h2>Create new account.</h2>
+        <p>Already a member? <a href="{% url 'login' %}" style="color: #DE235B; text-decoration: none;">Sign in</a></p>
+        <div id="progress-container" style="margin-right:1rem"class="progress-container">
+          <div class="step1">
+              <div id="step1-circle">1</div>
+              <span style="color: #DE235B; font-size:0.75rem;">Personal Info</span>
+          </div>
+          <div class="progress-bar">
+              <div class="progress-bar-inner"></div>
+          </div>
+          <div class="step2">
+            <div id="step2-circle" style="color:var(--Overlay-stroke, #C1C7CD); background-color:white; border-color:var(--Overlay-stroke, #C1C7CD);">2</div>
+            <span id="bordervalue" style="color:var(--Overlay-stroke, #C1C7CD); font-size:0.75rem;">Team Info</span>
+        </div>
+      </div>
+       
+      
+        
+        <form method="post" action="{% url 'profileset' %}">
+          {% csrf_token %}
+          <div class="form-step form-step-active" id="step-1">
+          <div class="form-group">
+            <label for="fullname">Full Name<sup style="color: #ff4433;">*</sup></label>
+            {{ form.fullname }}
+          </div>
+          <div class="form-group">
+            <label for="phone_number">Phone Number<sup style="color: #ff4433;">*</sup></label>
+            <div class="phone_number">{{ form.phone_number }}</div>
+          </div>
+          <div class="form-group">
+            <label for="phone_number2">Alternate Phone Number</label>
+            <div class="phone_number">{{ form.alternate_phone}}</div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email ID<sup style="color: #ff4433;">*</sup></label>
+            {{ form.email }}
+          </div>
+          <div class="form-group">
+            <label for="gender">Gender</label>
+            {{ form.gender }}
+          </div>
+    
+        </div>
+        <div class="form-step" style="width:100%;" id="step-2">
+          <div class="form-group">
+            <label for="teamname">Team Name<sup style="color: #ff4433;">*</sup></label>
+            {{ form.teamname }}
+          </div>
+          <div class="form-group">
+            <label for="collegename">College Name<sup style="color: #ff4433;">*</sup></label>
+            {{ form.collegename }}
+          </div>
+
+          <div class="form-group">
+            <label for="city">College City<sup style="color: #ff4433;">*</sup></label>
+            {{form.city}}
+          </div>
+          
+          <div class="form-group">
+            <label for="state">College State <sup style="color: #ff4433;">*</sup></label>
+            {{form.state}}
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">All fields are mandatory<sup style="color: #ff4433;">*</sup></label>
+        </div>
+        <div class="btn-container" style="display:flex;width:100%; aling-items:flex-end; justify-content:flex-end;">
+          <button type="button" class="btn next-btn">Next</button>
+          <button type="submit"style="display:none" class="btn create-account-btn">Create account</button>
+        </div>  
+        </form>
+        
+
+      </div>
+    </div>
+    <div class="Alcher-logo">
+      <a href="{% url 'home' %}"><img src="{% static 'imgs/AlcherLogo.png' %}"></a>
+    </div>
+  </body>
+  <script src="{% static 'js/profileset.js' %}"></script>
+  {% for message in messages %}
+  <script>
+    console.log("this is working");
+      showToast("{{ message|escapejs }}");
+  </script>
+  {% endfor %}
+</html>

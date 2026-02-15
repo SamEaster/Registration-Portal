@@ -1,0 +1,453 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&family=Roboto:wght@300;400;500;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Roboto;
+  background-color: #0a2628;
+}
+
+.action .menu {
+  z-index: 3;
+  position: absolute;
+  top: 120px;
+  right: 10px;
+  padding: 10px 20px;
+  font-family: system-ui;
+  background: #b5bc89;
+  width: 200px;
+  box-sizing: border-box;
+  border-radius: 15px;
+  transition: 0.5s;
+  visibility: hidden;
+  opacity: 0;
+  -moz-box-shadow: 1px 1px 5px 0px #555;
+  -webkit-box-shadow: 1px 1px 5px 0px #555;
+  box-shadow: 1px 1px 5px 0px #555;
+}
+.action .menu.active {
+  top: 70px;
+  visibility: visible;
+  opacity: 1;
+  overflow: visible;
+}
+.action .menu::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  right: 28px;
+  width: 20px;
+  height: 20px;
+  background: #b5bc89;
+  transform: rotate(45deg);
+}
+
+.action .menu h3 {
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 500;
+  font-size: 18px;
+  color: #555;
+  line-height: 1.2em;
+}
+.action .menu h3 span {
+  font-size: 14px;
+  color: rgba(85, 85, 85, 0.9);
+  font-weight: 400;
+}
+.action .menu ul {
+  padding-left: 0;
+  margin-bottom: 0;
+}
+.action .menu ul li {
+  list-style: none;
+  padding: 6px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+}
+
+.action .menu ul li img {
+  max-width: 20px;
+  margin-right: 10px;
+  opacity: 0.5;
+  transition: 0.5s;
+}
+
+.action .menu ul li:hover img {
+  opacity: 1;
+}
+
+.action .menu ul li a {
+  display: inline-block;
+  text-decoration: none;
+  color: rgb(10, 38, 40, 0.8);
+  font-weight: 500;
+  transition: 0.5s;
+}
+
+.action .menu ul li:hover a {
+  color: white;
+}
+*/ .body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 4vh;
+  margin: 10vh 0;
+}
+label {
+  font-size: 0.5em; /* Adjust as needed */
+}
+
+.team-container {
+  background-color: #FCFBFE;
+  border: 2px solid #D9D9D9;
+  border-radius: 10px;
+  width: 55vw;
+  height: fit-content;
+  padding: 3vh;
+  margin:6.5vh 0;
+}
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.header-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.header-text h3 {
+  font-family: "Inter", sans-serif;
+  font-size: 3vw;
+  font-weight: 600;
+  margin-bottom: 0.5vh;
+}
+
+.header-text h4 {
+  font-family: "Inter", sans-serif;
+  font-size: 2.5vw;
+  font-weight: 600;
+  margin-bottom: 2vh;
+}
+.member-img {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.member-img img {
+  width: 12vw;
+  height: 12vw;
+  border-radius: 50%;
+  background: no-repeat center;
+  background-size: cover;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.buttons-container button[type="reset"] {
+  background-color: #b5bc89;
+  outline: none;
+  border: none;
+  color: #0a2628;
+  font-size: 20px;
+  font-family: "Inter";
+  font-weight: 600;
+  padding: 5px 30px;
+  cursor: pointer;
+}
+.buttons-container button[type="submit"] {
+  color: #FCFBFE;
+  border:none;
+  background-color: #DE235B;
+  padding: 3px 25px;
+  margin: 4vh 0;
+  font-weight: 500;
+  font-size: calc(7px + 0.7vw);
+  font-family: "Inter";
+  text-align: center;
+  transition: all 0.5s;
+  cursor: pointer;
+  display: inline-block;
+}
+.buttons-container button[type="submit"]:hover {
+  color: white;
+  background-color: #f8bdd1;
+  border: 1px solid #DE235B;
+}
+#add_form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#add-more-members {
+  color: #0a2628;
+  border: 2px solid #0a2628;
+  background-color: #0a262833;
+  padding: 2px 25px;
+  font-weight: 600;
+  font-size: calc(7px + 0.7vw);
+  font-family: "Inter";
+  text-align: center;
+  transition: all 0.5s;
+  cursor: pointer;
+  display: inline-block;
+}
+#add-more-members:hover {
+  color: white;
+  background-color: #0a262867;
+}
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.name,
+.email,
+.phone {
+  display: flex;
+  flex-direction: column;
+  padding-top: 1.2vw;
+  margin:1vh 0;
+  height: 4vw;
+  min-height: 4vh;
+  color: #0a2628;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2vw;
+  font-family: "Inter";
+  text-align: center;
+  font-weight: 600;
+}
+.name input,
+.email input,
+.phone input {
+  font-weight: 400;
+  font-family: "Inter";
+  width: 35%;
+  text-align: center;
+  border: none;
+  border: 1px solid #2E5169;
+  border-radius: 8px;
+  background: white;
+  outline: none;
+  color: #0a2628;
+  font-size: 1.2vw;
+  width:368px;
+  height:52px;
+}
+.phone select{
+  text-align: center;
+  border:none;
+  border-radius: 10px;
+}
+.phone input{
+  border:none;
+}
+.phone-comp{
+  display: flex;
+  width:368px;
+  height:52px;
+  border: 1px solid #2E5169;
+  border-radius: 8px;
+}
+#id_phone_number_0{
+  width: 30%;
+  background-color: white;
+}
+#id_phone_number_1{
+  width: 70%;
+  background-color: white;
+  height:52;
+}
+.gender {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5vh;
+  height: 4vw;
+  min-height: 4vh;
+  color: #0a2628;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2vw;
+  font-family: "Inter";
+  text-align: center;
+  font-weight: 600;
+}
+
+.gender select {
+  font-weight: 400;
+  width: 368px;
+  height:52px;
+  font-family: "Inter";
+  text-align: center;
+  border-radius: 8px;
+  border: 1px solid #2E5169;
+  background: none;
+  outline: none;
+  color: #0a2628;
+  font-size: 1.2vw;
+}
+
+.team-no {
+  font-size: 3vw;
+  color: rgba(74, 80, 62, 1);
+}
+.heading {
+  font-size: 5vw;
+  margin-bottom: 2vh;
+}
+
+.footer {
+  display: flex;
+  height: 10vh;
+  box-sizing: border-box;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #b5bc89;
+  padding: 1rem;
+}
+
+.footer-left {
+  flex-shrink: 0;
+  margin-left: 3vh;
+}
+
+.footer-right {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 3vh;
+}
+
+.footer a {
+  margin-left: 0.5rem;
+}
+
+.footer img {
+  height: 1.5em;
+}
+.footer-left img {
+  height: 1.9em;
+}
+@media (max-width:768px){
+  .team-container{
+    width:65vw;
+  }
+  .name,
+  .email,
+  .phone,
+  .gender{
+    font-size: 2.5vw;
+    font-weight: 500;
+    width:100%;
+  }
+  .name input,
+  .email input,
+  .phone input{
+    font-size: 2.5vw;
+    width: 100%;
+  }
+  .phone-comp{
+    width: 100%;
+  }
+  .gender{
+    margin:5vh 0;
+  }
+  .name input::placeholder{
+    font-size:2.5vw;
+    color:white;
+  }
+  .phone input::placeholder{
+      font-size:2.5vw;
+  }
+  .phone-comp{
+    display: flex;
+    justify-content: center;
+  }
+  .email input::placeholder{
+    font-size:2.5vw;
+  }
+  .gender select{
+    font-size:2.5vw;
+    background: white;
+    width: 100%;
+  }
+}
+
+@media (max-width: 400px) {
+  .team-container{
+    width:75vw;
+  }
+  .name,
+  .email,
+  .phone,
+  .gender{
+    font-size: 2.8vw;
+    font-weight: 500;
+    width:100%;
+  }
+  .name input,
+  .email input,
+  .phone input{
+    font-size: 2.8vw;
+    width: 100%;
+  }
+  .phone-comp{
+    width: 100%;
+  }
+  #id_phone_number_0{
+    font-size: 3vw;
+  }
+  #id_phone_number_1{
+    font-size: 3vw;
+  }
+  .gender{
+    margin:5vh 0;
+  }
+  .name input::placeholder{
+    font-size:2.5vw;
+    color:white;
+  }
+  .phone input::placeholder{
+      font-size:2.5vw;
+  }
+  .phone-comp{
+    display: flex;
+    justify-content: center;
+  }
+  .email input::placeholder{
+    font-size:2.5vw;
+  }
+  .gender select{
+    font-size:2.5vw;
+    background: white;
+    width: 100%;
+  }
+  .edit1 button {
+    min-width: 1vw;
+
+    font-size: 1.5vw;
+    font-weight: 600;
+    position: absolute;
+    width: fit-content;
+    height: fit-content;
+    display: inline-block;
+    padding: 5px;
+    margin: 2vh 3vw 0 0;
+  }
+  .buttons-container button[type="submit"] {
+    padding:6px 35px;
+  }
+}

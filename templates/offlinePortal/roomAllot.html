@@ -1,0 +1,702 @@
+{% extends 'offlinePortal/home.html' %}
+{% block title %} Search {% endblock %}
+{% block styles %}
+<style>
+    .header_ div {
+        border-bottom: 1px solid rgb(26, 52, 97);
+        padding: 1.2vw;
+        width: 25vw;
+    }
+
+    .container-div {
+        border: 1px solid rgb(149, 118, 118);
+        border-radius: 0.5vw;
+        width: fit-content;
+        text-align: left;
+        font-size: 1.15vw;
+        margin: 1vw;
+    }
+
+    h1 {
+        color: rgb(26, 52, 97);
+        font-size: 1.5vw;
+        font-weight: 500;
+    }
+
+    h3,
+    strong {
+        font-weight: 500;
+    }
+
+    h3 a,
+    .container-div a {
+        color: rgb(26, 52, 97);
+        text-decoration: underline;
+    }
+
+    #input_box {
+        height: 2.5vw;
+        width: 15vw;
+        border: 1px solid #1d345c;
+        font-size: 1.1vw;
+        padding: 0.8vw;
+        border-radius: 0.4vw;
+    }
+
+    #searchBtn {
+        height: 2.9vw;
+        padding: 0 1.2vw;
+        border: 1px solid rgb(195, 195, 195);
+        background: #1d345c;
+        color: white;
+        cursor: pointer;
+        border-radius: 0.4vw;
+        font-size: 1.1vw;
+    }
+
+    td {
+        padding: 0.8vw;
+        text-align: center;
+    }
+
+    th {
+        font-size: 1.18vw;
+        padding: 1vw;
+        background-color: #1d345c;
+        color: white;
+    }
+
+    .abc {
+        font-size: 1.18vw;
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5vw;
+    }
+
+    .bcd {
+        width: 27%;
+        margin-left: 1.5vw;
+        font-size: 1.18vw;
+    }
+
+    .apply {
+        display: flex;
+        flex-direction: column;
+    }
+    .apply2 {
+        display: flex;
+        gap: 20px;
+    }
+    .applyDiscountButton {
+        height: 2.1vw;
+        padding: 0 1.2vw;
+        border: 1px solid rgb(195, 195, 195);
+        background: #1d345c;
+        color: white;
+        cursor: pointer;
+        border-radius: 0.4vw;
+        font-size: 1.1vw;
+    }
+    
+    
+
+    .gen,
+    .cal {
+        height: 2.9vw;
+        padding: 0 1.2vw;
+        border: 1px solid rgb(195, 195, 195);
+        background: #1d345c;
+        color: white;
+        cursor: pointer;
+        border-radius: 0.4vw;
+        font-size: 1.1vw;
+        margin-bottom: 1vw;
+    }
+
+    .cal:hover {
+        cursor: pointer;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 1.5vw;
+    }
+
+    th, td {
+        border: 1px solid rgb(149, 118, 118);
+        padding: 1vw;
+        text-align: center;
+    }
+
+    th {
+        background-color: #1d345c;
+        color: white;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    tr:hover {
+        background-color: #ddd;
+    }
+
+    .tdis {
+        width: 30vw;
+    }
+
+    input[type="date"]::-webkit-calendar-picker-indicator {
+        display: none;
+    }
+</style>
+
+</style>
+{% endblock styles %}
+{% block header %}
+Room Allotment
+{% endblock %}
+{% block content %}
+
+<form method="post">
+    {% csrf_token %}
+    <input type="text" name="alcherID" id="input_box" placeholder="Alcher / Member ID">
+    <button id="searchBtn" type="submit">Search</button>
+    <div style="font-size: 1vw;margin-top: 0.5vw; color: red;">
+        {% for message in messages %}
+        * {{message}}
+        {% endfor %}
+    </div>
+    <input type="hidden" name="accomodation" value=0>
+</form>
+<div>
+    {% if leader %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="flex justify-center w-full margin-auto p-5 text-center" >
+            
+            <table>
+                <tr>
+                    <th>Sl No.</th>
+                    <th>Member ID</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Gender</th>
+                    <th>Accomodation</th>
+                    <th>Accomodation Type</th>
+                    <th>No. of days</th>
+                    <th>Leaving date</th>
+                    <th>Discount</th>
+
+
+
+                </tr>
+                <tr>
+
+                </tr>
+                {% for member in team_members %}
+                <tr>
+                    <td> {{ forloop.counter }} </td>
+                    {% if member.memberid == 'MEM-XXXX-XXXX' %}
+                    <td>{{leader.alcherid}}</td>
+                    {% else %}
+                    <td> {{ member.memberid }} </td>
+                    {% endif %}
+                    <td> {{ member.name }} </td>
+                    <td> {{ member.phone }} </td>
+                    <td> {{ member.email }} </td>
+                    <td id="genderCell_{{ forloop.counter }}"> {{ member.gender }} </td>
+                    <td>
+                        {% if member.accomodation is true %}
+                            <select id="{{ member.memberid }}acc" name="{{ member.memberid }}acc" class="accommodation-dropdown" onchange="handleAccommodationChange(this)">
+                                <option value="1" selected>Yes</option>
+                            </select>
+                        {% else %}
+                            <select id="{{ member.memberid }}acc" name="{{ member.memberid }}acc" class="accommodation-dropdown" onchange="handleAccommodationChange(this)">
+                                <option value="0">No</option>
+                                <option value="1" selected>Yes</option>
+                            </select>
+                        {% endif %}
+                    </td>
+                    
+                    
+                    
+                    <td>
+                        {% if member.accomodation is true %}
+                        <select id="{{ member.memberid }}acctype" name="{{ member.memberid }}acctype" class="acctype">
+                            <option value={{member.accomodation_type}}>
+                                {{member.accomodation_type}}
+                            </option>
+                           
+                            {% else %}
+                            <select id="{{ member.memberid }}acctype" name="{{ member.memberid }}acctype" class="acctype">
+                                <option value="type1">
+                                    Common Room
+                                </option>
+                                <option value="type2">
+                                    Triple Sharing
+                                </option>
+                                {% comment %} <option value="type3">
+                                    type3
+                                </option> {% endcomment %}
+
+                                {% endif %}
+                            </select>
+                    </td>
+                    <td>
+                        {% if member.accomodation %}
+                        <input type="number" name="{{ member.memberid }}stay" class="daysStay" min=0 value={{member.daysStay}} style="width:100% ;">
+                        {% else %}
+                        <input type="number" name="{{ member.memberid }}stay" class="daysStay" min=0 value=0 style="width:100% ;">
+                        {% endif %}
+                    </td>
+                    <td>
+                        <input type="date" name="{{ member.memberid }}leaveDate" class="leaveDate" style="width:100%;">
+                    </td>
+                    <td>
+                        <input type="number" name="{{ member.memberid }}coupon" class="coupon" min="0" value="0" style="width:100%;">
+                    </td>
+                   
+ 
+                </tr>
+                {% endfor %}
+
+
+            </table>
+
+        </div>
+        <div class="bcd">
+
+
+            <div class="tdis">
+                <div class="apply">Apply discount to all
+                <div class="apply2">
+                <input type="number" id="discountInput" min="0" placeholder="Team Discount">
+                <div class="applyDiscountButton" onclick="applyDiscountToAll()">Apply</div>
+                </div>
+
+                </div>
+                    
+            </div>
+            
+            
+            
+
+              <!-- Dynamic Box for Gender Counts -->
+<div class="abc">
+    <div>
+        Boys Count:
+    </div>
+    <div>
+        <span id="boysCount">0</span>
+    </div>
+</div>
+
+<div class="abc">
+    <div>
+        Girls Count:
+    </div>
+    <div>
+        <span id="girlsCount">0</span>
+    </div>
+</div>
+            <div class="blankets_dues" style="display:flex ;">
+                
+                    <div class="abc">
+                        <div>
+                            Blankets
+                        </div>
+                        <div>
+                            <input type="number" name="blankets" id="Blankets" min=0 value=0 style="margin-left: 50px;">
+                        </div>
+                    </div>
+
+                    
+                   
+
+                  
+                </div>
+                
+                
+            
+            
+               
+            <div class="abc">
+                <div>
+                   Accomodation Price
+                </div>
+                <div>
+                    <input type="number" name="AccomodationPrice" id="AccomodationPrice" min=0 value=0 readonly style="margin-left: 48px;">
+                </div>
+            </div>
+            <div class="abc">
+                <div>
+                    Total
+                </div>
+                <div>
+                    <input type="number" id="total" name="total" 
+                        style="margin-left: 83px;">
+                </div>
+            </div>
+
+            <div style="display: flex;">
+                <div onclick=Calculate() class="cal">Calculate</div>
+                <input type="hidden" name="teamId" value={{team.id}}>
+            </div>
+            <div style="display: flex;">
+                <button type="submit" class="gen" onclick=Calculate()>Generate Invoice</button>
+            </div>
+        </div>
+        {% elif member %}
+        <form method="post">
+            {% csrf_token %}
+            <div class="flex justify-center w-full margin-auto p-5 text-center">
+
+                <table>
+                    <tr>
+                        <th>Sl No.</th>
+                        <th>Member ID</th>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Gender</th>
+                        <th>Accomodation</th>
+                        <th>No. of days</th>
+
+
+                    </tr>
+                    {% for member in team_members %}
+                    <tr>
+                        <td> {{ forloop.counter }} </td>
+                        <td> {{ member.memberid }} </td>
+                        <td> {{ member.name }} </td>
+                        <td> {{ member.phone }} </td>
+                        <td> {{ member.email }} </td>
+                        <td> {{ member.gender }} </td>
+                        <td>
+                            {% if member.accomodation is true %}
+                            <select id="{{ member.memberid }}acc" name="{{ member.memberid }}acc">
+                                <option value=1>
+                                    Yes
+                                </option>
+                                {% else %}
+                                <select id="{{ member.memberid }}acc" name="{{ member.memberid }}acc">
+                                    <option value=0>
+                                        No
+                                    </option>
+                                    <option value=1>
+                                        Yes
+                                    </option>
+                                    {% endif %}
+                                </select>
+                        </td>
+                        <td>
+                            {% if member.accomodation is true %}
+                            
+                            <input type="number" name="{{ member.memberid }}stay" id="daysStay" min=0 value={{member.daysStay}}>
+                            {% else %}
+                            <input type="number" name="{{ member.memberid }}stay" id="daysStay" min=0 value=0>
+                            {% endif %}
+                        </td>
+
+                        
+
+                    </tr>
+                    {% endfor %}
+
+
+                </table>
+
+            </div>
+            
+            <div class="bcd">
+                <div class="abc">
+                    <div>
+                        Blankets
+                    </div>
+                    <div>
+                        <input type="number" name="blankets" id="Blankets" min=0 value={{team.blankets}} style="margin-left: 50px;">
+                    </div>
+                </div>
+               
+                
+                <div class="abc">
+                    <div>
+                        Total
+                    </div>
+                    <div>
+                        <input type="number" id="total" name="total"
+                            style="margin-left: 83px;">
+                    </div>
+                </div>
+
+                <div style="display: flex;">
+                    <div onclick="Calculate()" class="cal">Calculate</div>
+                    <input type="hidden" name="teamId" value={{team.id}}>
+                </div>
+                <div style="display: flex;">
+                    <button type="submit" class="gen" onclick="Calculate()">Generate Invoice</button>
+                </div>
+            </div>
+            {% endif %}
+            <input type="hidden" name="accomodation" value=1>
+        </form>
+        <script defer>
+            function linktoteam() {
+                const inputbox = document.getElementById('input_box');
+                inputbox.value = '{{team.leader.alcherid}}';
+                const searchBtn = document.getElementById('searchBtn');
+                searchBtn.click();
+                inputbox.value = '';
+                console.log('done');
+            }
+        
+            function Calculate() {
+                const blankets = document.getElementById('Blankets');
+                var daysStayElements = document.querySelectorAll('.daysStay');
+                var type = document.querySelectorAll('.acctype');
+                var totalDays = 0;
+                var acctypeprice = 0;
+                var accommodationEnabled = false; // Flag to track if any accommodation is enabled
+            
+                // Loop through all accommodation dropdowns
+                type.forEach(function (dropdown) {
+                    if (dropdown.disabled === false) {
+                        accommodationEnabled = true; // At least one accommodation is enabled
+                    }
+                });
+            
+                // Perform calculations only if at least one accommodation is enabled
+                if (accommodationEnabled) {
+                    for (var i = 0; i < daysStayElements.length; i++) {
+                        var daysStay = daysStayElements[i];
+            
+                        if (type[i].value === "type1") {
+                            acctypeprice += daysStay.value * 300;
+                        } else if (type[i].value === "type2") {
+                            acctypeprice += daysStay.value * 400;
+                        } else if (type[i].value === "type3") {
+                            acctypeprice += daysStay.value * 350;
+                        }
+                    }
+            
+                    var AccomodationPrice = 0;
+            
+                    
+                    if (type[0].value !== "none") {
+                        AccomodationPrice = acctypeprice; 
+                    }
+            
+                    document.getElementById('AccomodationPrice').value = AccomodationPrice;
+            
+                    var couponElements = document.querySelectorAll('.coupon');
+                    var totalCoupons = 0;
+            
+                    for (var i = 0; i < couponElements.length; i++) {
+                        var couponValue = couponElements[i].value;
+                        totalCoupons += parseInt(couponValue);
+                    }
+            
+                    var totalValue = blankets.value * 100 + AccomodationPrice - totalCoupons;
+                    document.getElementById('total').value = totalValue;
+                } else {
+                    
+                    alert("Please enable at least one accommodation type to perform calculations.");
+                   
+                }
+            }
+        </script>
+        
+        
+
+
+
+
+        <script>
+            function countGender() {
+                var totalMembers = {{ team_members|length }};
+                var maleCount = 0;
+                var femaleCount = 0;
+        
+                for (var i = 1; i <= totalMembers; i++) {
+                    var genderCellId = 'genderCell_' + i;
+                    var genderCell = document.getElementById(genderCellId);
+        
+                    if (genderCell) {
+                        var genderValue = genderCell.textContent.trim().toUpperCase();
+        
+                      
+                        if (genderValue === "M") {
+                            maleCount++;
+                        } else if (genderValue === "F") {
+                            femaleCount++;
+                        }
+                    }
+                }
+        
+              
+                document.getElementById('boysCount').textContent = maleCount;
+                document.getElementById('girlsCount').textContent = femaleCount;
+            }
+        
+           
+            countGender();
+        </script>
+        <script>
+            function applyDiscountToAll() {
+                var discountInput = document.getElementById('discountInput');
+                var couponElements = document.querySelectorAll('.coupon');
+                var accommodationDropdowns = document.querySelectorAll('.accommodation-dropdown');
+        
+                var discountValue = parseInt(discountInput.value) || 0;
+        
+                couponElements.forEach(function (couponElement, index) {
+                    var accommodationDropdown = accommodationDropdowns[index];
+                    if (accommodationDropdown && accommodationDropdown.value !== '0') {
+                        
+                        couponElement.value = discountValue;
+                    }
+                });
+        
+               
+            }
+        </script>
+        
+    
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var leaveDateInputs = document.querySelectorAll('.leaveDate');
+            var daysStayInputs = document.querySelectorAll('.daysStay');
+
+            var daysStayElements = document.querySelectorAll('.daysStay');
+            daysStayElements.forEach(function (daysStayElement) {
+                daysStayElement.value = 0;
+            });
+    
+            function updateLeaveDate(index) {
+                var daysStay = parseInt(daysStayInputs[index].value) || 0;
+                var currentDate = new Date();
+                var leavingDate = new Date(currentDate);
+                leavingDate.setDate(currentDate.getDate() + daysStay);
+                leaveDateInputs[index].valueAsDate = leavingDate;
+                console.log("Member " + (index + 1) + " Leaving Date:", leaveDateInputs[index].valueAsDate);
+            }
+    
+           
+            daysStayInputs.forEach(function (daysStayInput, index) {
+                updateLeaveDate(index);
+            });
+    
+            
+            daysStayInputs.forEach(function (daysStayInput, index) {
+                daysStayInput.addEventListener('input', function() {
+                    updateLeaveDate(index);
+                });
+            });
+        });
+    </script>
+
+    <script defer>
+        function initializeFields(row) {
+            var accommodationDropdown = row.querySelector('.accommodation-dropdown');
+            var acctypeSelect = row.querySelector('.acctype');
+            var daysStayInput = row.querySelector('.daysStay');
+            var leaveDateInput = row.querySelector('.leaveDate');
+            var couponInput = row.querySelector('.coupon');
+    
+            
+            var accommodationValue = accommodationDropdown.value;
+    
+           
+            acctypeSelect.disabled = (accommodationValue === '0');
+            daysStayInput.disabled = (accommodationValue === '0');
+            leaveDateInput.disabled = (accommodationValue === '0');
+            couponInput.disabled = (accommodationValue === '0');
+        }
+
+
+        function resetData() {
+            var accommodationDropdowns = document.querySelectorAll('.accommodation-dropdown');
+            var daysStayElements = document.querySelectorAll('.daysStay');
+            var couponElements = document.querySelectorAll('.coupon');
+        
+            daysStayElements.forEach(function (daysStayElement, index) {
+                var accommodationDropdown = accommodationDropdowns[index];
+                if (accommodationDropdown && accommodationDropdown.value === '0') {
+                   
+                    daysStayElement.value = 0;
+                }
+            });
+        
+            couponElements.forEach(function (couponElement, index) {
+                var accommodationDropdown = accommodationDropdowns[index];
+                if (accommodationDropdown && accommodationDropdown.value === '0') {
+                    
+                    couponElement.value = 0;
+                }
+            });
+        
+            // After resetting data, recalculate the total
+            Calculate();
+        }
+        
+    
+        function handleAccommodationChange(accommodationDropdown) {
+            var row = accommodationDropdown.closest('tr');
+    
+            var acctypeSelect = row.querySelector('.acctype');
+            var daysStayInput = row.querySelector('.daysStay');
+            var leaveDateInput = row.querySelector('.leaveDate');
+            var couponInput = row.querySelector('.coupon');
+    
+            var accommodationValue = accommodationDropdown.value;
+
+            if (accommodationDropdown.value === '0') {
+                resetData();
+            }
+    
+            // Enable/disable fields based on the accommodation value
+            acctypeSelect.disabled = (accommodationValue === '0');
+            daysStayInput.disabled = (accommodationValue === '0');
+            leaveDateInput.disabled = (accommodationValue === '0');
+            couponInput.disabled = (accommodationValue === '0');
+        }
+    
+        document.addEventListener("DOMContentLoaded", function() {
+            var accommodationDropdowns = document.querySelectorAll('.accommodation-dropdown');
+    
+            accommodationDropdowns.forEach(function(accommodationDropdown) {
+                var row = accommodationDropdown.closest('tr');
+                
+               
+                initializeFields(row);
+    
+                accommodationDropdown.addEventListener('change', function() {
+                    handleAccommodationChange(accommodationDropdown);
+                });
+            });
+        });
+    
+        // ... (rest of your existing JavaScript code)
+    </script>
+    
+    
+       
+    
+    
+        
+     
+    
+    
+       
+    
+    
+        
+        
+        
+
+
+</div>
+{% endblock %}

@@ -1,0 +1,163 @@
+{% extends '../basictailwind.html'%}
+{%block title%}Edit Profile | Alcheringa {%endblock%}
+{% block body %}
+<Style>
+    input,
+    textarea {
+        border: none;
+        border-bottom: 1px solid rgb(214, 206, 206);
+        margin: 8px 0px;
+    }
+
+    input,
+    textarea:focus {
+        outline: none;
+    }
+</Style>
+
+<body x-data="{ showModal: false}" :class="{'overflow-y-hidden': showModal}">
+    <div class="flex h-screen" style="background-color: #F3F6F8;">
+        {% include "../navbar.html" %}
+        <div class="flex-grow h-screen bg-gray-100">
+            <div class="flex flex-grow h-full" style="background-color: #F3F6F8;">
+                <div class="mx-4 flex-grow h-full">
+                    <div class="flex h-full">
+                        <div class=" my-4 bg-white max-w-4xl rounded-lg w-screen shadow-md text-md">
+                            <div>
+                                <div class="py-3 pl-6  text-lg border-b-2 font-normal">Edit profile</div>
+                                <br>
+                                <div class="mx-10 pb-20 md:pb-1">
+                                    <ul class="errorlist" style="color:red">
+                                        {% if form.non_field_errors %}
+                                        <li>{{ form.non_field_errors }}</li>
+                                        {% endif %}
+                                        {% for field in form %}
+                                        {% if field.errors %}
+                                        <ul class="errorlist">
+                                            {% for error in field.errors %}
+                                            {{ error }}
+                                            {% endfor %}
+                                        </ul>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                    <div class="container p-2">
+                                        <img style="height : 70px; width : 70px; border-radius: 50%;"
+                                            src="{{request.user.img.url}}" id="dp-set" class="justify-self-start"
+                                            alt="profile pic" border="0" class="mx-auto"
+                                            style="border-radius:9999px;" />
+                                        <button class="mx-6 bg-gray-200 rounded-full border-black" onclick="dpupload()"
+                                            style="transform:translate(30px,-18px) scale(1.5,1.5)">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                                fill="currentColor">
+                                                <path
+                                                    d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <!-- Hiden dp upload -->
+
+                                    <form method="POST" enctype="multipart/form-data" class="">{% csrf_token %}
+                                        <div
+                                            class="grid grid-cols-1 md:grid-cols-2 gap-2 place-content-end md:place-content-center pb-12 md:pb-1">
+                                            <div style="height:0px;overflow:hidden">
+                                                {{ form.img }}
+
+                                            </div>
+                                            <br>
+
+                                            <div>
+                                                <div class="font-medium text-xs text-gray-500 text-left">Full name *
+                                                </div>
+                                                {{ form.fullname }}
+                                            </div>
+
+
+
+                                            <div>
+                                                <div class="font-medium text-xs text-gray-500 text-left ">Username *
+                                                </div>
+                                                {{ form.username }}
+                                            </div>
+
+
+
+
+                                            <div>
+                                                <div class="font-medium text-xs text-gray-500 text-left">Email ID *
+                                                </div>
+                                                {{ request.user.email }}
+                                            </div>
+
+                                            <div>
+                                                <div class="font-medium text-xs text-gray-500 text-left">Gender *</div>
+                                                {{ form.gender }}
+                                            </div>
+
+                                            <div>
+                                                <div class="font-medium text-xs text-gray-500 text-left">College *</div>
+                                                {{ form.collegename }}
+                                            </div>
+
+                                            <div>
+                                                <div class="font-medium text-xs text-gray-500 text-left">City *</div>
+                                                {{ form.city }}
+                                            </div>
+
+                                            <div>
+                                                <div class="font-medium text-xs text-gray-500 text-left">Phone *</div>
+                                                {{ form.phone }}
+                                            </div>
+
+                                            <div>
+                                                <div class="font-medium text-xs text-gray-500 text-left">Alternate Phone
+                                                    number</div>
+                                                {{ form.alternate_phone }}
+                                            </div>
+
+                                            <div style="height:0px;overflow:hidden">
+                                                {{form.interest}}</div>
+                                        </div>
+                                        <div class="container">
+                                            <div>
+                                                <div class="pt-6 font-medium text-xs text-gray-500 text-left">Interests
+                                                </div>
+                                            </div>
+                                            <div class="flex flex-wrap py-3" id="chip-interest">
+                                                <span @click="showModal = true;modalstart();"
+                                                    class="rounded-full text-gray-500 bg-gray-200 font-semibold text-sm flex align-center cursor-pointer active:bg-gray-300 transition duration-300 ease w-max my-auto">
+                                                    <div
+                                                        class="rounded-full w-10 h-10 max-w-none text-center flex align-center justify-center ">
+                                                        <i class="fa fa-plus my-auto"
+                                                            style="font-size:1.2rem; color:black;"
+                                                            aria-hidden="true"></i></div>
+                                                </span>
+                                            </div>
+                                        </div>
+
+
+
+
+
+
+
+
+                                        <div class="submit">
+                                            <input type="submit"
+                                                class="hover:bg-red-700 text-white inline-block py-2 px-4 rounded shadow-sm font-semibold text-base"
+                                                style="background-color: #EE6337;" value="Update details" />
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="  w-80 border-gray-400 rounded mx-4 m-{5}"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {%include 'authentication/interest_modal.html'%}
+</body>
+{%include 'authentication/interest_script.html'%}
+{% endblock %}

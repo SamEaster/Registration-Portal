@@ -1,0 +1,508 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto:wght@400;500;700&display=swap');
+.container-1 {
+    background: url('../imgs/alcher_profile_design_2.png');
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+.sub-container {
+    position: relative;
+    z-index: 1;
+    min-height: 1vh;
+    height: auto;
+    width: 90%;
+    background-color: #FFFFFF;
+    margin: auto;
+    padding: 0;
+    font-family: sans-serif;
+    position: relative;
+    font-weight: 400;
+    font-size: 20px;
+    /* margin-top: 7vh; */
+    margin-bottom: 5vh;
+    border-radius: 15px 15px 15px 15px;
+    box-sizing: border-box;
+}
+
+.save:active{
+    background-color: #f0f0f0;
+}
+.save:after{
+    content: "";
+    display: table;
+    clear: both;
+}
+.save {
+    min-width: 1vw;
+    top: calc((3*1.3vw) + (2*1.3vh));
+    right: 1.5vw;
+    position: absolute;
+    width: 6vw;
+    height: 3vw;
+    font-size: 1.2vw;
+    font-weight: 500;
+    color: #FFFFFF;
+    border: 2px solid #DE235B;
+    cursor: pointer;
+    background-color: #DE235B;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    margin: 5vh 2vw 0 0;
+  }
+.cancel{
+    min-width: 1vw;
+    top: calc((3*1.3vw) + (2*1.3vh));
+    right: 9vw;
+    position: absolute;
+    width: 6.5vw;
+    height: 3vw;
+    font-size: 1.2vw;
+    font-weight: 500;
+    color:#DE235B;
+    border: 2px solid #DE235B;
+    cursor: pointer;
+    background: #DE235B1A;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 5px;
+    margin: 5vh 2vw 0 0;
+}
+.navbar-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #DE235B1A;
+    color:#2E5169;
+    font-size: 18px;
+    border-radius:15px 15px 0 0;
+    cursor: pointer;
+    height: 40px;
+  }
+  .nav-link{
+    width:100%;
+    height:100%;
+    text-align: center;
+    padding:5px 0 5px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .nav-active{
+    color:#DE235B;
+    border-bottom:2px solid #DE235B;
+  }
+
+.circle {
+    position:relative;
+    box-sizing: border-box;
+    /* width: fit-content; */
+    margin: 0 1vw 0;
+    flex-direction: column;
+    height:auto;
+  }
+  .circle .img-container{
+    display: block;
+    float: left;
+    height: 8vw;
+    width: 8vw;
+    border-radius: 0;
+    margin: 8px;
+    padding:10px;
+    background-image: url('/static/imgs/profile_background.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  .circle .img-container img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
+  .circlediv{
+    display: block;
+    overflow: hidden;
+    height: 15vh;
+    box-sizing: border-box;
+  }
+  .circlediv .username {
+    display: block;
+    text-align: left;
+    width: fit-content;
+    font-weight: 600;
+    font-size: 2vw;
+    margin: 2vh 0 1vh 2vw;
+  }
+  .circlediv .ID {
+    display: block;
+    text-align: left;
+    width: fit-content;
+    font-size: 1.3vw;
+    margin: 2vh 0 1vh 2vw;
+}
+.img_edit{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 7.5vw;
+    left: 10%;
+    cursor: pointer;
+    border-radius: 50%;
+    border: none;
+    background: #DE235B;
+    padding: 2px;
+}
+.allDetails{
+    display: block;
+    clear:left;
+}
+.allDetails form{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+    color: #0a2628;
+    box-sizing: border-box;
+    position: relative;
+    font-family: "Satoshi", sans-serif;
+    clear:left;
+    width:100%;
+}
+.details div{
+    background-color: white;
+    border:1px solid #2E5169;
+    font-size: 1.3vw;
+}
+.details div select{
+    margin:0;
+    padding: 0.5vw;
+    width: 100%;
+    font-size: 1.3vw;
+    background-color: white;
+    color:#969696;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+}
+.details div input{
+    margin:0;
+    padding: 0.5vw;
+    width: 95%;
+    font-size: 1.3vw;
+    background-color: white;
+    color:#969696;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+}
+#id_phone_number_0{
+    width:5vw;
+}
+#id_alternate_phone_0{
+    width:5vw;
+}
+.gender select option{
+    background: white;
+    border: none;
+}
+
+.email{
+    font-size: 1.6vw;
+    color:black;
+    font-weight: 600;
+    margin-top: 15px;
+    padding-bottom:13px;
+}
+.email img{
+    display:inline;
+    height: auto;
+    padding:4px;
+}
+.email div{
+    display:flex;
+    justify-content: flex-start;
+    background-color: white;
+    margin:0;
+    padding: 0;
+    color:black;
+    font-weight: 500;
+    border:none;
+}
+.email div div{
+    display:flex;
+    align-items: center;
+    background-color: white;
+    margin:0;
+    padding: 0;
+    color:black;
+    font-weight: 500;
+    padding: 4px;
+}
+
+@media screen and (max-width: 950px) {
+    
+    .backbutton{
+        font-size: 2vw;
+    }
+    .sidebar {
+        visibility: hidden;
+    }
+    .circle{
+        height: 12.5vw;
+    }
+    .circle .img-container{
+        width:14vw;
+        height:14vw;
+    }
+    .circlediv .username{
+        margin: 2vh 0 1vh 2vw;
+        font-size: 2.5vw;
+    }
+    .circlediv .ID{
+        font-size: 2vw;
+    }
+    .img_edit{
+        width: 2.3vh;
+        height: 2.3vh;
+        position: absolute;
+        top:13vw;
+        left: 16vw;
+    }
+    .details div{
+        background-color: white;
+        border:1px solid #2E5169;
+    }
+    .details div select{
+        margin:0;
+        padding: 0.1vw;
+        width: 100%;
+        font-size: 1.3vw;
+        background-color: white;
+        color:#969696;
+        border-radius: 8px;
+        border: none;
+        outline: none;
+    }
+    .details div input{
+        margin:0;
+        padding: 0.2vw;
+        width: 100%;
+        font-size: 1.2vw;
+        background-color: white;
+        color:#969696;
+        border-radius: 8px;
+        border: none;
+        outline: none;
+    }
+    .email div{
+        background-color: white;
+        color: black;
+        border:none;
+    }
+    .email div div{
+        background-color: white;
+        color: black;
+        border:none;
+    }
+    .cancel svg{
+        width: 1.2vw;
+        height:1.2vw;
+
+    }
+    #id_phone_number_0{
+        width:6vw;
+    }
+    #id_alternate_phone_0{
+        width:6vw;
+    }
+}
+
+@media screen and (max-width: 760px){
+    .cancel{
+        border:1px solid #DE235B;
+    }
+    .save{
+        border:1px solid #DE235B;
+    }
+
+    .save input {
+        min-width: 1vw;
+        width: 45%;
+        height: 6vh;
+        font-size: 2vw;
+        padding: 5px;
+        margin: 5vh 0 3vh 0;
+    }
+    .container-1{
+        background-color: #0A2628;
+        min-height: 100vh;
+        height: auto;
+        width: 100%;
+        height: 100%;
+        padding-bottom: 2%;
+    }
+    .sub-container {
+        box-sizing: border-box;
+        max-width: 100%;
+        font-size: 20px;
+        margin:auto;
+      }
+    .edit button{
+        min-width: 1vw;
+        top: 0;
+        right: 0;
+        font-size: 1vw;
+        font-weight: 600;
+        position: absolute;
+        width: fit-content;
+        height: fit-content;
+        display: inline-block;
+        padding: 5px;
+        margin: 2vh 3vw 0 0 ;
+        color:#FFFFFF;
+        background-color: #DE235B;
+        border: 2px solid #DE235B;
+    }
+    
+    .circle{
+        height: auto;
+        display:relative;
+      }
+      .circle .img-container {
+        float: left;
+        height: 14vh;
+        width: 14vh;
+        display: inline;
+      }
+      .circlediv .username{
+        margin: 2vh 0 1vh 2vw;
+        font-size: 3vw;
+      }
+      .circlediv .ID{
+        font-size: 2.5vw;
+      }
+      .allDetails{
+        margin-left:2%;
+      }
+      .details{
+        font-size: 20px;
+        font-weight: 500;
+        margin-right:2.5vw;
+      }
+      .details div {
+        padding: 0.8vw;
+        font-size: 3vw;
+        background-color: white;
+        color:#969696;
+        border-radius: 8px;
+        margin-top: 2%;
+        border:1px solid #2E5169;
+        font-size: 2.2vw;
+      }
+    .details div select{
+        margin:0;
+        padding: 0.2vw;
+        width: 100%;
+        font-size: 2.2vw;
+        background-color: white;
+        color:#969696;
+        border-radius: 8px;
+        border: none;
+        outline: none;
+    }
+    .details div input{
+        margin:0;
+        padding: 0.2vw;
+        width: 95%;
+        font-size: 2.2vw;
+        background-color: white;
+        color:#969696;
+        border-radius: 8px;
+        border: none;
+        outline: none;
+    }
+    #id_phone_number_0{
+        width:10vw;
+    }
+    #id_alternate_phone_0{
+        width:10vw;
+    }
+    #img_edit{
+        position:absolute;
+        width: 2.5vh;
+        height: 2.5vh;
+        top:14vh;
+        left:14vh;
+    }
+}
+
+@media(max-width:450px){
+    .navbar-container{
+        font-size: 14px;
+        height: 40px;
+      }
+}
+@media(max-width:450px){
+    .sub-container {
+        box-sizing: border-box;
+        max-width: 100%;
+        font-size: 20px;
+        margin:auto;
+    }
+    .cancel{
+        border:1px solid #DE235B;
+        width: 13vw;
+        height: 6.5vw;
+        font-size: 3vw;
+        right:18vw;
+        top: calc((7*1.3vw) + (8*1.3vh));
+    }
+    .save{
+        border:1px solid #DE235B;
+        width: 13vw;
+        height: 6.5vw;
+        font-size: 3vw;
+        top: calc((7*1.3vw) + (8*1.3vh));
+    }
+    
+    .circle .img-container{
+        height: 13vh;
+        width: 13vh;
+        display: inline;
+    }
+    .circlediv .username{
+        font-size: 4.7vw;
+    }
+      .circlediv .ID{
+        font-size: 4.8;
+    }
+    .allDetails form{
+        display: block;
+    }
+    .details{
+        margin:20px 10px 20px;
+    }
+    .details div{
+        box-sizing: border-box;
+    }
+    .details div select,.details div input{
+        font-size: 3.5vw;
+        margin:3px;
+        box-sizing: border-box;
+    }
+    .img_edit{
+        width: 2.5vh;
+        height: 2.5vh;
+        position: absolute;
+        top:13vh;
+        left:14vh;
+    }
+    #id_phone_number_0{
+        width:11vw;
+    }
+    #id_alternate_phone_0{
+        width:11vw;
+    }
+}

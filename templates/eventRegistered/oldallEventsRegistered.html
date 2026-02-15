@@ -1,0 +1,306 @@
+{% extends '../basictailwind.html'%}
+{% load static %}
+{%block title%}Competitions | Alcheringa {%endblock%}
+
+{%block body%}
+<div style="background-color: #F3F6F8;">
+    <style>
+        .orcolor {
+            background-color: #EE6337;
+        }
+
+        .competitions-list::-webkit-scrollbar {
+            width: 0.5vw;
+        }
+
+        .competitions-list::-webkit-scrollbar-thumb {
+            background-color: rgb(226 232 240);
+            border-radius: 3px;
+        }
+
+        .competitions-list::-webkit-scrollbar-track {
+            background-color: white;
+            margin-block: 1em;
+        }
+
+        .competitions-list::-webkit-scrollbar-thumb:hover {
+            background-color: #C2CFE0;
+        }
+
+        .profile {
+            width: 23.4%;
+        }
+
+        .dot {
+            height: 4px;
+            width: 4px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .changecoloritem {
+            background-color: #EE6337;
+        }
+
+        .changecolor1 {
+            background-color: #C2CFE0;
+        }
+
+        /* @media (max-width: 768px) {
+            .hideitems {
+                display: none;
+            }
+
+            .moduleslist {
+                display: inline-block;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .showitems {
+                display: inline-block;
+            }
+
+            .competition-image {
+                width: 31%;
+                height: 100%;
+            }
+        } */
+        .rules-modal ::-webkit-scrollbar-track {
+            background-color: rgb(255, 255, 255);
+        }
+
+        .rules-modal ::-webkit-scrollbar-thumb {
+            background-color: #e07e60;
+            border-radius: 3px;
+        }
+        .rules-modal ::-webkit-scrollbar {
+            width: 10px;
+            padding-right: 2px;
+        }
+
+        .rules-modal ::-webkit-scrollbar-track {
+            background-color: rgb(255, 255, 255);
+        }
+
+        .rules-modal ::-webkit-scrollbar-thumb {
+            background-color: #e07e60;
+            border-radius: 3px;
+        }
+
+    </style>
+    </head>
+
+    <body x-data="{ showModal: false }" :class="{'overflow-y-hidden': showModal}" >
+        <div class="sm:flex md:flex-row sm:flex-col">
+            {% include 'navbar.html' %}
+
+            <span style="display: grid; grid-template-rows: 8% 92%;" class="content bg-slate-100 h-screen w-full">
+                <nav class="mx-5 my-3">
+                    <span
+                        class="competition-title align-middle font-medium text-2xl sm:text-center">
+                        <p class="text-center pl-5 md:text-left md:pl-0">My Registrations</p>
+                    </span>
+                </nav>
+                <div class="md:mx-5 md:grid md:grid-cols-7 pb-4">
+                    <div class="m-0 md:col-span-7 rounded-md bg-white inline ml-3 sm:w-full overflow-auto competitions-list shadow-md">
+                        <div class="justify-between flex hideitems border-b-2">
+                            <p class="pl-5 py-3 font-medium inline-block" id="mod">Registered</p>
+                            <div class="pl-5 py-3 font-medium inline-block">
+                            </div>
+                        </div>
+                        <div class="competitions-list overflow-auto w-full" style="padding-bottom:50px">
+                            <div class="flex flex-col justify-center">
+                            {% for comp in allcomp %}
+                                {% for item in comp.list %}                    
+                                <div class="relative bg-gray-100 rounded-lg shadow-md my-3 ml-2 flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 lg:pr-3 max-w-xs md:max-w-full md:max-h-60 ">
+                                    <div class="w-full md:w-1/3 bg-white grid place-items-center">
+                                        <img src="{{comp.image.url}}" class="lg:rounded-l-lg square h-full" />
+                                    </div>
+                                    <div
+                                        class="w-full md:w-2/3 bg-gray-100 flex flex-col space-y-2 p-3  bg-gray-100 rounded-md ">
+
+                                        <h3 class="font-medium md:text-xl text-xl" style="font-weight: 700;">
+                                            {{comp.event_name}}</h3>
+                                        <p class="md:text-sm text-gray-500 text-base">{{comp.module}} &#xb7; <span
+                                                style="color: #EE6337;text-decoration:none;"><button
+                                                    onclick="showrules(this)" data-rules= '{{comp.event_rules}}' @click="showModal = true"><span class="cursor md:text-sm text-zinc-500
+                                                    text-amber-600 font-medium">
+                                                        View Rules
+                                                    </span>
+                                                </button>
+                                            </span>
+                                        </p>
+                                        <p class="md:text-sm text-gray-500 text-base">
+                                            {%if comp.min_members == 1 and comp.max_members == 1 %}
+                                                <i class="fa fa-user" aria-hidden="true"></i> Member
+                                                <div>
+                                                    {% for member in item.0 %}
+                                                        {% if member.name == user.username %}
+                                                            <div class="orcolor text-white  pt-1 pb-1 pl-3 pr-3 mr-2 rounded-3xl font-medium inline-block">You</div>
+                                                        {% else %}
+                                                            <div class="orcolor text-white  pt-1 pb-1 pl-3 pr-3 mr-2 rounded-3xl font-medium inline-block">{{ member.name }}</div>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </div>
+                                            {%else%}
+                                                <i class="fa fa-users" aria-hidden="true"></i> Members
+                                                <div>
+                                                    {% for member in item.0 %}
+                                                        {% if member.name == user.username %}
+                                                            <div class="orcolor text-white  pt-1 pb-1 pl-3 pr-3 mr-2 rounded-3xl font-medium inline-block">You</div>
+                                                        {% else %}
+                                                            <div class="orcolor text-white  pt-1 pb-1 pl-3 pr-3 mr-2 rounded-3xl font-medium inline-block">{{ member.name }}</div>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                    {% if comp.max_members > item.0.count %}
+                                                    <a href="{% url 'updateComp' slug=item.1 %}" class="my-auto">
+                                                        <div class="text-grey  pt-1 pb-1 pl-2 pr-2 rounded font-medium inline-block">&plus;</div>
+                                                    </a>
+                                                    {% endif %}
+                                                </div>
+                                            {%endif%}
+                                            <!-- <i class="fas fa-map-marker-alt" aria-hidden="true" style="color:green;"></i><span style="text-gray-600"> {{comp.location}}</span> -->
+                                        </p>
+                                    </div>
+                                    <div class="sm:pb-3 inline-block w-max items-end">
+                                        <a href="{% url 'cancelReg' slug=item.1 %}" class="my-auto w-max"><button
+                                            class="border border-orange border-2 text-orange-600 md:ml-5 w-max pt-1 pb-1 pl-4 pr-4 mt-5 rounded font-medium ml-0">Cancel Registeration</button></a>
+                                    </div>
+                                </div>
+                                {% endfor%}
+                            {% endfor%}
+                            </div>
+                        </div>
+                        {% if allcomp.count == 0 %}
+                            <div style=" text-align: center; position: relative; min-height: inherit; font-size: large;">
+                                No registrations yet
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </span>
+        </div>
+
+    <div
+      class="fixed inset-0 w-full h-full z-20 bg-black bg-opacity-50 duration-300 overflow-y-auto rules-modal"
+      x-show="showModal"
+      x-transition:enter="transition duration-300"
+      x-transition:enter-start="opacity-0"
+      x-transition:enter-end="opacity-100"
+      x-transition:leave="transition duration-300"
+      x-transition:leave-start="opacity-100"
+      x-transition:leave-end="opacity-0"
+    >
+      <div class="fixed inset-0 sm:w-3/4 md:w-1/2 lg:w-3/4 mx-2 sm:mx-auto h-4/5 overflow-y-auto my-10 opacity-100" >
+        <div
+          class="relative p-5 bg-white shadow-lg rounded-md text-gray-900 z-20"
+          @click.away="showModal = false"
+          x-show="showModal"
+          x-transition:enter="transition transform duration-300"
+          x-transition:enter-start="scale-0"
+          x-transition:enter-end="scale-100"
+          x-transition:leave="transition transform duration-300"
+          x-transition:leave-start="scale-100"
+          x-transition:leave-end="scale-0"
+        >
+          <header class="flex items-center justify-between p-2">
+            <h2 class="font-semibold">Rules</h2>
+            <button class="focus:outline-none p-2" @click="showModal = false">
+              <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                <path
+                  d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"
+                ></path>
+              </svg>
+            </button>
+          </header>
+          <main class="p-2">
+            <p id = "rules_body">
+              
+            </p>
+          </main>
+        </div>
+      </div>
+    </div>
+
+        <!-- js code -->
+        <script>
+            var item;
+            var heads = "headspan";
+            var arrid = "arrow";
+            var m = "mod";
+
+            function inversion(id) {
+                // console.log($("#" + id).attr("src", "arrow-inverted.png' %}"));
+                if ($("#" + id).attr("src") == "{% static 'icons/dropdownbtn.png' %}") {
+                    console.log("hello")
+                    $("#" + id).attr("src", "{% static 'icons/arrow-inverted.png' %}");
+                } else {
+                    $("#" + id).attr("src", "{% static 'icons/dropdownbtn.png' %}");
+                }
+            }
+            function mobchange(id) {
+                if ($(window).width() < 768) {
+                    var txt = $("#" + id).find("span").text();
+                    $("#" + heads).text(txt);
+                    console.log(txt);
+                }
+            }
+            function changecolor(id) {
+                var txt = $("#" + id).find("span").text();
+                $(".ii").css("background-color", "rgb(241 245 249 / var(--tw-bg-opacity))")
+                $(".ii").css("color", "#000000")
+                $("#" + m).text(txt);
+                console.log('clicked');
+                $("#" + id).css("background-color", "#EE6337");
+                $("#" + id).css("color", "white");
+                item = id;
+                $("#" + arrid).attr("src", "{% static 'icons/dropdownbtn.png' %}");
+                if ($(window).width() < 768) {
+                    $('.moduleitems').css('display', 'none');
+                }
+                // $('.moduleitems').css('display','none');
+            }
+
+            var element = 'Dance';
+            function dropdown() {
+                if ($(window).width() > 768) {
+                    $('.moduleitems').css('display', 'inline-block');
+                } else if (($('.moduleitems').css("display") == "none") && ($(window).width() < 768)) {
+                    $('.moduleitems').css('display', 'inline-block');
+                } else if (($('.moduleitems').css("display") != "none") && ($(window).width() < 768)) {
+                    $('.moduleitems').css('display', 'none');
+                } else {
+                    $('.moduleitems').css('display', 'none');
+                }
+
+            }
+            //onload change color of the active button
+            window.onload = function () {
+                var modulename = '{{modulename}}'
+                if (modulename.length > 0) {
+                    changecolor(modulename)
+                    mobchange(modulename)
+                }
+            }
+            function showrules(ele) {
+                const rules = ele.getAttribute("data-rules")
+                document.getElementById("rules_body").innerText = rules;
+            }
+            function hiderules() {
+                document.getElementById('rules_modal').style.display = 'none';
+                // document.body.style.filter = 'blur(0px)';
+            }
+            // $(document).ready(function () {
+            //     function showrules(rules) {
+            //         // document.getElementById('rules_modal').style.display = 'block';
+            //         document.getElementById("rules_body").innerText = rules;
+    
+            //     }
+            // });
+        </script>
+    </body>
+
+    </html>
+    {% endblock %}

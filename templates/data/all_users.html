@@ -1,0 +1,77 @@
+{% extends 'data/base.html' %}
+{% block title %} Users {% endblock %}
+{% block styles %}
+{% endblock styles %}
+{% block content %}
+<div>
+    <h1 class="text-center w-full text-3xl font-bold my-10">All Users </h1>
+    <div class="flex justify-center w-full margin-auto p-5 text-center">
+
+        <table>
+            <tr>
+                <th>Sl No.</th>
+                <th>Team Name</th>
+                <th>Competition Name</th>
+                <th>City</th>
+                <th>College Name</th>
+                <th>Leader Alcher Id</th>
+                <th>Leader Name</th>
+                <th>Leader email</th>
+                <th>Leader Phone</th>
+
+                <th>Participants</th>
+                <th>Performance Link</th>
+                <th>Description</th>
+            </tr>
+            {% for submission in users %}
+            <tr>
+                <td> {{ forloop.counter }} </td>
+                <td> {{ submission.team.team_name }} </td>
+                <td> {{ submission.event.event_name }} </td>
+                {% if submission.leader.alcherid %}
+                <td> {{ submission.leader.city }}</td>
+                <td> {{ submission.leader.collegename }}</td>
+                <td> {{ submission.leader.alcherid }}</td>
+                <td> {{ submission.leader.fullname }}</td>
+                <td> {{ submission.leader.email }}</td>
+                <td> {{ submission.leader.phone_number }}</td>
+
+                <td>
+                    {% for member in submission.members.all %}
+                    <p style="white-space: nowrap;"> {{member.memberid}},{{member.name}}, {{member.phone}},{{member.email}}<br></p>
+                    {% endfor %}
+                </td>
+                <td>Submission not needed</td>
+                <td>-</td>
+                {% else %}
+                <td> {{ submission.team.leader.city }} </td>
+                <td> {{ submission.team.leader.collegename }} </td>
+                <td> {{ submission.team.leader.alcherid }} </td>
+                <td> {{ submission.team.leader.fullname }} </td>
+                <td> {{ submission.team.leader.email }}</td>
+                <td> {{ submission.team.leader.phone_number }}</td>
+                <td>
+                    {% for member in submission.team.members.all %}
+                    <p style="white-space: nowrap;"> {{member.memberid}}, {{member.name}}, {{member.phone}},{{member.email}}<br></p>
+                    {% endfor %}
+                </td>
+                <td>
+                    <p class="submission-link">
+                        <a href="{{ submission.link }}" target='_blank'> {{ submission.link }} </a>
+                    </p>
+                </td>
+                <td> {{ submission.description}} </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+
+
+        </table>
+
+    </div>
+
+
+</div>
+
+
+{% endblock %}

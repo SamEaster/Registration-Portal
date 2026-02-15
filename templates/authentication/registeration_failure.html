@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="{% static 'imgs/Group 26.png' %}" />
+    <title>Registeration Failure | Alcheringa</title>
+  </head>
+  <style>
+    body {
+      background-color: #0a2628;
+    }
+    .main {
+      width: 60%;
+      margin: 5vw auto;
+      padding: 2vw;
+      background-color: #b5bc89;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .main button {
+      color: white;
+      margin-top: 4vw;
+      background-color: #0a2628;
+    }
+    .main h1 {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    .main button a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.5vw;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    @media (max-width: 768px) {
+      .main {
+        height: 70vw;
+        width: 75vw;
+      }
+      .main h1 {
+        font-size: 7vw;
+      }
+      .alcher1 {
+        height: 30vw;
+        width: 30vw;
+      }
+      .main button a {
+        font-size: 6vw;
+      }
+    }
+  </style>
+  <body>
+    <img class="alcher" src="{% static 'imgs/Frame 21.png' %}" />
+    <div class="main">
+      <img class="alcher1" src="{% static 'imgs/Objects (1).png' %}" alt="image" />
+      <h1>Registration failed</h1>
+      <button><a href="{% url 'register' %}">Try Again</a></button>
+    </div>
+  </body>
+</html>

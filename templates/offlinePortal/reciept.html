@@ -1,0 +1,169 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invoice</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap" rel="stylesheet"/>
+
+<style>
+  
+    
+
+    table,
+    td {
+    border: solid 5px black;
+    text-align: center;
+    border-collapse: collapse;
+    }
+
+    .bold~tr td {
+    border: solid 1px lightgray;
+    }
+
+    td {
+    padding: 1vw;
+    }
+
+    [colspan="4"][rowspan="2"] {
+    height: 16vw;
+    }
+    [colspan="1"][rowspan="2"] {
+    height: 8vw;
+    }
+        
+
+        
+
+</style>
+  </head>
+  <body>
+
+    <div class="container1" style="display: flex;flex-direction: row;margin: 1vw; height:20vh; justify-content:space-between;">
+        <div class="logo" style="margin-left: 2vw;font-family: 'Inter', sans-serif;">
+            <img src="{% static 'imgs/offlinePortal/Mask_group.png' %}"  alt="ALCHERINGA">
+            <p style="font-size: 2.3vw;"><b>Dihing Hostel, IIT Guwahati</b></p>
+            
+            <p style="font-size: 2.3vw;line-height: 0rem;"><b>publicrelations23@alcheinga.in</b></p>
+            <p style="font-size: 2.3vw; line-height: 0.3rem;font-family: 'Inter', sans-serif;"><b>alcheringa.in</b></p>
+        </div>
+        <div style="margin-top:5vw; margin-right: 2vw">
+          <p style="color: rgb(241, 21, 21); font-size: 1.4rem;line-height: 0.4rem;"><b>INVOICE</b></p>
+          <p>Invoice No. : {{invno}}</p>
+          <p>Invoice Date : {{invdate}}</p>
+          <p>AlcherID:{{alcherid}}</p>
+        </div>
+    </div>
+    <div class="details" style="margin-left: 2.5vw;font-family: 'Inter', sans-serif;font-weight: 590; ">
+        <form action="post" style="height: 200px"> 
+            <!-- <div style="display: flex; "> -->
+            <label for="Leader Name"><p style="line-height:auto;">Leader Name: &nbsp;{{leadername}}</p></label>
+            <!-- <input type="text" id="name" name="name" style="border: none; width: 19vw;"> -->
+            <!-- </div> -->
+            <!-- <div style="display: flex; "></div> -->
+            <label for="college name"><p style="line-height: auto;">College Name :&nbsp;{{collegename}}</p></label>
+            <!-- <input type="text" id="collegename" name="clgname" style="border: none; width: 19vw;"> -->
+            <!-- </div> -->
+            <!-- <div style="display: flex; "></div> -->
+            <label for="number"><p style="line-height: auto;">Number: &nbsp;{{phoneno}}</p></label>
+            <!-- <input type="number" id="number" name="number" style="border: none; width: 19vw;"> -->
+            <!-- </div> -->
+        </form>
+        <p><b>Accommodation Type &nbsp;&nbsp;</b> <input type="text" style="border: none;"></p>
+
+        <table style="width:500px; height: 600px">
+            <tr>
+              <td colspan="1" >Sl.No</td>
+              <td colspan="4">Description</td>
+              <td colspan="1">Qty.</td>
+              <td colspan="5">Rate</td>
+              <td colspan="8">Amount</td>
+              <td colspan="9">Total</td>
+              
+            </tr>
+            <tr>
+              <td colspan="1" rowspan="5">1</td>
+              <td colspan="4" rowspan="5">Blankets</td>
+              
+            </tr>
+            
+            <tr>
+              <td colspan="1" rowspan="4">{{blankets}}</td>
+              <td colspan="1" rowspan="4">100</td>
+            </tr>
+            <tr>
+              <td colspan="9" rowspan="3">{{blankets}}*100 </td>
+            
+            </tr>
+            <tr>
+              <td colspan="4" rowspan="2" id="blanketstotal"> </td>
+            </tr>
+            <tr>
+              
+            </tr>
+            <tr>
+              <td colspan="1" rowspan="5">2</td>
+              <td colspan="4" rowspan="5">Accomodation</td>
+                
+            </tr>
+              
+              <tr>
+                <td colspan="1" rowspan="4" id="accomodation">Type1: {{type1count}}<br>Type2: {{type2count}}<br>Type3: {{type3count}}</td>
+                <td colspan="1" rowspan="4">250<br>300<br>350</td>
+              </tr>
+              <tr>
+        
+                <td colspan="9" rowspan="3" id="accomodationqty">250*{{type1days}}<br>300*{{type2days}}<br>350*{{type3days}}</td>
+              
+              </tr>
+              
+              <tr>
+                <tr>
+                    <td colspan="6" id="accomodationTotal">{{accomodation}}</td>
+                
+             
+                  </tr>
+              </tr>
+           
+            
+            <tr class="bold">
+              <td colspan="50">
+                <div style="display: flex;justify-content: space-between;height: 1vw;align-items: center;">
+                    <p>Dues:{{dues}}</p>
+                </div>
+              </td>
+            </tr>
+            <!-- <tr>
+              <td colspan="6" rowspan="3"></td>
+              <td colspan="9" id="totalPaid">Total Amount Paid</td>
+            </tr> -->
+          </table>
+        </div>
+        <div class="invoice" style="font-family: 'Inter', sans-serif;font-weight: 600;border:solid; margin-left:5vw;display: flex;justify-content: space-between; ">
+          <div style="margin-left: 2vw;">
+            <p> For any query contact-</p>
+            <p style="line-height: 0.4rem;">Abhishek Ambast</p>
+            <p style="line-height: 0.4rem;">+91 92050 45980</p>
+            <p style="line-height: 0.4rem;">Harshith Reddy</p>
+            <p style="line-height: 0.4rem;">+91 77805 52508</p>
+          </div>
+          <div style="margin:3vw 6vw 1vw 0;display: flex;flex-direction: column;justify-content: space-between;">
+            <div colspan="9" id="totalPaid">Total Amount Paid</div>
+            <div>Signature and stamp</div>
+          </div>
+        </div>
+
+
+    <script>
+
+
+      document.getElementById('blanketstotal').innerHTML={{blankets}}*100;
+      document.getElementById('totalPaid').innerHTML="Total Amount Paid : " + ({{total}});
+    </script>
+  </body>
+</html>

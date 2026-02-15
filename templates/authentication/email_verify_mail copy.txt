@@ -1,0 +1,11 @@
+{% autoescape off %}
+
+Hello {{user.fullname}},
+
+Click on this link to verify your account.
+{{link}}
+
+Sincerely,
+Alcheringa Web Operations
+
+{% endautoescape %}

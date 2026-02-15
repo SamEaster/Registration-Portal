@@ -1,0 +1,37 @@
+{% extends 'data/base.html' %}
+{% block title %} Users {% endblock %}
+{% block styles %}
+div{
+padding:5rem;
+}
+
+
+{%  endblock styles %}
+{% block content %}
+<div>
+
+    <div class="flex justify-center flex-col w-full margin-auto p-2.5 text-center my-20 text-3xl font-bold">
+        <div>
+            <a href="{% url 'all_users' %}">All Users</a><br>
+        </div>
+        <div>
+            <a href="{% url 'all_leaders' %}">Leaders</a><br>
+        </div>
+       <div>
+        <a href="{% url 'competitions_with_submission' %}" class="my-10">Competitions(with submission mandatory)</a>
+       </div>
+       <div>
+        <a href="{% url 'competitions_without_submission' %}" class="my-10">Competitions(without submission mandatory)</a>
+       </div>
+
+    </div>
+    
+   
+
+</div>
+
+
+</div>
+
+
+{% endblock %}

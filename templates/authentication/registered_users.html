@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="{% static 'imgs/Group 26.png' %}" />
+
+    <title>Data | Registered Users</title>
+  </head>
+  <body>
+    <div>
+      <table>
+        <tr>
+          <td>Alcher Id</td>
+          <td>Full Name</td>
+          <td>Email</td>
+          <td>Phone</td>
+          <td>College</td>
+          <td>City</td>
+          <td>Team Name</td>
+          <td>Alternate Phone</td>
+        </tr>
+        {% for user in users %}
+          <tr>
+            <td>{{ user.alcherid }}</td>
+            <td>{{ user.fullname }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.phone }}</td>
+            <td>{{ user.collegename }}</td>
+            <td>{{ user.city }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.alternate_phone }}</td>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </body>
+</html>

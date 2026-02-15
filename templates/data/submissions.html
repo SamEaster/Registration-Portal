@@ -1,0 +1,50 @@
+{% extends 'data/base.html' %}
+{% block title %} Users {% endblock %}
+{% block styles %}
+
+{%  endblock styles %}
+{% block content %}
+<div>
+    <h1 class="text-center w-full text-3xl font-bold my-10">Submissions : {{ competition.event_name }} </h1>
+    <div class="flex justify-center w-full margin-auto p-5 text-center">
+    
+    <table>
+        <tr>
+            <th>Sl No.</th>
+            <th>Competition Name</th>
+            <th>Leader Alcher Id</th>
+            <th>Leader Name</th>
+            <th>Participants</th>
+            <th>Performance Link</th>
+            <th>Description</th>
+        </tr>
+        {% for submission in submissions %}
+        <tr>
+            <td>  {{ forloop.counter }} </td>
+            <td>  {{ competition.event_name }}   </td>
+            <td>  {{ submission.team.leader.alcherid }}   </td>
+            <td>  {{ submission.team.leader.fullname }}   </td>
+            <td>  {% for member in  submission.team.members.all %}
+                <p> {{member.name}}, {{member.phone}},{{member.email}}</p>
+               
+               {% endfor %}
+               </td>
+            <td><p class="submission-link">
+                <a href="{{ submission.link }}" target='__blank'>  {{ submission.link }} </a>  
+               </p> 
+         </td>
+            <td>  {{ submission.description}}   </td>
+           
+        </tr>
+        {% endfor %}
+           
+           
+    </table>
+
+</div>
+
+
+</div>
+
+
+{% endblock %}

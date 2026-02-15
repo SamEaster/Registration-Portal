@@ -1,0 +1,51 @@
+{% extends './basictailwind.html'%}
+{% load static %}
+{%block title%}Rule Booklet | Alcheringa {%endblock%}
+{% block body %}
+<link rel="stylesheet" href={% static "css/registration_login_rulebook.css" %}>
+
+<body>
+  <div style="height: 100vh; overflow-y: hidden;" class="flex w-full" style="background-color: #F3F6F8;">
+    {% include "./navbar.html" %}
+    <div class="rule_back">
+      <div class="rule_head flex space_bet center_ele my-2">
+        <p class="more_size">Rule Booklet</p>
+        <i class="fa fa-bell-o" aria-hidden="true"></i>
+      </div>
+      <div class="rule_body flex-grow">
+        <div style="padding: 20px 10px;" class="rule_head border_bottom flex space_bet center_ele">
+          <p>Rule Booklet</p>
+          <a href="{% static 'rulebook/rulebook.pdf' %}" download="{% static 'rulebook/rulebook.pdf' %}"><button
+              class="btn_pdf">Downoad PDF</button></a>
+        </div>
+        <div class="rule_wrapper">
+          <!-- <div class="color_head  flex">
+                    <h2>Rulebook</h2>
+                </div>  -->
+          <div class="rule_content">
+            <div class="rule_content_head">
+              <p>
+                <!-- Viewing PDF Files On-Line -->
+                <br>
+              </p>
+            </div>
+            <div class="rule_content_body">
+              <!-- <p>{{comp.event_rules}}</p> -->
+              <iframe src="{% static 'rulebook/rulebook.pdf' %}#scrollbar=0&toolbar=0&navpanes=0&view=FitH" width="100%"
+                style="height: 80vh;" frameborder="0"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+<script>
+  function download_file(fileURL, fileName) {
+    link.href = fileURL;
+    link.download = fileName;
+    link.dispatchEvent(new MouseEvent('click'));
+  }
+</script>
+{% endblock %}
